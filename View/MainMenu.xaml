@@ -17,8 +17,8 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="30*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Grid.Column="0" x:Name="MainMenuBG" Grid.RowSpan="3" Grid.ColumnSpan="3" Source="../Resources/Images/MainMenu_img.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="48" RenderTransformOrigin="1.375,0.754" Foreground="#FF209D00" Background="{x:Null}" BorderBrush="#FF2F652F" BorderThickness="4" OpacityMask="#FF9A9A9A" FontWeight="Bold">
+        <Image Grid.Column="0" x:Name="MainMenuBG" Grid.RowSpan="3" Grid.ColumnSpan="3" Source="../Resources/Images/MainMenu_img1.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="48" RenderTransformOrigin="1.375,0.754" Foreground="#FF209D00" BorderBrush="#FF2F652F" BorderThickness="4" FontWeight="Bold">
             ЭВОЛЮЦИЯ
         </Label>
 

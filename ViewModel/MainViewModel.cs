@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace evolution.ViewModel
 {
-    class MainMenuViewModel : BaseViewModel
+    class MainViewModel : BaseViewModel
     {
     }
 }

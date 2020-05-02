@@ -6,16 +6,14 @@
         xmlns:local="clr-namespace:evolution"
         mc:Ignorable="d"
         Title="MainWindow" MinWidth="800" MinHeight="600
-        ">
+        " Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Frame Grid.Column="1" Source="MainMenu.xaml"  Margin="0"
+        <Frame x:Name="frame" Content="{Binding currentPage}" 
                BorderBrush="LimeGreen" BorderThickness="4"
-               NavigationUIVisibility="Hidden">
-
-        </Frame>
+               NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Window>

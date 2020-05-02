@@ -11,7 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Frame Grid.Column="1" Source="View/MainMenu.xaml"  Margin="0"
+        <Frame Grid.Column="1" Source="MainMenu.xaml"  Margin="0"
                BorderBrush="LimeGreen" BorderThickness="4"
                NavigationUIVisibility="Hidden">
 

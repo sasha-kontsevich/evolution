@@ -23,6 +23,7 @@ namespace evolution.View
         public SinglePlayer()
         {
             InitializeComponent();
+
         }
     }
 }

@@ -11,7 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Frame x:Name="frame" Content="{Binding currentPage}" 
+        <Frame x:Name="frame" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" 
                BorderBrush="LimeGreen" BorderThickness="4"
                NavigationUIVisibility="Hidden"/>
 

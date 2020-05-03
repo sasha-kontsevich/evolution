@@ -57,7 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Navigation.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\SinglePlayer.xaml.cs">
       <DependentUpon>SinglePlayer.xaml</DependentUpon>
     </Compile>

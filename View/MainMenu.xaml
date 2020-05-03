@@ -30,6 +30,7 @@
             <Button Padding="5" Margin="5">Правила</Button>
             <Button Padding="5" Margin="5">Настройки</Button>
             <Button Padding="5" Margin="5">Выход</Button>
+            
         </StackPanel>
 
     </Grid>

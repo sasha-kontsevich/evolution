@@ -20,20 +20,10 @@ namespace evolution
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Page MainMenu;
-        public Page currentPage;
         public MainWindow()
         {
             InitializeComponent();
-
-
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            MainMenu = new MainMenu();
-            frame.Content = MainMenu;
-            currentPage = MainMenu;
+            DataContext = new ViewModel.MainViewModel();
         }
     }
 }

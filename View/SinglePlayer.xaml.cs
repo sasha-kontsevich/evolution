@@ -23,7 +23,7 @@ namespace evolution.View
         public SinglePlayer()
         {
             InitializeComponent();
-
+            this.DataContext = new ViewModel.SinglePlayerViewModel();
         }
     }
 }

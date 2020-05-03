@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         <Frame x:Name="frame" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" 
                BorderBrush="LimeGreen" BorderThickness="4"
-               NavigationUIVisibility="Hidden"/>
-
+               NavigationUIVisibility="Hidden"
+               Opacity="{Binding FrameOpacity}"/>
     </Grid>
 </Window>

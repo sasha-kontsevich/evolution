@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,17 @@ namespace evolution.ViewModel
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        private static MainWindowViewModel instance;
+
+
+        public static MainWindowViewModel getInstance()
+        {
+            if (instance == null)
+                instance = new MainWindowViewModel();
+            return instance;
+        }
+
+
         private Page mainMenuPage;
         private Page singlePlayerPage;
         private Page currentPage;
@@ -54,30 +66,15 @@ namespace evolution.ViewModel
             mainMenuPage = new MainMenu();                          //Начальная инициализация страниц
             singlePlayerPage = new View.SinglePlayer();
             CurrentPage = mainMenuPage;                             //Страница при загрузке
-           // SlowOpacity(singlePlayerPage);
 
         }
 
-
-        // команды изменения страниц
-        //private RelayCommand singlePlayerMenuItem_Click;
-        private RelayCommand singlePlayerMenuItem_Click;
-        public RelayCommand SinglePlayerMenuItem_Click
+        public void SelectSinglePayer()
         {
-
-            //return new RelayCommand(() => SlowOpacity(singlePlayerPage));
-            get
-            {
-                return singlePlayerMenuItem_Click ??
-                    (singlePlayerMenuItem_Click = new RelayCommand(obj =>
-                    //SlowOpacity(singlePlayerPage)
-                    {
-                       
-                    }
-                    ));
-            }
-
+            CurrentPage = singlePlayerPage;
         }
+        // команды изменения страниц
+
 
         public async void SlowOpacity(Page page)
         {

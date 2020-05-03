@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Card.cs" />
+    <Compile Include="Model\GameSession.cs" />
+    <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Property.cs" />
+    <Compile Include="Model\Species.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -118,9 +123,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Images\MainMenu_img1.jpg" />
   </ItemGroup>

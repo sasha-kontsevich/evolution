@@ -17,11 +17,26 @@ namespace evolution.ViewModel
 {
     class MainMenuViewModel : BaseViewModel
     {
+        
         public MainMenuViewModel()
         {
 
         }
 
-        
+        private RelayCommand singlePlayerMenuItem_Click;
+        public RelayCommand SinglePlayerMenuItem_Click
+        {
+            get
+            {
+                //return singlePlayerMenuItem_Click ??
+                //    (singlePlayerMenuItem_Click = new RelayCommand(obj =>
+                //    //SlowOpacity(singlePlayerPage)
+                //    {
+                //        MessageBox.Show("ef");
+                //    }
+                //    ));
+                return new RelayCommand(obj => { MessageBox.Show("ef"); });
+            }
+        }
     }
 }

@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using evolution.View;
 
 namespace evolution.ViewModel
 {
@@ -24,16 +25,18 @@ namespace evolution.ViewModel
         private static MainWindowViewModel instance;
 
 
-        public static MainWindowViewModel getInstance()
+        public static MainWindowViewModel getInstance(MainWindow window)
         {
             if (instance == null)
-                instance = new MainWindowViewModel();
+                instance = new MainWindowViewModel(window);
             return instance;
         }
 
 
         private Page mainMenuPage;
+        private MainMenuViewModel mainMenuDataContext;
         private Page singlePlayerPage;
+        private SinglePlayerViewModel singlePlayerDataContext;
         private Page currentPage;
 
         public Page CurrentPage
@@ -61,36 +64,57 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("FrameOpacity");
             }
         }
-        public MainWindowViewModel()
+
+        public Page SinglePlayerPage { get => singlePlayerPage; set => singlePlayerPage = value; }
+
+        public MainWindow window;
+        public MainWindowViewModel(MainWindow _window)
         {
             mainMenuPage = new MainMenu();                          //Начальная инициализация страниц
-            singlePlayerPage = new View.SinglePlayer();
+            SinglePlayerPage = new SinglePlayer();
+
+            mainMenuDataContext = new MainMenuViewModel(this);
+            singlePlayerDataContext = new SinglePlayerViewModel(this);
+
+            mainMenuPage.DataContext = mainMenuDataContext;
+            SinglePlayerPage.DataContext = singlePlayerDataContext;
+
             CurrentPage = mainMenuPage;                             //Страница при загрузке
-
+            window = _window;
+            
         }
 
-        public void SelectSinglePayer()
-        {
-            CurrentPage = singlePlayerPage;
-        }
+
         // команды изменения страниц
-
+        public async void SlowOpacity()
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                for (double i = 1.0; i > 0.0; i -= 0.05)
+                {
+                    FrameOpacity = i;
+                    Thread.Sleep(50);
+                }
+                FrameOpacity = 0;
+                //window.MainMenu.Visibility=Visibility.Hidden;
+            });
+        }
 
         public async void SlowOpacity(Page page)
         {
             await Task.Factory.StartNew(() =>
             {
-                //for (double i = 1.0; 1 > 0.0; i -= 0.1)
-                //{
-                //    FrameOpacity = i;
-                //    Thread.Sleep(50);
-                //}
-                CurrentPage = page;
-                for (double i = 0.0; i < 1.1; i += 0.1)
+                for (double i = 1.0; i > 0.0; i -= 0.1)
                 {
                     FrameOpacity = i;
                     Thread.Sleep(50);
                 }
+                CurrentPage = page;
+                //for (double i = 0.0; i < 1.1; i += 0.1)
+                //{
+                //    FrameOpacity = i;
+                //    Thread.Sleep(50);
+                //}
             });
         }
     }

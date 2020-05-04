@@ -23,7 +23,6 @@ namespace evolution
         public MainMenu()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.MainMenuViewModel();
 
         }
 

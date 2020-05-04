@@ -1,4 +1,5 @@
-﻿using System;
+﻿using evolution.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,6 @@ namespace evolution.View
         public SinglePlayer()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.SinglePlayerViewModel();
         }
     }
 }

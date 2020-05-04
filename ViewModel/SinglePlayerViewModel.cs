@@ -8,9 +8,12 @@ namespace evolution.ViewModel
 {
     public class SinglePlayerViewModel : BaseViewModel
     {
-        public SinglePlayerViewModel()
+        MainWindowViewModel mainWindowViewModel;
+        public SinglePlayerViewModel(MainWindowViewModel _mainWindowViewModel)
         {
-
+            mainWindowViewModel = _mainWindowViewModel;
+            //_mainWindowViewModel.window.Close();
+            
         }
     }
 }

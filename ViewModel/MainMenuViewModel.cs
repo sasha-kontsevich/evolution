@@ -17,9 +17,10 @@ namespace evolution.ViewModel
 {
     class MainMenuViewModel : BaseViewModel
     {
-        
-        public MainMenuViewModel()
+        MainWindowViewModel mainWindowViewModel;
+        public MainMenuViewModel(MainWindowViewModel _mainWindowViewModel)              //Начальная инициализация
         {
+            mainWindowViewModel = _mainWindowViewModel;
 
         }
 
@@ -28,15 +29,32 @@ namespace evolution.ViewModel
         {
             get
             {
-                //return singlePlayerMenuItem_Click ??
-                //    (singlePlayerMenuItem_Click = new RelayCommand(obj =>
-                //    //SlowOpacity(singlePlayerPage)
-                //    {
-                //        MessageBox.Show("ef");
-                //    }
-                //    ));
-                return new RelayCommand(obj => { MessageBox.Show("ef"); });
+                return new RelayCommand(obj => {mainWindowViewModel.CurrentPage = mainWindowViewModel.SinglePlayerPage; });
             }
         }
+
+
+
+        private RelayCommand appClose_Click;
+        public RelayCommand AppClose_Click
+        {
+            get
+            {
+                return new RelayCommand(obj => { App.Current.MainWindow.Close(); });
+            }
+        }
+        //public async void SlowOpacity()
+        //{
+        //    await Task.Factory.StartNew(() =>
+        //    {
+        //        for (double i = 1.0; i > 0.0; i -= 0.05)
+        //        {
+        //            FrameOpacity = i;
+        //            Thread.Sleep(50);
+        //        }
+        //        FrameOpacity = 0;
+        //        window.MainMenu.Visibility=Visibility.Hidden;
+        //    });
+        //}
     }
 }

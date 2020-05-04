@@ -11,8 +11,64 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <!--<Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="1*"/>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition  Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="100*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column=" 1" HorizontalAlignment="Center">
+                <RadioButton Content="2 Игрока"></RadioButton>
+                <RadioButton Content="3 Игрока"></RadioButton>
+                <RadioButton Content="4 Игрока"></RadioButton>
+                <RadioButton Content="5 Игрока"></RadioButton>
+                <RadioButton Content="6 Игрока"></RadioButton>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="0" x:Name="MainMenu" Opacity="{Binding FrameOpacity}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="1.4*"/>
+                <ColumnDefinition Width="5" ></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition  Width="1.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Grid.Column="0" x:Name="MainMenuBG" Grid.RowSpan="3" Grid.ColumnSpan="6" Source="../Resources/Images/MainMenu_img1.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Rectangle Grid.Column="1" Grid.RowSpan="3" Fill="Green"></Rectangle>
+            <Rectangle Grid.Column="2" Grid.RowSpan="3" Fill="White" Opacity="0.9"></Rectangle>
+            <Rectangle Grid.RowSpan="3" Grid.Column="3" Fill="Green"></Rectangle>
+            <Label Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="48" RenderTransformOrigin="1.375,0.754" Foreground="Green" BorderBrush="Green" BorderThickness="4" FontWeight="Bold">
+                ЭВОЛЮЦИЯ
+            </Label>
+            <StackPanel Margin="5,5,8,4" Grid.Row="1" Grid.Column="2">
+                <Button Margin="5" Padding="5" Command="{Binding SinglePlayerMenuItem_Click}" Click="Button_Click">Одиночная игра</Button>
+                <Button Padding="5" Margin="5">Сетевая игра</Button>
+                <Button Padding="5" Margin="5">Профиль</Button>
+                <Button Padding="5" Margin="5">Рейтинг</Button>
+                <Button Padding="5" Margin="5">Правила</Button>
+                <Button Padding="5" Margin="5">Настройки</Button>
+                <Button Padding="5" Margin="5" Content="Выход" Command="{Binding AppClose}">
+                </Button>
+            </StackPanel>
+        </Grid>-->
         <Frame x:Name="frame" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" 
-               BorderBrush="LimeGreen" BorderThickness="4"
+               BorderBrush="LimeGreen" BorderThickness="0"
                NavigationUIVisibility="Hidden"
                Opacity="{Binding FrameOpacity}"/>
     </Grid>

@@ -18,50 +18,39 @@ namespace evolution.ViewModel
     class MainMenuViewModel : BaseViewModel
     {
         MainWindowViewModel mainWindowViewModel;
-        public MainMenuViewModel(MainWindowViewModel _mainWindowViewModel)              //Начальная инициализация
+
+        private RelayCommand appClose_Click;
+        private RelayCommand singlePlayerMenuItem_Click;
+        private RelayCommand settingsMenuItem_Click;
+
+        public MainMenuViewModel(MainWindowViewModel _mainWindowViewModel)      //Начальная инициализация
         {
             mainWindowViewModel = _mainWindowViewModel;
 
         }
 
-        private RelayCommand singlePlayerMenuItem_Click;                        //Комманда пункта меню "Одиночная игра"
-        public RelayCommand SinglePlayerMenuItem_Click
+        public RelayCommand SinglePlayerMenuItem_Click                        //Комманда пункта меню "Одиночная игра"
         {
             get
             {
-                return new RelayCommand(obj => {mainWindowViewModel.CurrentPage = mainWindowViewModel.SinglePlayerPage; });
+                return new RelayCommand(obj => {mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage); });
             }
         }
-
-        private RelayCommand settingsMenuItem_Click;                        //Комманда пункта меню "Найстройки"
-        public RelayCommand SettingsMenuItem_Click
+        public RelayCommand SettingsMenuItem_Click                            //Комманда пункта меню "Найстройки"
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.CurrentPage = mainWindowViewModel.SettingsPage; });
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.SettingsPage); });
             }
         }
-
-        private RelayCommand appClose_Click;
-        public RelayCommand AppClose_Click
+        public RelayCommand AppClose_Click                                    //Закрыть приложение
         {
             get
             {
                 return new RelayCommand(obj => { App.Current.MainWindow.Close(); });
             }
         }
-        //public async void SlowOpacity()
-        //{
-        //    await Task.Factory.StartNew(() =>
-        //    {
-        //        for (double i = 1.0; i > 0.0; i -= 0.05)
-        //        {
-        //            FrameOpacity = i;
-        //            Thread.Sleep(50);
-        //        }
-        //        FrameOpacity = 0;
-        //        window.MainMenu.Visibility=Visibility.Hidden;
-        //    });
-        //}
+        
+
     }
 }

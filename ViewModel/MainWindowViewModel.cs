@@ -94,37 +94,27 @@ namespace evolution.ViewModel
             
         }
 
-
-        // команды изменения страниц
-        public async void SlowOpacity()
+        public void ChangePage(Page page)
         {
-            await Task.Factory.StartNew(() =>
-            {
-                for (double i = 1.0; i > 0.0; i -= 0.05)
-                {
-                    FrameOpacity = i;
-                    Thread.Sleep(50);
-                }
-                FrameOpacity = 0;
-                //window.MainMenu.Visibility=Visibility.Hidden;
-            });
+            SlowOpacity(page);
         }
+
 
         public async void SlowOpacity(Page page)
         {
             await Task.Factory.StartNew(() =>
             {
-                for (double i = 1.0; i > 0.0; i -= 0.1)
+                for (double i = 1.0; i > 0.0; i -= 0.06)
                 {
                     FrameOpacity = i;
-                    Thread.Sleep(50);
+                    Thread.Sleep(10);
                 }
                 CurrentPage = page;
-                //for (double i = 0.0; i < 1.1; i += 0.1)
-                //{
-                //    FrameOpacity = i;
-                //    Thread.Sleep(50);
-                //}
+                for (double i = 0.0; i < 1.1; i += 0.07)
+                {
+                    FrameOpacity = i;
+                    Thread.Sleep(10);
+                }
             });
         }
     }

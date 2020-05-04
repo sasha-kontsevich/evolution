@@ -6,11 +6,14 @@
       xmlns:local="clr-namespace:evolution"
       mc:Ignorable="d" 
       Title="MainMenu" MinWidth="800" MinHeight="600" Loaded="Page_Loaded">
+    <Page.Resources>
+        <ResourceDictionary Source="../Styles/Style.xaml" />
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition  Width="1.4*"/>
             <ColumnDefinition Width="5" ></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2.2*"></ColumnDefinition>
             <ColumnDefinition Width="5"></ColumnDefinition>
             <ColumnDefinition  Width="1.4*"/>
         </Grid.ColumnDefinitions>

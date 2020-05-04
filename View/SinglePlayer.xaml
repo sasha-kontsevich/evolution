@@ -13,13 +13,17 @@
             <ColumnDefinition  Width="1*"/>
             <ColumnDefinition Width="4*"></ColumnDefinition>
             <ColumnDefinition  Width="1*"/>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition  Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"></RowDefinition>
-            <RowDefinition Height="20*"></RowDefinition>
             <RowDefinition Height="100*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
             <RowDefinition Height="30*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Image Grid.Column="0" x:Name="MainMenuBG" Grid.RowSpan="5" Grid.ColumnSpan="6" Source="../Resources/Images/MainMenu_img1.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column=" 1" HorizontalAlignment="Center">
             <RadioButton Content="2 Игрока"></RadioButton>
             <RadioButton Content="3 Игрока"></RadioButton>
@@ -27,5 +31,9 @@
             <RadioButton Content="5 Игрока"></RadioButton>
             <RadioButton Content="6 Игрока"></RadioButton>
         </StackPanel>
+        <Button Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Назад" Command="{Binding BackToMenu}"></Button>
+        <!--<Grid Grid.Row="3" Grid.Column="1">
+            <B
+        </Grid>-->
     </Grid>
 </Page>

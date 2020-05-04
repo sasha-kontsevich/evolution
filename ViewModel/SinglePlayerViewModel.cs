@@ -15,5 +15,19 @@ namespace evolution.ViewModel
             //_mainWindowViewModel.window.Close();
             
         }
+        public RelayCommand BackToMenu                               //Вернуться в главное меню
+        {
+            get
+            {
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage); });
+            }
+        }
+        public RelayCommand StartGame                              //Начало игры
+        {
+            get
+            {
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.SettingsPage); });
+            }
+        }
     }
 }

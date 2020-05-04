@@ -27,12 +27,12 @@
             ЭВОЛЮЦИЯ
         </Label>
         <StackPanel Margin="5,5,8,4" Grid.Row="1" Grid.Column="2">
-            <Button Margin="5" Padding="5" Command="{Binding SinglePlayerMenuItem_Click}" Click="Button_Click">Одиночная игра</Button>
+            <Button Margin="5" Padding="5" Command="{Binding SinglePlayerMenuItem_Click}">Одиночная игра</Button>
             <Button Padding="5" Margin="5">Сетевая игра</Button>
             <Button Padding="5" Margin="5">Профиль</Button>
             <Button Padding="5" Margin="5">Рейтинг</Button>
             <Button Padding="5" Margin="5">Правила</Button>
-            <Button Padding="5" Margin="5">Настройки</Button>
+            <Button Padding="5" Margin="5" Command="{Binding SettingsMenuItem_Click}">Настройки</Button>
             <Button Padding="5" Margin="5" Content="Выход" Command="{Binding AppClose_Click}">
             </Button>
         </StackPanel>

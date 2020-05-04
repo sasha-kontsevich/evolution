@@ -32,11 +32,15 @@ namespace evolution.ViewModel
             return instance;
         }
 
-
+        private MainWindow window;
         private Page mainMenuPage;
-        private MainMenuViewModel mainMenuDataContext;
         private Page singlePlayerPage;
+        private Page settingsPage;
+
         private SinglePlayerViewModel singlePlayerDataContext;
+        private MainMenuViewModel mainMenuDataContext;
+        private SettingsViewModel settingsDataContex;
+
         private Page currentPage;
 
         public Page CurrentPage
@@ -65,22 +69,28 @@ namespace evolution.ViewModel
             }
         }
 
+        public MainWindow Window { get => window; set => window = value; }
         public Page SinglePlayerPage { get => singlePlayerPage; set => singlePlayerPage = value; }
+        public Page SettingsPage { get => settingsPage; set => settingsPage = value; }
+        public Page MainMenuPage { get => mainMenuPage; set => mainMenuPage = value; }
+        
 
-        public MainWindow window;
         public MainWindowViewModel(MainWindow _window)
         {
-            mainMenuPage = new MainMenu();                          //Начальная инициализация страниц
+            MainMenuPage = new MainMenu();                                   //Начальная инициализация страниц
             SinglePlayerPage = new SinglePlayer();
+            SettingsPage = new Settings();
 
-            mainMenuDataContext = new MainMenuViewModel(this);
+            mainMenuDataContext = new MainMenuViewModel(this);              //Инициализация контекста для страниц
             singlePlayerDataContext = new SinglePlayerViewModel(this);
+            settingsDataContex = new SettingsViewModel(this);
 
-            mainMenuPage.DataContext = mainMenuDataContext;
+            MainMenuPage.DataContext = mainMenuDataContext;                 //Задание контекста страниц
             SinglePlayerPage.DataContext = singlePlayerDataContext;
+            SettingsPage.DataContext = settingsDataContex;
 
-            CurrentPage = mainMenuPage;                             //Страница при загрузке
-            window = _window;
+            CurrentPage = MainMenuPage;                             //Страница при загрузке
+            Window = _window;
             
         }
 

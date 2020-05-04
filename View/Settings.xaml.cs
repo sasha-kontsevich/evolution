@@ -13,24 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace evolution
+namespace evolution.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenu.xaml
+    /// Логика взаимодействия для Page1.xaml
     /// </summary>
-    public partial class MainMenu : Page
+    public partial class Settings : Page
     {
-        public MainMenu()
+        public Settings()
         {
             InitializeComponent();
-
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-
     }
 }

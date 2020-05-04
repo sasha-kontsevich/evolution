@@ -24,7 +24,7 @@ namespace evolution.ViewModel
 
         }
 
-        private RelayCommand singlePlayerMenuItem_Click;
+        private RelayCommand singlePlayerMenuItem_Click;                        //Комманда пункта меню "Одиночная игра"
         public RelayCommand SinglePlayerMenuItem_Click
         {
             get
@@ -33,7 +33,14 @@ namespace evolution.ViewModel
             }
         }
 
-
+        private RelayCommand settingsMenuItem_Click;                        //Комманда пункта меню "Найстройки"
+        public RelayCommand SettingsMenuItem_Click
+        {
+            get
+            {
+                return new RelayCommand(obj => { mainWindowViewModel.CurrentPage = mainWindowViewModel.SettingsPage; });
+            }
+        }
 
         private RelayCommand appClose_Click;
         public RelayCommand AppClose_Click

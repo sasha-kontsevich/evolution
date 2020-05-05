@@ -22,15 +22,6 @@ namespace evolution.ViewModel
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private static MainWindowViewModel instance;
-
-
-        public static MainWindowViewModel getInstance(MainWindow window)
-        {
-            if (instance == null)
-                instance = new MainWindowViewModel(window);
-            return instance;
-        }
 
         private MainWindow window;
         private Page mainMenuPage;

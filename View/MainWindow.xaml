@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:evolution"
         mc:Ignorable="d"
-        Title="MainWindow" MinWidth="800" MinHeight="600
+        Title="MainWindow" MinWidth="1060" MinHeight="600
         " Loaded="Window_Loaded">
     <Window.Resources>
             <ResourceDictionary Source="../Styles/Style.xaml" />
@@ -17,7 +17,8 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
+        <Image x:Name="MainMenuBG" Source="../Resources/Images/MainMenu_img1.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
         <Frame x:Name="frame" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" 
                BorderBrush="LimeGreen" BorderThickness="0"
                NavigationUIVisibility="Hidden"

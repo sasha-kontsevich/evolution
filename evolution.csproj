@@ -59,7 +59,9 @@
     <Compile Include="Model\Cofiguration.cs" />
     <Compile Include="Model\GameSession.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Players.cs" />
     <Compile Include="Model\Property.cs" />
+    <Compile Include="Model\Reward.cs" />
     <Compile Include="Model\Species.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -84,6 +86,10 @@
     <Page Include="Styles\SettingsStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\SinglePlayerStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Style.xaml">
       <SubType>Designer</SubType>
@@ -148,9 +154,22 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\GrooveStr.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\MainMenu_img1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\612642.jpg" />
+    <Resource Include="Resources\Images\7buVexxYpjs.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\NotReady.png" />
+    <Resource Include="Resources\Images\Ready.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\NoAvatar.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

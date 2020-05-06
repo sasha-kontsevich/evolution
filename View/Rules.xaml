@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Rules">
     <Page.Resources>
-        <ResourceDictionary Source="../Styles/SettingsStyle.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="../Styles/RulesStyle.xaml"></ResourceDictionary>
     </Page.Resources>
 
     <Grid>
@@ -22,12 +22,175 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="257*"></RowDefinition>
             <RowDefinition Height="auto" MinHeight="138.4"></RowDefinition>
-            <RowDefinition Height="54*"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
         <Rectangle Grid.Column="1" Grid.RowSpan="3" Fill="Green" Grid.ColumnSpan="1"></Rectangle>
-        <Rectangle Grid.Column="2" Grid.RowSpan="2" Fill="White" Opacity="0.8"></Rectangle>
+        <Rectangle Grid.Column="2" Grid.RowSpan="2" Fill="White" Opacity="0.9"></Rectangle>
         <Rectangle Grid.RowSpan="3" Grid.Column="3" Fill="Green" Grid.ColumnSpan="1"></Rectangle>
         <Rectangle Grid.RowSpan="1" Grid.Column="2" Fill="#ddd" Grid.ColumnSpan="1" Grid.Row="2"  Opacity="0.9"></Rectangle>
+        <ScrollViewer Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
+            <StackPanel>
+                <Label Style="{StaticResource Heading1}" Content="{DynamicResource HeadingText1}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text1}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text2}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text3}"></TextBlock>
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText2}" VerticalAlignment="Top"></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition ></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_1}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_2}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_3}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_4}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_5}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_6}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_7}"></TextBlock>
+                    </StackPanel>
+                    <Image Grid.Column="1" Source="../Resources/Images/components.jpg"></Image>
+                </Grid>
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText3}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text5}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text6}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text7}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text8}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text9}"></TextBlock>
+                <Image Grid.Column="1" Source="../Resources/Images/game2.jpg"></Image>
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText4}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text10}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text11}"></TextBlock>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text12_1}"></TextBlock>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text12_2}"></TextBlock>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text12_3}"></TextBlock>
+                </StackPanel>
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText5}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text13}"></TextBlock>
+
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText6}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text14}"></TextBlock>
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText7}" VerticalAlignment="Top"></Label>
+                        <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text15}"></TextBlock>
+                        <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text16}"></TextBlock>
+                        <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text17}"></TextBlock>
+                    </StackPanel>
+                    <Image Grid.Column="1" Source="../Resources/Images/game14.jpg"></Image>
+                </Grid>
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText8}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text18}"></TextBlock>
+                <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText9}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text19}"></TextBlock>
+                <Image Grid.Column="1" Source="../Resources/Images/game15.jpg"></Image>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text20}"></TextBlock>
+                <Image Grid.Column="1" Source="../Resources/Images/game16.jpg"></Image>
+                <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText10}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text21}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text22}"></TextBlock>
+                <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText11}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text23}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text24}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text25}"></TextBlock>
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText12}" VerticalAlignment="Top"></Label>
+                <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText13}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text26}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text27}"></TextBlock>
+
+                <Image Grid.Column="1" Source="../Resources/Images/game20.jpg"></Image>
+                <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText14}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text28}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text29}"></TextBlock>
+                <Label Style="{StaticResource Heading4}" Content="{DynamicResource HeadingText15}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text30}"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="../Resources/Images/game24.jpg" Margin="30,0,0,0"></Image>
+                </Grid>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text31}"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="../Resources/Images/game25.jpg" Margin="30,0,0,0"></Image>
+                </Grid>
+
+                <Label Style="{StaticResource Heading4}" Content="{DynamicResource HeadingText16}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text32}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text33}"></TextBlock>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text34}"></TextBlock>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text35}"></TextBlock>
+                </StackPanel>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text36}"></TextBlock>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text37}"></TextBlock>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text38}"></TextBlock>
+                </StackPanel>
+                <Label Style="{StaticResource Heading4}" Content="{DynamicResource HeadingText17}" VerticalAlignment="Top"></Label>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text39_1}"></TextBlock>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text39_2}"></TextBlock>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text39_3}"></TextBlock>
+                </StackPanel>
+                <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText18}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text40}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text41}"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text42_1}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text42_2}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text42_3}"></TextBlock>
+                        <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text42_4}"></TextBlock>
+                    </StackPanel>
+                    <Image Grid.Column="1" Source="../Resources/Images/game26.jpg" Margin="30,0,0,0"></Image>
+
+                </Grid>
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText19}" VerticalAlignment="Top"></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text43}"></TextBlock>
+                        <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text44}"></TextBlock>
+                    </StackPanel>
+                    <Image Grid.Column="1" Source="../Resources/Images/game27.jpg" Margin="30,0,0,0"></Image>
+                </Grid>
+                <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText20}" VerticalAlignment="Top"></Label>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text45}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text46}"></TextBlock>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text47_1}"></TextBlock>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text47_2}"></TextBlock>
+                    <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text47_3}"></TextBlock>
+                </StackPanel>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text48}"></TextBlock>
+                <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text49}"></TextBlock>
+
+
+            </StackPanel>
+            
+            
+        </ScrollViewer>
         <Grid Grid.Row="2" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"></ColumnDefinition>
@@ -37,11 +200,12 @@
                 <ColumnDefinition Width="50*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="12*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
                 <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="15*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
             <Button Grid.Column="1" Grid.Row="1" Content="Назад" Command="{Binding BackToMenu}"></Button>
+            <Button Grid.Column="3" Grid.Row="1" Content="Играть" Command="{Binding ToSinglePlayer}"></Button>
         </Grid>
     </Grid>
 </Page>

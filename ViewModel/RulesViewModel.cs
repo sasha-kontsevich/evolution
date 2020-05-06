@@ -20,6 +20,12 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage); });
             }
         }
-
+        public RelayCommand ToSinglePlayer                               //Вернуться в главное меню
+        {
+            get
+            {
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage); });
+            }
+        }
     }
 }

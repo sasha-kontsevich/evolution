@@ -7,7 +7,6 @@
         <Setter Property="Button.Foreground" Value="#222" />
         <Setter Property="Button.FontFamily" Value="Andy" />
         <Setter Property="Button.FontSize" Value="18"></Setter>
-        <Setter Property="Button.Margin" Value="10,4,10,6"></Setter>
         <Setter Property="Button.BorderThickness" Value="2"></Setter>
         <Setter Property="Button.BorderBrush" Value="Green"></Setter>
     </Style>

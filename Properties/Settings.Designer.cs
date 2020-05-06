@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Globalization;
+
 namespace evolution.Properties
 {
 
@@ -26,5 +28,7 @@ namespace evolution.Properties
                 return defaultInstance;
             }
         }
+
+        public CultureInfo DefaultLanguage { get; internal set; }
     }
 }

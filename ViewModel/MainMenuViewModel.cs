@@ -43,11 +43,18 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.SettingsPage); });
             }
         }
+        public RelayCommand RulesMenuItem_Click                            //Комманда пункта меню "Правила"
+        {
+            get
+            {
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.RulesPage); });
+            }
+        }
         public RelayCommand AppClose_Click                                    //Закрыть приложение
         {
             get
             {
-                return new RelayCommand(obj => { App.Current.MainWindow.Close(); });
+                return new RelayCommand(obj => { mainWindowViewModel.AppClose(); });
             }
         }
         

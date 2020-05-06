@@ -34,7 +34,7 @@
             <!--<Button Padding="5" Margin="5">Сетецвая игра</Button>-->
             <Button Padding="5" Margin="5" Content="Профиль" ></Button>
             <Button Padding="5" Margin="5" Content="Рейтинг" ></Button>
-            <Button Padding="5" Margin="5" Content="Правила" ></Button>
+            <Button Padding="5" Margin="5" Content="Правила" Command="{Binding RulesMenuItem_Click}"></Button>
             <Button Padding="5" Margin="5" Content="Настройки" Command="{Binding SettingsMenuItem_Click}"></Button>
             <Button Padding="5" Margin="5" Content="Выход" Command="{Binding AppClose_Click}">
             </Button>

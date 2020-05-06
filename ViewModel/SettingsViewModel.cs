@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace evolution.ViewModel
 {
@@ -30,7 +31,7 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { /*TODO: Сохранение настроек*/ });
+                return new RelayCommand(obj => { /*TODO: Сохранение настроек*/});
             }
         }
         public RelayCommand SettingsCancel                                    //Комманда пункта настроек "Отмена"

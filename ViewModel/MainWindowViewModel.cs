@@ -24,13 +24,16 @@ namespace evolution.ViewModel
     {
 
         private MainWindow window;
+
         private Page mainMenuPage;
         private Page singlePlayerPage;
         private Page settingsPage;
+        private Page rulesPage;
 
         private SinglePlayerViewModel singlePlayerDataContext;
         private MainMenuViewModel mainMenuDataContext;
         private SettingsViewModel settingsDataContex;
+        private RulesViewModel rulesDataContex;
 
         private Page currentPage;
 
@@ -64,21 +67,24 @@ namespace evolution.ViewModel
         public Page SinglePlayerPage { get => singlePlayerPage; set => singlePlayerPage = value; }
         public Page SettingsPage { get => settingsPage; set => settingsPage = value; }
         public Page MainMenuPage { get => mainMenuPage; set => mainMenuPage = value; }
-        
+        public Page RulesPage { get => rulesPage; set => rulesPage = value; }
 
         public MainWindowViewModel(MainWindow _window)
         {
             MainMenuPage = new MainMenu();                                   //Начальная инициализация страниц
             SinglePlayerPage = new SinglePlayer();
             SettingsPage = new Settings();
+            RulesPage = new Rules();
 
             mainMenuDataContext = new MainMenuViewModel(this);              //Инициализация контекста для страниц
             singlePlayerDataContext = new SinglePlayerViewModel(this);
             settingsDataContex = new SettingsViewModel(this);
+            rulesDataContex = new RulesViewModel(this);
 
             MainMenuPage.DataContext = mainMenuDataContext;                 //Задание контекста страниц
             SinglePlayerPage.DataContext = singlePlayerDataContext;
             SettingsPage.DataContext = settingsDataContex;
+            RulesPage.DataContext = rulesDataContex;
 
             CurrentPage = MainMenuPage;                             //Страница при загрузке
             Window = _window;
@@ -108,5 +114,10 @@ namespace evolution.ViewModel
                 }
             });
         }
+        public void AppClose()
+        {
+            App.Current.MainWindow.Close();
+        }
+
     }
 }

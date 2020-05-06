@@ -24,5 +24,10 @@ namespace evolution.Model
         public int Rating { get => rating; set => rating = value; }
         public int Score { get => score; set => score = value; }
         public List<Reward> Rewards { get => rewards; set => rewards = value; }
+
+        public Player()
+        {
+
+        }
     }
 }

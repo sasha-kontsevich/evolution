@@ -49,7 +49,7 @@
                         <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_6}"></TextBlock>
                         <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text4_7}"></TextBlock>
                     </StackPanel>
-                    <Image Grid.Column="1" Source="../Resources/Images/components.jpg"></Image>
+                    <Image Grid.Column="1" Source="../Resources/Images/components.png"></Image>
                 </Grid>
                 <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText3}" VerticalAlignment="Top"></Label>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text5}"></TextBlock>
@@ -57,7 +57,7 @@
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text7}"></TextBlock>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text8}"></TextBlock>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text9}"></TextBlock>
-                <Image Grid.Column="1" Source="../Resources/Images/game2.jpg"></Image>
+                <Image Grid.Column="1" Source="../Resources/Images/game2.png"></Image>
                 <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText4}" VerticalAlignment="Top"></Label>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text10}"></TextBlock>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text11}"></TextBlock>
@@ -84,15 +84,15 @@
                         <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text16}"></TextBlock>
                         <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text17}"></TextBlock>
                     </StackPanel>
-                    <Image Grid.Column="1" Source="../Resources/Images/game14.jpg"></Image>
+                    <Image Grid.Column="1" Source="../Resources/Images/game14.png"></Image>
                 </Grid>
                 <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText8}" VerticalAlignment="Top"></Label>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text18}"></TextBlock>
                 <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText9}" VerticalAlignment="Top"></Label>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text19}"></TextBlock>
-                <Image Grid.Column="1" Source="../Resources/Images/game15.jpg"></Image>
+                <Image Grid.Column="1" Source="../Resources/Images/game15.png"></Image>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text20}"></TextBlock>
-                <Image Grid.Column="1" Source="../Resources/Images/game16.jpg"></Image>
+                <Image Grid.Column="1" Source="../Resources/Images/game16.png"></Image>
                 <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText10}" VerticalAlignment="Top"></Label>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text21}"></TextBlock>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text22}"></TextBlock>
@@ -105,7 +105,7 @@
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text26}"></TextBlock>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text27}"></TextBlock>
 
-                <Image Grid.Column="1" Source="../Resources/Images/game20.jpg"></Image>
+                <Image Grid.Column="1" Source="../Resources/Images/game20.png"></Image>
                 <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText14}" VerticalAlignment="Top"></Label>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text28}"></TextBlock>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text29}"></TextBlock>
@@ -116,7 +116,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="../Resources/Images/game24.jpg" Margin="30,0,0,0"></Image>
+                    <Image Grid.Column="0" Source="../Resources/Images/game24.png" Margin="30,0,0,0"></Image>
                 </Grid>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text31}"></TextBlock>
                 <Grid>
@@ -124,7 +124,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="../Resources/Images/game25.jpg" Margin="30,0,0,0"></Image>
+                    <Image Grid.Column="0" Source="../Resources/Images/game25.png" Margin="30,0,0,0"></Image>
                 </Grid>
 
                 <Label Style="{StaticResource Heading4}" Content="{DynamicResource HeadingText16}" VerticalAlignment="Top"></Label>
@@ -159,7 +159,7 @@
                         <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text42_3}"></TextBlock>
                         <TextBlock Style="{StaticResource ListText}" Text="{DynamicResource Text42_4}"></TextBlock>
                     </StackPanel>
-                    <Image Grid.Column="1" Source="../Resources/Images/game26.jpg" Margin="30,0,0,0"></Image>
+                    <Image Grid.Column="1" Source="../Resources/Images/game26.png" Margin="30,0,0,0"></Image>
 
                 </Grid>
                 <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText19}" VerticalAlignment="Top"></Label>
@@ -172,7 +172,7 @@
                         <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text43}"></TextBlock>
                         <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text44}"></TextBlock>
                     </StackPanel>
-                    <Image Grid.Column="1" Source="../Resources/Images/game27.jpg" Margin="30,0,0,0"></Image>
+                    <Image Grid.Column="1" Source="../Resources/Images/game27.png" Margin="30,0,0,0"></Image>
                 </Grid>
                 <Label Style="{StaticResource Heading2}" Content="{DynamicResource HeadingText20}" VerticalAlignment="Top"></Label>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text45}"></TextBlock>

@@ -177,10 +177,6 @@
     <Resource Include="Resources\Images\MainMenu_img1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\612642.jpg" />
-    <Resource Include="Resources\Images\7buVexxYpjs.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\NotReady.png" />
     <Resource Include="Resources\Images\Ready.png" />
   </ItemGroup>
@@ -216,6 +212,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\game27.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\components.png" />
+    <Resource Include="Resources\Images\game14.png" />
+    <Resource Include="Resources\Images\game15.png" />
+    <Resource Include="Resources\Images\game16.png" />
+    <Resource Include="Resources\Images\game2.png" />
+    <Resource Include="Resources\Images\game20.png" />
+    <Resource Include="Resources\Images\game24.png" />
+    <Resource Include="Resources\Images\game25.png" />
+    <Resource Include="Resources\Images\game26.png" />
+    <Resource Include="Resources\Images\game27.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

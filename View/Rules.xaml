@@ -90,7 +90,7 @@
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text18}"></TextBlock>
                 <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText9}" VerticalAlignment="Top"></Label>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text19}"></TextBlock>
-                <Image Grid.Column="1" Source="../Resources/Images/game15.png"></Image>
+                <Image Grid.Column="1" Source="../Resources/Images/game15.png" Margin="30,0,30,0"></Image>
                 <TextBlock Style="{StaticResource Text}" Text="{DynamicResource Text20}"></TextBlock>
                 <Image Grid.Column="1" Source="../Resources/Images/game16.png"></Image>
                 <Label Style="{StaticResource Heading3}" Content="{DynamicResource HeadingText10}" VerticalAlignment="Top"></Label>

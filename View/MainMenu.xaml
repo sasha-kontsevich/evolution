@@ -31,9 +31,9 @@
         </Label>
         <StackPanel Margin="5,5,8,4" Grid.Row="1" Grid.Column="2">
             <Button Margin="5" Padding="5" Content="Играть" Command="{Binding SinglePlayerMenuItem_Click}"></Button>
-            <!--<Button Padding="5" Margin="5">Сетецвая игра</Button>-->
-            <Button Padding="5" Margin="5" Content="Профиль" ></Button>
-            <Button Padding="5" Margin="5" Content="Рейтинг" ></Button>
+            <!--<Button Padding="5" Margin="5">Сетевая игра</Button>-->
+            <Button Padding="5" Margin="5" Content="Профиль" Command="{Binding ProfileMenuItem_Click}"></Button>
+            <Button Padding="5" Margin="5" Content="Рейтинг" Command="{Binding LeaderBoardMenuItem_Click}"></Button>
             <Button Padding="5" Margin="5" Content="Правила" Command="{Binding RulesMenuItem_Click}"></Button>
             <Button Padding="5" Margin="5" Content="Настройки" Command="{Binding SettingsMenuItem_Click}"></Button>
             <Button Padding="5" Margin="5" Content="Выход" Command="{Binding AppClose_Click}">

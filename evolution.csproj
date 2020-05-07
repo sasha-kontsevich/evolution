@@ -67,12 +67,20 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\GameViewModel.cs" />
+    <Compile Include="ViewModel\LeaderBoardViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RulesViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\SinglePlayerViewModel.cs" />
     <Compile Include="View\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LeaderBoard.xaml.cs">
+      <DependentUpon>LeaderBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Rules.xaml.cs">
       <DependentUpon>Rules.xaml</DependentUpon>
@@ -88,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Localize\lang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ControlButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,6 +123,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\LeaderBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +147,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Rules.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -182,36 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\NoAvatar.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\components.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game14.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game15.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game16.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game20.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game24.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game25.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game26.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\game27.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\components.png" />

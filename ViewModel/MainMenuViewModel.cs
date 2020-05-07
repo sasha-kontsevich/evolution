@@ -36,6 +36,22 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => {mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage); });
             }
         }
+        public RelayCommand ProfileMenuItem_Click                        //Комманда пункта меню "Рейтинг"
+        {
+            get
+            {
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.ProfilePage); });
+            }
+        }
+
+        public RelayCommand LeaderBoardMenuItem_Click                        //Комманда пункта меню "Рейтинг"
+        {
+            get
+            {
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.LeaderBoardPage); });
+            }
+        }
+
         public RelayCommand SettingsMenuItem_Click                            //Комманда пункта меню "Найстройки"
         {
             get

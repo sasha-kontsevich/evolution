@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:evolution.Styles">
+    <Style TargetType="Button">
+        <Setter Property="Button.Background" Value="White" />
+        <Setter Property="Button.Foreground" Value="#222" />
+        <Setter Property="Button.FontFamily" Value="Andy" />
+        <Setter Property="Button.FontSize" Value="18"></Setter>
+        <Setter Property="Button.BorderThickness" Value="2"></Setter>
+        <Setter Property="Button.BorderBrush" Value="Green"></Setter>
+    </Style>
+</ResourceDictionary>

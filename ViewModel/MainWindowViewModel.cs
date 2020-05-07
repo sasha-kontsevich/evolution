@@ -6,16 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Windows.Input;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Collections.ObjectModel;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using evolution.View;
 
 namespace evolution.ViewModel
@@ -29,11 +19,15 @@ namespace evolution.ViewModel
         private Page singlePlayerPage;
         private Page settingsPage;
         private Page rulesPage;
+        private Page leaderBoardPage;
+        private Page profilePage;
 
         private SinglePlayerViewModel singlePlayerDataContext;
         private MainMenuViewModel mainMenuDataContext;
         private SettingsViewModel settingsDataContex;
         private RulesViewModel rulesDataContex;
+        private LeaderBoardViewModel leaderBoardContext;
+        private ProfileViewModel profileContext;
 
         private Page currentPage;
 
@@ -68,27 +62,35 @@ namespace evolution.ViewModel
         public Page SettingsPage { get => settingsPage; set => settingsPage = value; }
         public Page MainMenuPage { get => mainMenuPage; set => mainMenuPage = value; }
         public Page RulesPage { get => rulesPage; set => rulesPage = value; }
+        public Page LeaderBoardPage { get => leaderBoardPage; set => leaderBoardPage = value; }
+        public Page ProfilePage { get => profilePage; set => profilePage = value; }
 
         public MainWindowViewModel(MainWindow _window)
         {
+            Window = _window;
+
             MainMenuPage = new MainMenu();                                   //Начальная инициализация страниц
             SinglePlayerPage = new SinglePlayer();
             SettingsPage = new Settings();
             RulesPage = new Rules();
+            LeaderBoardPage = new LeaderBoard();
+            ProfilePage = new Profile();
 
             mainMenuDataContext = new MainMenuViewModel(this);              //Инициализация контекста для страниц
             singlePlayerDataContext = new SinglePlayerViewModel(this);
             settingsDataContex = new SettingsViewModel(this);
             rulesDataContex = new RulesViewModel(this);
+            leaderBoardContext = new LeaderBoardViewModel(this);
+            profileContext = new ProfileViewModel(this);
 
             MainMenuPage.DataContext = mainMenuDataContext;                 //Задание контекста страниц
             SinglePlayerPage.DataContext = singlePlayerDataContext;
             SettingsPage.DataContext = settingsDataContex;
             RulesPage.DataContext = rulesDataContex;
+            LeaderBoardPage.DataContext = leaderBoardContext;
+            ProfilePage.DataContext = profileContext;
 
             CurrentPage = MainMenuPage;                             //Страница при загрузке
-            Window = _window;
-            
         }
 
         public void ChangePage(Page page)

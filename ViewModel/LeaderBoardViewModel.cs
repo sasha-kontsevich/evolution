@@ -24,7 +24,7 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.LeaderBoardPage); });
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.ProfilePage); });
             }
         }
 

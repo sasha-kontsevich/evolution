@@ -48,6 +48,16 @@
         <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Fill="White" Opacity="0.9"></Rectangle>
         <Rectangle Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Fill="White" Opacity="0.9"></Rectangle>
         <Rectangle  Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="1" Fill="White" Opacity="0.0" ></Rectangle>
+
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <Label Content="Язык" Style="{StaticResource SettingsTitle}"></Label>
+            <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" Margin="0,0,40,0">
+                <!--<ComboBoxItem IsSelected="True">English</ComboBoxItem>
+                <ComboBoxItem>Русский</ComboBoxItem>-->
+            </ComboBox>
+        </StackPanel>
+
+
             <Grid  Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="1" Background="White" Opacity="0.9">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>

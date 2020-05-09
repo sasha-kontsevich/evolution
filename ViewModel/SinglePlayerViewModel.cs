@@ -37,7 +37,7 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.SettingsPage); });
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.GamePage); });
             }
         }
 

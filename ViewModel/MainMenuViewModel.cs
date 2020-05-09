@@ -19,10 +19,6 @@ namespace evolution.ViewModel
     {
         MainWindowViewModel mainWindowViewModel;
 
-        private RelayCommand appClose_Click;
-        private RelayCommand singlePlayerMenuItem_Click;
-        private RelayCommand settingsMenuItem_Click;
-
         public MainMenuViewModel(MainWindowViewModel _mainWindowViewModel)      //Начальная инициализация
         {
             mainWindowViewModel = _mainWindowViewModel;
@@ -43,7 +39,6 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.ProfilePage); });
             }
         }
-
         public RelayCommand LeaderBoardMenuItem_Click                        //Комманда пункта меню "Рейтинг"
         {
             get
@@ -51,19 +46,18 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.LeaderBoardPage); });
             }
         }
-
-        public RelayCommand SettingsMenuItem_Click                            //Комманда пункта меню "Найстройки"
-        {
-            get
-            {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.SettingsPage); });
-            }
-        }
         public RelayCommand RulesMenuItem_Click                            //Комманда пункта меню "Правила"
         {
             get
             {
                 return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.RulesPage); });
+            }
+        }
+        public RelayCommand SettingsMenuItem_Click                            //Комманда пункта меню "Найстройки"
+        {
+            get
+            {
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.SettingsPage); });
             }
         }
         public RelayCommand AppClose_Click                                    //Закрыть приложение

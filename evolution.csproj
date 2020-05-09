@@ -58,6 +58,7 @@
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\Cofiguration.cs" />
     <Compile Include="Model\GameSession.cs" />
+    <Compile Include="Model\GameSettings.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Players.cs" />
     <Compile Include="Model\Property.cs" />
@@ -94,6 +95,10 @@
     <Page Include="Resources\Dictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Localize\lang.ru-RU.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Localize\lang.xaml">
       <SubType>Designer</SubType>

@@ -52,16 +52,16 @@ namespace evolution
                 switch (value.Name)
                 {
                     case "ru-RU":
-                        dict.Source = new Uri(String.Format("Resources/lang.{0}.xaml", value.Name), UriKind.Relative);
+                        dict.Source = new Uri(String.Format("Resources/Localize/lang.{0}.xaml", value.Name), UriKind.Relative);
                         break;
                     default:
-                        dict.Source = new Uri("Resources/lang.xaml", UriKind.Relative);
+                        dict.Source = new Uri("Resources/Localize/lang.xaml", UriKind.Relative);
                         break;
                 }
 
                 //3. Находим старую ResourceDictionary и удаляем его и добавляем новую ResourceDictionary
                 ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
-                                              where d.Source != null && d.Source.OriginalString.StartsWith("Resources/lang.")
+                                              where d.Source != null && d.Source.OriginalString.StartsWith("Resources/Localize/lang.")
                                               select d).First();
                 if (oldDict != null)
                 {

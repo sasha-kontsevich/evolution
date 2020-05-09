@@ -21,6 +21,7 @@ namespace evolution.ViewModel
         private Page rulesPage;
         private Page leaderBoardPage;
         private Page profilePage;
+        private Page gamePage;
 
         private SinglePlayerViewModel singlePlayerDataContext;
         private MainMenuViewModel mainMenuDataContext;
@@ -28,6 +29,7 @@ namespace evolution.ViewModel
         private RulesViewModel rulesDataContex;
         private LeaderBoardViewModel leaderBoardContext;
         private ProfileViewModel profileContext;
+        private GameViewModel gameContext;
 
         private Page currentPage;
 
@@ -64,6 +66,7 @@ namespace evolution.ViewModel
         public Page RulesPage { get => rulesPage; set => rulesPage = value; }
         public Page LeaderBoardPage { get => leaderBoardPage; set => leaderBoardPage = value; }
         public Page ProfilePage { get => profilePage; set => profilePage = value; }
+        public Page GamePage { get => gamePage; set => gamePage = value; }
 
         public MainWindowViewModel(MainWindow _window)
         {
@@ -75,6 +78,7 @@ namespace evolution.ViewModel
             RulesPage = new Rules();
             LeaderBoardPage = new LeaderBoard();
             ProfilePage = new Profile();
+            GamePage = new Game();
 
             mainMenuDataContext = new MainMenuViewModel(this);              //Инициализация контекста для страниц
             singlePlayerDataContext = new SinglePlayerViewModel(this);
@@ -82,6 +86,7 @@ namespace evolution.ViewModel
             rulesDataContex = new RulesViewModel(this);
             leaderBoardContext = new LeaderBoardViewModel(this);
             profileContext = new ProfileViewModel(this);
+            gameContext = new GameViewModel(this);
 
             MainMenuPage.DataContext = mainMenuDataContext;                 //Задание контекста страниц
             SinglePlayerPage.DataContext = singlePlayerDataContext;
@@ -89,6 +94,7 @@ namespace evolution.ViewModel
             RulesPage.DataContext = rulesDataContex;
             LeaderBoardPage.DataContext = leaderBoardContext;
             ProfilePage.DataContext = profileContext;
+            GamePage.DataContext = gameContext;
 
             CurrentPage = MainMenuPage;                             //Страница при загрузке
         }

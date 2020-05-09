@@ -16,4 +16,22 @@
         <Setter Property="Button.FontFamily" Value="Andy" />
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
     </Style>
+    <Style TargetType="Label" x:Key="SettingsTitle">
+        <Setter Property="FontSize" Value="18"></Setter>
+        <Setter Property="Foreground" Value="Green"></Setter>
+        <Setter Property="Button.FontFamily" Value="Myriad Pro" />
+    </Style>
+    <Style TargetType="ComboBox">
+        <Setter Property="BorderBrush" Value="Green"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+        <Setter Property="Height" Value="30"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+    </Style>
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="BorderBrush" Value="Green"></Setter>
+        <Setter Property="BorderThickness" Value="1.5"></Setter>
+        <Setter Property="Height" Value="30"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+
+    </Style>
 </ResourceDictionary>

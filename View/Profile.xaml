@@ -40,8 +40,8 @@
                 <RowDefinition Height="20*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Column="1" Grid.Row="1" Content="Назад" Command="{Binding BackToMenu}"></Button>
-            <Button Grid.Column="3" Grid.Row="1" Content="Рейтинг" Command="{Binding ToLeaderBoard}"></Button>
+            <Button Grid.Column="1" Grid.Row="1" Content="{DynamicResource Back}" Command="{Binding BackToMenu}"></Button>
+            <Button Grid.Column="3" Grid.Row="1" Content="{DynamicResource LeaderBoard}" Command="{Binding ToLeaderBoard}"></Button>
         </Grid>
         </Grid>
 </Page>

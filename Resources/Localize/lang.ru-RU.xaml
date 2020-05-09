@@ -3,6 +3,40 @@
                     xmlns:local="clr-namespace:evolution.Resources"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
+    <v:String x:Key="Evolution">ЭВОЛЮЦИЯ</v:String>
+    <v:String x:Key="EvolutionWin">Эволюция</v:String>
+    <v:String x:Key="Play">Играть</v:String>
+    <v:String x:Key="Profile">Профиль</v:String>
+    <v:String x:Key="LeaderBoard">Рейтинг</v:String>
+    <v:String x:Key="Rules">Правила</v:String>
+    <v:String x:Key="Settings">Настройки</v:String>
+    <v:String x:Key="Exit">Выход</v:String>
+    <v:String x:Key="Back">Назад</v:String>
+    <v:String x:Key="Language">Язык</v:String>
+    <v:String x:Key="OK">ОК</v:String>
+    <v:String x:Key="Accept">Принять</v:String>
+    <v:String x:Key="Cancel">Отмена</v:String>
+    <v:String x:Key="Continue">Продолжить</v:String>
+    <v:String x:Key="ExitGame">Покинуть игру</v:String>
+    <v:String x:Key="Menu">Меню</v:String>
+    <v:String x:Key="RatingLabel">Рейтинг:</v:String>
+    <v:String x:Key="Player1">Игрок 1</v:String>
+    <v:String x:Key="Player2">Игрок 2</v:String>
+    <v:String x:Key="Player3">Игрок 3</v:String>
+    <v:String x:Key="Player4">Игрок 4</v:String>
+    <v:String x:Key="Player5">Игрок 5</v:String>
+    <v:String x:Key="Player6">Игрок 6</v:String>
+    <v:String x:Key="Login">Логин:</v:String>
+    <v:String x:Key="Password">Пароль:</v:String>
+    <v:String x:Key="SignIn">Войти</v:String>
+    <v:String x:Key="TakePart">Участвовать</v:String>
+
+
+
+
+
+
+
     <v:String x:Key="HeadingText1">Правила игры Эволюция</v:String>
     <v:String x:Key="Text1">На нашей планете более миллиона различных видов животных. Теория эволюции пытается объяснить причину этого невероятного биоразнообразия.</v:String>
     <v:String x:Key="Text2">Чарльз Дарвин сформулировал теорию эволюции посредством естественного отбора. Его теория утверждает, что животные, которые лучше приспособлены к выживанию в окружающей среде, с большей вероятностью передают свои свойства. За тысячи поколений это привело к разнообразию видов, которые мы находим на нашей планете.</v:String>

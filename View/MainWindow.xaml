@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:evolution"
         mc:Ignorable="d"
-        Title="Evolution" MinWidth="1060" MinHeight="600
-        " Loaded="Window_Loaded">
+        Title="{DynamicResource EvolutionWin}" MinWidth="1060" MinHeight="600" 
+        Loaded="Window_Loaded">
     <Window.Resources>
             <ResourceDictionary Source="../Styles/Style.xaml" />
     </Window.Resources>

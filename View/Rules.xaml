@@ -204,8 +204,8 @@
                 <RowDefinition Height="20*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Column="1" Grid.Row="1" Content="Назад" Command="{Binding BackToMenu}"></Button>
-            <Button Grid.Column="3" Grid.Row="1" Content="Играть" Command="{Binding ToSinglePlayer}"></Button>
+            <Button Grid.Column="1" Grid.Row="1" Content="{DynamicResource Back}" Command="{Binding BackToMenu}"></Button>
+            <Button Grid.Column="3" Grid.Row="1" Content="{DynamicResource Play}" Command="{Binding ToSinglePlayer}"></Button>
         </Grid>
     </Grid>
 </Page>

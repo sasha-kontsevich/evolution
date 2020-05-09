@@ -13,7 +13,7 @@
     <Grid>
         <Rectangle Fill="#fff"></Rectangle>
         <Canvas>
-            <Button Command="{Binding ShowMenu}">Menu</Button>
+            <Button Content="{DynamicResource Menu}" Command="{Binding ShowMenu}"></Button>
         </Canvas>
 
             <Grid Opacity="{Binding MenuOpacity}"
@@ -35,14 +35,12 @@
                 <Rectangle Grid.Column="1" Grid.RowSpan="3" Fill="Green"></Rectangle>
                 <Rectangle Grid.Column="2" Grid.RowSpan="3" Fill="White" Opacity="0.9"></Rectangle>
                 <Rectangle Grid.RowSpan="3" Grid.Column="3" Fill="Green"></Rectangle>
-                <Label Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="48" RenderTransformOrigin="1.375,0.754" Foreground="Green" BorderBrush="Green" BorderThickness="4" FontWeight="Bold">
-                    ЭВОЛЮЦИЯ
-                </Label>
+            <Label Content="{DynamicResource Evolution}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="48" RenderTransformOrigin="1.375,0.754" Foreground="Green" BorderBrush="Green" BorderThickness="4" FontWeight="Bold"></Label>
                 <StackPanel Margin="5,5,8,4" Grid.Row="1" Grid.Column="2">
-                    <Button Padding="5" Margin="5" Content="Продолжить" Command="{Binding Continue}"></Button>
-                    <Button Padding="5" Margin="5" Content="Правила" Command="{Binding RulesMenuItem_Click}"></Button>
-                    <Button Padding="5" Margin="5" Content="Настройки" Command="{Binding SettingsMenuItem_Click}"></Button>
-                    <Button Padding="5" Margin="5" Content="Покинуть игру" Command="{Binding ReturnToMenu}">
+                <Button Padding="5" Margin="5" Content="{DynamicResource Continue}" Command="{Binding Continue}"></Button>
+                <Button Padding="5" Margin="5" Content="{DynamicResource Rules}" Command="{Binding RulesMenuItem_Click}"></Button>
+                <Button Padding="5" Margin="5" Content="{DynamicResource Settings}" Command="{Binding SettingsMenuItem_Click}"></Button>
+                <Button Padding="5" Margin="5" Content="{DynamicResource ExitGame}" Command="{Binding ReturnToMenu}">
                     </Button>
                 </StackPanel>
             </Grid>

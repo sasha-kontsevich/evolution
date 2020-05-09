@@ -3,6 +3,38 @@
                     xmlns:local="clr-namespace:evolution.Resources"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
+    <v:String x:Key="Evolution">EVOLUTION</v:String>
+    <v:String x:Key="EvolutionWin">Evolution</v:String>
+    <v:String x:Key="Play">Play</v:String>
+    <v:String x:Key="Profile">Profile</v:String>
+    <v:String x:Key="LeaderBoard">Leaderboard</v:String>
+    <v:String x:Key="Rules">Rules</v:String>
+    <v:String x:Key="Settings">Settings</v:String>
+    <v:String x:Key="Exit">Exit game</v:String>
+    <v:String x:Key="Back">Back</v:String>
+    <v:String x:Key="Language">Language</v:String>
+    <v:String x:Key="OK">OK</v:String>
+    <v:String x:Key="Accept">Accept</v:String>
+    <v:String x:Key="Cancel">Cancel</v:String>
+    <v:String x:Key="Continue">Continue</v:String>
+    <v:String x:Key="ExitGame">Exit Game</v:String>
+    <v:String x:Key="Menu">Menu</v:String>
+    <v:String x:Key="RatingLabel">Rating:</v:String>
+    <v:String x:Key="Player1">Player 1</v:String>
+    <v:String x:Key="Player2">Player 2</v:String>
+    <v:String x:Key="Player3">Player 3</v:String>
+    <v:String x:Key="Player4">Player 4</v:String>
+    <v:String x:Key="Player5">Player 5</v:String>
+    <v:String x:Key="Player6">Player 6</v:String>
+    <v:String x:Key="Login">Login:</v:String>
+    <v:String x:Key="Password">Password:</v:String>
+    <v:String x:Key="SignIn">Sign In</v:String>
+    <v:String x:Key="TakePart">Take part</v:String>
+
+
+
+
+
     <v:String x:Key="HeadingText1">Evolution Game Rules</v:String>
     <v:String x:Key="Text1">There are over a million different animal species on our planet. The theory of evolution attempts to explain the cause of this incredible biodiversity.</v:String>
     <v:String x:Key="Text2">Charles Darwin formulated a theory of evolution by means of natural selection. His theory posits that animals that are better adapted to survive in an environment are more likely to pass on their traits. Over thousands of generations, this has led to the variety of species we find on our planet.</v:String>

@@ -43,14 +43,14 @@
             </Grid.RowDefinitions>
             <Rectangle  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="1" Fill="White" Opacity="0.9"></Rectangle>
             <Rectangle  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="1" Fill="Green"></Rectangle>
-            <Label Grid.Column="1" Grid.Row="1" Content="Настройки" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <Label Grid.Column="1" Grid.Row="1" Content="{DynamicResource Settings}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
         </Grid>
         <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Fill="White" Opacity="0.9"></Rectangle>
         <Rectangle Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Fill="White" Opacity="0.9"></Rectangle>
         <Rectangle  Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="1" Fill="White" Opacity="0.0" ></Rectangle>
 
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <Label Content="Язык" Style="{StaticResource SettingsTitle}"></Label>
+            <Label Content="{DynamicResource Language}" Style="{StaticResource SettingsTitle}"></Label>
             <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" Margin="0,0,40,0">
                 <!--<ComboBoxItem IsSelected="True">English</ComboBoxItem>
                 <ComboBoxItem>Русский</ComboBoxItem>-->
@@ -76,9 +76,9 @@
             </Grid.RowDefinitions>
             <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="1" Fill="Green"></Rectangle>
             <!--<Rectangle  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="1" Fill="Green"></Rectangle>-->
-            <Button Content="ОК" Grid.Column="1" Grid.Row="2" Command="{Binding SettingsOK}"></Button>
-            <Button Content="Принять"  Grid.Column="3" Grid.Row="2" Command="{Binding SettingsAccept}" ></Button>
-            <Button Content="Отмена"  Grid.Column="5" Grid.Row="2" Command="{Binding SettingsCancel}"></Button>
+            <Button Content="{DynamicResource OK}" Grid.Column="1" Grid.Row="2" Command="{Binding SettingsOK}"></Button>
+            <Button Content="{DynamicResource Accept}"  Grid.Column="3" Grid.Row="2" Command="{Binding SettingsAccept}" ></Button>
+            <Button Content="{DynamicResource Cancel}"  Grid.Column="5" Grid.Row="2" Command="{Binding SettingsCancel}"></Button>
             </Grid>
     </Grid>
 </Page>

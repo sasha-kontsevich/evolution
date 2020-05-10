@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище EvolutionDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Awards">
+          <Key>
+            <PropertyRef Name="AwardID" />
+          </Key>
+          <Property Name="AwardID" Type="int" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Level" Type="tinyint" />
+          <Property Name="Image" Type="image" />
+        </EntityType>
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="MatchID" />
+          </Key>
+          <Property Name="MatchID" Type="int" Nullable="false" />
+          <Property Name="GameDuration" Type="time" Precision="7" />
+          <Property Name="Date" Type="date" />
+          <Property Name="PlayerCount" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "EvolutionDB.dbo.UserMatchResults" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="UserMatchResults">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="MatchID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="MatchID" Type="int" Nullable="false" />
+          <Property Name="Place" Type="int" />
+          <Property Name="Score" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="30" />
+          <Property Name="RegisterDate" Type="date" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Avatar" Type="image" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="UsersAwards">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="AwardID" Type="int" />
+        </EntityType>
+        <Association Name="FK_UserMatchResults_Matches">
+          <End Role="Matches" Type="Self.Matches" Multiplicity="1" />
+          <End Role="UserMatchResults" Type="Self.UserMatchResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="MatchID" />
+            </Principal>
+            <Dependent Role="UserMatchResults">
+              <PropertyRef Name="MatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMatchResults_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserMatchResults" Type="Self.UserMatchResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserMatchResults">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersAwards_Awards">
+          <End Role="Awards" Type="Self.Awards" Multiplicity="0..1" />
+          <End Role="UsersAwards" Type="Self.UsersAwards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Awards">
+              <PropertyRef Name="AwardID" />
+            </Principal>
+            <Dependent Role="UsersAwards">
+              <PropertyRef Name="AwardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersAwards_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UsersAwards" Type="Self.UsersAwards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UsersAwards">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище EvolutionDBModelContainer">
+          <EntitySet Name="Awards" EntityType="Self.Awards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersAwards" EntityType="Self.UsersAwards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMatchResults" EntityType="Self.UserMatchResults" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserMatchResults].[UserID] AS [UserID], 
+    [UserMatchResults].[MatchID] AS [MatchID], 
+    [UserMatchResults].[Place] AS [Place], 
+    [UserMatchResults].[Score] AS [Score]
+    FROM [dbo].[UserMatchResults] AS [UserMatchResults]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_UserMatchResults_Matches" Association="Self.FK_UserMatchResults_Matches">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="UserMatchResults" EntitySet="UserMatchResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMatchResults_Users" Association="Self.FK_UserMatchResults_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserMatchResults" EntitySet="UserMatchResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAwards_Awards" Association="Self.FK_UsersAwards_Awards">
+            <End Role="Awards" EntitySet="Awards" />
+            <End Role="UsersAwards" EntitySet="UsersAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAwards_Users" Association="Self.FK_UsersAwards_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersAwards" EntitySet="UsersAwards" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EvolutionDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Awards">
+          <Key>
+            <PropertyRef Name="AwardID" />
+          </Key>
+          <Property Name="AwardID" Type="Int32" Nullable="false" />
+          <Property Name="Label" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Byte" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="UsersAwards" Relationship="Self.FK_UsersAwards_Awards" FromRole="Awards" ToRole="UsersAwards" />
+        </EntityType>
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="MatchID" />
+          </Key>
+          <Property Name="MatchID" Type="Int32" Nullable="false" />
+          <Property Name="GameDuration" Type="Time" Precision="7" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="PlayerCount" Type="Int32" />
+          <NavigationProperty Name="UserMatchResults" Relationship="Self.FK_UserMatchResults_Matches" FromRole="Matches" ToRole="UserMatchResults" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="0" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserMatchResults" Relationship="Self.FK_UserMatchResults_Users" FromRole="Users" ToRole="UserMatchResults" />
+          <NavigationProperty Name="UsersAwards" Relationship="Self.FK_UsersAwards_Users" FromRole="Users" ToRole="UsersAwards" />
+        </EntityType>
+        <EntityType Name="UsersAwards">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="AwardID" Type="Int32" />
+          <NavigationProperty Name="Awards" Relationship="Self.FK_UsersAwards_Awards" FromRole="UsersAwards" ToRole="Awards" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_UsersAwards_Users" FromRole="UsersAwards" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserMatchResults">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="MatchID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="MatchID" Type="Int32" Nullable="false" />
+          <Property Name="Place" Type="Int32" />
+          <Property Name="Score" Type="Int32" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK_UserMatchResults_Matches" FromRole="UserMatchResults" ToRole="Matches" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_UserMatchResults_Users" FromRole="UserMatchResults" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_UsersAwards_Awards">
+          <End Role="Awards" Type="Self.Awards" Multiplicity="0..1" />
+          <End Role="UsersAwards" Type="Self.UsersAwards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Awards">
+              <PropertyRef Name="AwardID" />
+            </Principal>
+            <Dependent Role="UsersAwards">
+              <PropertyRef Name="AwardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMatchResults_Matches">
+          <End Role="Matches" Type="Self.Matches" Multiplicity="1" />
+          <End Role="UserMatchResults" Type="Self.UserMatchResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="MatchID" />
+            </Principal>
+            <Dependent Role="UserMatchResults">
+              <PropertyRef Name="MatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMatchResults_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserMatchResults" Type="Self.UserMatchResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserMatchResults">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersAwards_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UsersAwards" Type="Self.UsersAwards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UsersAwards">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EvolutionDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Awards" EntityType="Self.Awards" />
+          <EntitySet Name="Matches" EntityType="Self.Matches" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="UsersAwards" EntityType="Self.UsersAwards" />
+          <EntitySet Name="UserMatchResults" EntityType="Self.UserMatchResults" />
+          <AssociationSet Name="FK_UsersAwards_Awards" Association="Self.FK_UsersAwards_Awards">
+            <End Role="Awards" EntitySet="Awards" />
+            <End Role="UsersAwards" EntitySet="UsersAwards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMatchResults_Matches" Association="Self.FK_UserMatchResults_Matches">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="UserMatchResults" EntitySet="UserMatchResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMatchResults_Users" Association="Self.FK_UserMatchResults_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserMatchResults" EntitySet="UserMatchResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAwards_Users" Association="Self.FK_UsersAwards_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersAwards" EntitySet="UsersAwards" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EvolutionDBModelContainer" CdmEntityContainer="EvolutionDBContext">
+          <EntitySetMapping Name="Awards">
+            <EntityTypeMapping TypeName="EvolutionDBModel.Awards">
+              <MappingFragment StoreEntitySet="Awards">
+                <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="EvolutionDBModel.Matches">
+              <MappingFragment StoreEntitySet="Matches">
+                <ScalarProperty Name="MatchID" ColumnName="MatchID" />
+                <ScalarProperty Name="GameDuration" ColumnName="GameDuration" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PlayerCount" ColumnName="PlayerCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EvolutionDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersAwards">
+            <EntityTypeMapping TypeName="EvolutionDBModel.UsersAwards">
+              <MappingFragment StoreEntitySet="UsersAwards">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMatchResults">
+            <EntityTypeMapping TypeName="EvolutionDBModel.UserMatchResults">
+              <MappingFragment StoreEntitySet="UserMatchResults">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MatchID" ColumnName="MatchID" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

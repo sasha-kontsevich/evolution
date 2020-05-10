@@ -8,14 +8,35 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Game">
     <Page.Resources>
-        <ResourceDictionary Source="../Styles/ControlButtons.xaml"></ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ControlButtons.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/GameUI.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
     <Grid>
         <Rectangle Fill="#fff"></Rectangle>
         <Canvas>
-            <Button Content="{DynamicResource Menu}" Command="{Binding ShowMenu}"></Button>
         </Canvas>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
+            <Button Content="{DynamicResource Menu}" Command="{Binding ShowMenu}" Style="{StaticResource MenuButton}" Margin="5"></Button>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                <Rectangle Width="600" Height="90" Fill="#ddd" HorizontalAlignment="Center" VerticalAlignment="top"></Rectangle>
+                <Ellipse Height="150" Width="150" Margin="0,-50,0,0" Fill="#000"></Ellipse>
+            </Grid>
+        </Grid>
             <Grid Opacity="{Binding MenuOpacity}"
                Visibility="{Binding MenuVisibility}"> 
                 <Grid.ColumnDefinitions>
@@ -30,7 +51,6 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="30*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <!--<Image Grid.Column="0" x:Name="MainMenuBG" Grid.RowSpan="3" Grid.ColumnSpan="6" Source="../Resources/Images/MainMenu_img1.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
             <Rectangle Grid.ColumnSpan="5" Grid.RowSpan="3" Fill="#000" Opacity="0.8"></Rectangle>
                 <Rectangle Grid.Column="1" Grid.RowSpan="3" Fill="Green"></Rectangle>
                 <Rectangle Grid.Column="2" Grid.RowSpan="3" Fill="White" Opacity="0.9"></Rectangle>

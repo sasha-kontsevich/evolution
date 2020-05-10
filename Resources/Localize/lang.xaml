@@ -17,7 +17,7 @@
     <v:String x:Key="Accept">Accept</v:String>
     <v:String x:Key="Cancel">Cancel</v:String>
     <v:String x:Key="Continue">Continue</v:String>
-    <v:String x:Key="ExitGame">Exit Game</v:String>
+    <v:String x:Key="ExitGame">Leave match</v:String>
     <v:String x:Key="Menu">Menu</v:String>
     <v:String x:Key="RatingLabel">Rating:</v:String>
     <v:String x:Key="Player1">Player 1</v:String>

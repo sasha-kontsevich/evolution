@@ -25,9 +25,9 @@ namespace evolution
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Awards> Awards { get; set; }
-        public virtual DbSet<Matches> Matches { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Award> Awards { get; set; }
+        public virtual DbSet<Match> Matches { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersAwards> UsersAwards { get; set; }
         public virtual DbSet<UserMatchResults> UserMatchResults { get; set; }
     }

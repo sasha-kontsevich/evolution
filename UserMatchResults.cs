@@ -19,7 +19,7 @@ namespace evolution
         public Nullable<int> Place { get; set; }
         public Nullable<int> Score { get; set; }
     
-        public virtual Matches Matches { get; set; }
-        public virtual Users Users { get; set; }
+        public virtual Match Matches { get; set; }
+        public virtual User Users { get; set; }
     }
 }

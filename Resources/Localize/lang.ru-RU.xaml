@@ -30,6 +30,11 @@
     <v:String x:Key="Password">Пароль:</v:String>
     <v:String x:Key="SignIn">Войти</v:String>
     <v:String x:Key="TakePart">Участвовать</v:String>
+    <v:String x:Key="Place">Место</v:String>
+    <v:String x:Key="Player">Игрок</v:String>
+    <v:String x:Key="Rating">Рейтинг</v:String>
+
+
 
 
 

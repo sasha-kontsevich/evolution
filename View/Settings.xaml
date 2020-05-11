@@ -9,76 +9,56 @@
       Title="Settings">
 
     <Page.Resources>
-        <ResourceDictionary Source="../Styles/SettingsStyle.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/SettingsStyle.xaml" />
+                <ResourceDictionary Source="../Styles/Style.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"></ColumnDefinition>
-            <ColumnDefinition Width="30"></ColumnDefinition>
-            <ColumnDefinition Width="15*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="30"></ColumnDefinition>
-            <ColumnDefinition Width="15*"></ColumnDefinition>
-            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition  Width="1*"/>
+            <ColumnDefinition Width="5" ></ColumnDefinition>
+            <ColumnDefinition Width="2.2*"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition  Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"></RowDefinition>
-            <RowDefinition Height="28*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="6*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
-        <!--<Image Grid.Column="0" x:Name="MainMenuBG" Grid.RowSpan="5" Grid.ColumnSpan="7" Source="../Resources/Images/MainMenu_img1.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-        <Grid  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="1">
+        <Rectangle Grid.Column="1" Grid.RowSpan="3" Fill="Green" Grid.ColumnSpan="1" ></Rectangle>
+        <Rectangle Grid.Column="2" Grid.RowSpan="3" Fill="White" Opacity="0.9"  ></Rectangle>
+        <Rectangle Grid.RowSpan="3" Grid.Column="3" Fill="Green" Grid.ColumnSpan="1" ></Rectangle>
+        <Rectangle Grid.RowSpan="1" Grid.Column="2" Fill="#ddd" Grid.ColumnSpan="1" Grid.Row="2"  Opacity="0.9" ></Rectangle>
+        <Label Content="{DynamicResource Settings}" Style="{StaticResource Title}" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" ></Label>
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <Rectangle Fill="Green" Height="2" Margin="10,0,10,30"></Rectangle>
+            <Label Content="{DynamicResource Language}" Style="{StaticResource SettingsTitle}" HorizontalAlignment="Center"></Label>
+            <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" Margin="30,0,30,0" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+        <Grid Grid.Row="2" Grid.Column="2" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="30*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="40*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="40*"></ColumnDefinition>
+                <ColumnDefinition Width="100*"></ColumnDefinition>
+                <ColumnDefinition Width="30*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="3"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Rectangle  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="1" Fill="White" Opacity="0.9"></Rectangle>
-            <Rectangle  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="1" Fill="Green"></Rectangle>
-            <Label Grid.Column="1" Grid.Row="1" Content="{DynamicResource Settings}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-        </Grid>
-        <Rectangle Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Fill="White" Opacity="0.9"></Rectangle>
-        <Rectangle Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Fill="White" Opacity="0.9"></Rectangle>
-        <Rectangle  Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="1" Fill="White" Opacity="0.0" ></Rectangle>
-
-        <StackPanel Grid.Row="1" Grid.Column="2">
-            <Label Content="{DynamicResource Language}" Style="{StaticResource SettingsTitle}"></Label>
-            <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" Margin="0,0,40,0">
-                <!--<ComboBoxItem IsSelected="True">English</ComboBoxItem>
-                <ComboBoxItem>Русский</ComboBoxItem>-->
-            </ComboBox>
-        </StackPanel>
-
-
-            <Grid  Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="1" Background="White" Opacity="0.9">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3"></RowDefinition>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="20*"/>
+                <RowDefinition Height="8*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="1" Fill="Green"></Rectangle>
-            <!--<Rectangle  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="1" Fill="Green"></Rectangle>-->
-            <Button Content="{DynamicResource OK}" Grid.Column="1" Grid.Row="2" Command="{Binding SettingsOK}"></Button>
-            <Button Content="{DynamicResource Accept}"  Grid.Column="3" Grid.Row="2" Command="{Binding SettingsAccept}" ></Button>
-            <Button Content="{DynamicResource Cancel}"  Grid.Column="5" Grid.Row="2" Command="{Binding SettingsCancel}"></Button>
-            </Grid>
+            <Button Content="{DynamicResource OK}" Grid.Column="1" Grid.Row="1" Command="{Binding SettingsOK}"></Button>
+            <Button Content="{DynamicResource Accept}"  Grid.Column="3" Grid.Row="1" Command="{Binding SettingsAccept}" ></Button>
+            <Button Content="{DynamicResource Cancel}"  Grid.Column="5" Grid.Row="1" Command="{Binding SettingsCancel}"></Button>
+        </Grid>
     </Grid>
+
 </Page>

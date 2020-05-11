@@ -18,7 +18,7 @@ namespace evolution
         public Nullable<int> UserID { get; set; }
         public Nullable<int> AwardID { get; set; }
     
-        public virtual Awards Awards { get; set; }
-        public virtual Users Users { get; set; }
+        public virtual Award Awards { get; set; }
+        public virtual User Users { get; set; }
     }
 }

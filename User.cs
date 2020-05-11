@@ -12,20 +12,25 @@ namespace evolution
     using System;
     using System.Collections.Generic;
     
-    public partial class Awards
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Awards()
+        public User()
         {
+            this.UserMatchResults = new HashSet<UserMatchResults>();
             this.UsersAwards = new HashSet<UsersAwards>();
         }
     
-        public int AwardID { get; set; }
-        public string Label { get; set; }
-        public string Description { get; set; }
-        public Nullable<byte> Level { get; set; }
-        public byte[] Image { get; set; }
+        public int ID { get; set; }
+        public string NickName { get; set; }
+        public Nullable<System.DateTime> RegisterDate { get; set; }
+        public Nullable<int> Rating { get; set; }
+        public byte[] Avatar { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMatchResults> UserMatchResults { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersAwards> UsersAwards { get; set; }
     }

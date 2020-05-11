@@ -33,6 +33,7 @@ namespace evolution.ViewModel
 
         private Page currentPage;
 
+        private User currentUser;
         public Page CurrentPage
         {
             get { return currentPage; }
@@ -67,6 +68,7 @@ namespace evolution.ViewModel
         public Page LeaderBoardPage { get => leaderBoardPage; set => leaderBoardPage = value; }
         public Page ProfilePage { get => profilePage; set => profilePage = value; }
         public Page GamePage { get => gamePage; set => gamePage = value; }
+        public LeaderBoardViewModel LeaderBoardContext { get => leaderBoardContext; set => leaderBoardContext = value; }
 
         public MainWindowViewModel(MainWindow _window)
         {
@@ -84,7 +86,7 @@ namespace evolution.ViewModel
             singlePlayerDataContext = new SinglePlayerViewModel(this);
             settingsDataContex = new SettingsViewModel(this);
             rulesDataContex = new RulesViewModel(this);
-            leaderBoardContext = new LeaderBoardViewModel(this);
+            LeaderBoardContext = new LeaderBoardViewModel(this);
             profileContext = new ProfileViewModel(this);
             gameContext = new GameViewModel(this);
 
@@ -92,7 +94,7 @@ namespace evolution.ViewModel
             SinglePlayerPage.DataContext = singlePlayerDataContext;
             SettingsPage.DataContext = settingsDataContex;
             RulesPage.DataContext = rulesDataContex;
-            LeaderBoardPage.DataContext = leaderBoardContext;
+            LeaderBoardPage.DataContext = LeaderBoardContext;
             ProfilePage.DataContext = profileContext;
             GamePage.DataContext = gameContext;
 

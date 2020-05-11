@@ -43,7 +43,7 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.LeaderBoardPage); });
+                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.LeaderBoardPage); mainWindowViewModel.LeaderBoardContext.Update(); });
             }
         }
         public RelayCommand RulesMenuItem_Click                            //Комманда пункта меню "Правила"

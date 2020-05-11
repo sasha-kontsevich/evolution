@@ -30,6 +30,9 @@
     <v:String x:Key="Password">Password:</v:String>
     <v:String x:Key="SignIn">Sign In</v:String>
     <v:String x:Key="TakePart">Take part</v:String>
+    <v:String x:Key="Place">Place</v:String>
+    <v:String x:Key="Player">Player</v:String>
+    <v:String x:Key="Rating">Rating</v:String>
 
 
 

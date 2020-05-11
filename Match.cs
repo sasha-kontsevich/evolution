@@ -12,26 +12,20 @@ namespace evolution
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Match
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public Match()
         {
             this.UserMatchResults = new HashSet<UserMatchResults>();
-            this.UsersAwards = new HashSet<UsersAwards>();
         }
     
-        public int ID { get; set; }
-        public string NickName { get; set; }
-        public Nullable<System.DateTime> RegisterDate { get; set; }
-        public Nullable<int> Rating { get; set; }
-        public byte[] Avatar { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public int MatchID { get; set; }
+        public Nullable<System.TimeSpan> GameDuration { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> PlayerCount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserMatchResults> UserMatchResults { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsersAwards> UsersAwards { get; set; }
     }
 }

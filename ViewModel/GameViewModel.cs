@@ -15,6 +15,8 @@ namespace evolution.ViewModel
         {
             mainWindowViewModel = _mainWindowViewModel;
         }
+
+        #region Menu
         private double menuOpacity = 0;
         public double MenuOpacity
         {
@@ -64,7 +66,7 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => { MenuOpacity = 1; MenuVisibility = Visibility.Visible; });
             }
         }
-
+        #endregion
 
     }
 }

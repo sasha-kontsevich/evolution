@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="08835f06dfc14190857fa4b91aedf9cb" Name="Diagram1">
-        <EntityTypeShape EntityType="EvolutionDBModel.Awards" Width="1.5" PointX="1.125" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EvolutionDBModel.Matches" Width="1.5" PointX="6.375" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EvolutionDBModel.Users" Width="1.5" PointX="3.625" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EvolutionDBModel.Award" Width="1.5" PointX="1.125" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EvolutionDBModel.Match" Width="1.5" PointX="6.375" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EvolutionDBModel.User" Width="1.5" PointX="3.625" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EvolutionDBModel.UsersAwards" Width="1.5" PointX="1.125" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EvolutionDBModel.UserMatchResults" Width="1.5" PointX="6.375" PointY="2.125" IsExpanded="true" />
         <AssociationConnector Association="EvolutionDBModel.FK_UsersAwards_Awards" ManuallyRouted="false" />

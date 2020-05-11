@@ -67,7 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Awards.cs">
+    <Compile Include="Award.cs">
       <DependentUpon>DBEvolutionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEvolutionModel.Context.cs">
@@ -85,7 +85,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBEvolutionModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Matches.cs">
+    <Compile Include="Match.cs">
       <DependentUpon>DBEvolutionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Card.cs" />
@@ -98,10 +98,10 @@
     <Compile Include="Model\Species.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="UserMatchResults.cs">
+    <Compile Include="User.cs">
       <DependentUpon>DBEvolutionModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Users.cs">
+    <Compile Include="UserMatchResults.cs">
       <DependentUpon>DBEvolutionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UsersAwards.cs">

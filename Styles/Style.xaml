@@ -10,5 +10,15 @@
         <Setter Property="BorderThickness" Value="2"></Setter>
         <Setter Property="Margin" Value="5"></Setter>
     </Style>
+    <Style TargetType="Label" x:Key="Title">
+        <Setter Property="FontSize" Value="36"></Setter>
+        <Setter Property="Foreground" Value="Green"></Setter>
+        <Setter Property="FontFamily" Value="Myriad Pro" />
+    </Style>
+    <Style TargetType="DataGrid">
+        <Setter Property="BorderBrush" Value="Green"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+
+    </Style>
 
 </ResourceDictionary>

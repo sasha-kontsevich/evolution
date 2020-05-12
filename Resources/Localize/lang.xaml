@@ -33,6 +33,14 @@
     <v:String x:Key="Place">Place</v:String>
     <v:String x:Key="Player">Player</v:String>
     <v:String x:Key="Rating">Rating</v:String>
+    <v:String x:Key="Registration">Registration</v:String>
+    <v:String x:Key="ConfirmPassword">Confirm password:</v:String>
+    <v:String x:Key="Nickname">Nickname:</v:String>
+    <v:String x:Key="RegistrationToolTip1">A login can contain from 6 to 50 alphanumeric characters and such characters as _ - . @</v:String>
+    <v:String x:Key="RegistrationToolTip2">Password can contain from 6 to 30 alphanumeric characters</v:String>
+    <v:String x:Key="RegistrationToolTip3">Confirm password</v:String>
+    <v:String x:Key="RegistrationToolTip4">The nickname can contain from 4 to 30 alphanumeric characters</v:String>
+
 
 
 

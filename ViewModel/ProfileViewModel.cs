@@ -2,16 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace evolution.ViewModel
 {
-    public class ProfileViewModel
+    public class ProfileViewModel : BaseViewModel
     {
         MainWindowViewModel mainWindowViewModel;
         public ProfileViewModel(MainWindowViewModel _mainWindowViewModel)
         {
             mainWindowViewModel = _mainWindowViewModel;
+            if(mainWindowViewModel.CurrentUser==null)
+            {
+                SignInVisibility = Visibility.Visible;
+                RegistrationVisibility = Visibility.Hidden;
+            }
+            else
+            {
+                SignInVisibility = Visibility.Hidden;
+                RegistrationVisibility = Visibility.Visible;
+            }
         }
         public RelayCommand BackToMenu
         {
@@ -27,6 +39,230 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.LeaderBoardPage); });
             }
         }
+        private Visibility signInVisibility;
+        public Visibility SignInVisibility
+        {
+            get { return signInVisibility; }
+            set
+            {
+                if (signInVisibility == value)
+                    return;
 
+                signInVisibility = value;
+                RaisePropertyChanged("SignInVisibility");
+            }
+        }
+        private Visibility registrationVisibility;
+        public Visibility RegistrationVisibility
+        {
+            get { return registrationVisibility; }
+            set
+            {
+                if (registrationVisibility == value)
+                    return;
+
+                registrationVisibility = value;
+                RaisePropertyChanged("RegistrationVisibility");
+            }
+        }
+
+        private string signInLogin;
+        public string SignInLogin
+        {
+            get { return signInLogin; }
+            set
+            {
+                if (signInLogin == value)
+                    return;
+
+                signInLogin = value;
+                RaisePropertyChanged("SignInLogin");
+            }
+        }
+        private string signPassword;
+        public string SignPassword
+        {
+            get { return signPassword; }
+            set
+            {
+                if (signPassword == value)
+                    return;
+
+                signPassword = value;
+                RaisePropertyChanged("SignPassword");
+            }
+        }
+        private string registrationLogin;
+        public string RegistrationLogin
+        {
+            get { return registrationLogin; }
+            set
+            {
+                if (registrationLogin == value)
+                    return;
+
+                registrationLogin = value;
+                RaisePropertyChanged("RegistrationLogin");
+            }
+        }
+        private string registrationPassword1;
+        public string RegistrationPassword1
+        {
+            get { return registrationPassword1; }
+            set
+            {
+                if (registrationPassword1 == value)
+                    return;
+
+                registrationPassword1 = value;
+                RaisePropertyChanged("RegistrationPassword1");
+            }
+        }
+        private string registrationPassword2;
+        public string RegistrationPassword2
+        {
+            get { return registrationPassword2; }
+            set
+            {
+                if (registrationPassword2 == value)
+                    return;
+
+                registrationPassword2 = value;
+                RaisePropertyChanged("RegistrationPassword2");
+            }
+        }
+        private string registrationNickname;
+        public string RegistrationNickname
+        {
+            get { return registrationNickname; }
+            set
+            {
+                if (registrationNickname == value)
+                    return;
+
+                registrationNickname = value;
+                RaisePropertyChanged("RegistrationNickname");
+            }
+        }
+        public RelayCommand ToRegistration
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    SignInVisibility = Visibility.Visible;
+                    RegistrationVisibility = Visibility.Visible;
+                });
+            }
+        }
+        public RelayCommand ToSignIn
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    SignInVisibility = Visibility.Visible;
+                    RegistrationVisibility = Visibility.Hidden;
+                });
+            }
+        }
+        public RelayCommand SignIn
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if (SignInMethod(SignInLogin, SignPassword))
+                    {
+                        SignInVisibility = Visibility.Hidden;
+                        RegistrationVisibility = Visibility.Hidden;
+                    }
+                });
+            }
+        }
+        public RelayCommand Registration
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if (RegistrationMethod())
+                    {
+                        SignInVisibility = Visibility.Hidden;
+                        RegistrationVisibility = Visibility.Hidden;
+                    }
+                });
+            }
+        }
+
+        private bool RegistrationMethod()
+        {
+            try
+            {
+                if (Regex.IsMatch(RegistrationLogin, @"^[\w@.-]{6,50}$") && Regex.IsMatch(RegistrationPassword1, @"^[\w]{6,30}$") && RegistrationPassword1 == RegistrationPassword2 && Regex.IsMatch(RegistrationNickname, @"^[\w]{4,30}$"))
+                {
+                    var context = new EvolutionDBContext();
+                    int n = (from u in context.Users
+                            select u.ID).Max();
+                    var query = from u in context.Users
+                                where u.Login == RegistrationLogin
+                                select u;
+                    int n1 = query.Count();
+                    query = from u in context.Users
+                                where u.NickName == RegistrationNickname
+                                select u;
+                    int n2 = query.Count();
+
+                    if (n1 == 0 && n2 == 0)
+                    {
+                        context.Users.Add(new User { ID = n + 1, NickName = RegistrationNickname, Login = RegistrationLogin, Password = RegistrationPassword1, RegisterDate = DateTime.Now, Rating = 1000 });
+                        context.SaveChanges();
+                        SignInMethod(RegistrationLogin, RegistrationPassword1);
+                        return true;
+                    }
+                    else
+                    {
+                        if (App.Language.Name == "en-US")
+                        {
+                            MessageBox.Show("This login or nickname already taken");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Этот логин или имя пользователя уже используется");
+                        }
+
+                    }
+                    return false;
+                }
+            }
+            catch
+            {
+
+            }
+            return false;
+        }
+
+        public bool SignInMethod(string _login, string _password)
+        {
+            User user = new User();
+            var context = new EvolutionDBContext();
+            var query = from u in context.Users
+                        where u.Login== _login && u.Password == _password
+                        select u;
+            try
+            {
+                user = query.ToList().First();
+                mainWindowViewModel.CurrentUser = user;
+                return true;
+            }
+            catch
+            {
+                if(App.Language.Name=="en-US")
+                {
+                    MessageBox.Show("Invalid login or password");
+                }
+                else
+                {
+                    MessageBox.Show("Неправильный логин или пароль");
+                }
+            }
+            return false;
+        }
     }
 }

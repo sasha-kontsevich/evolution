@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -69,6 +70,9 @@
     </ApplicationDefinition>
     <Compile Include="Award.cs">
       <DependentUpon>DBEvolutionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Custom\BindablePasswordBox.xaml.cs">
+      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBEvolutionModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -133,6 +137,10 @@
     <Compile Include="View\SinglePlayer.xaml.cs">
       <DependentUpon>SinglePlayer.xaml</DependentUpon>
     </Compile>
+    <Page Include="Custom\BindablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Dictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace evolution.ViewModel
 {
@@ -67,6 +68,45 @@ namespace evolution.ViewModel
             }
         }
         #endregion
+
+        private Page gameFrame;
+        public Page GameFrame
+        {
+            get { return gameFrame; }
+            set
+            {
+                if (gameFrame == value)
+                    return;
+                gameFrame = value;
+                RaisePropertyChanged("GameFrame");
+            }
+        }
+        public RelayCommand SettingsMenuItem
+        {
+            get
+            {
+                return new RelayCommand(obj => { GameFrame = mainWindowViewModel.SettingsPage; });
+            }
+        }
+        public RelayCommand RulesMenuItem
+        {
+            get
+            {
+                return new RelayCommand(obj => { GameFrame = mainWindowViewModel.RulesPage; });
+            }
+        }
+        private List<string> languages = new List<string>();
+        public List<string> Languages
+        {
+            get { return languages; }
+            set
+            {
+                if (languages == value)
+                    return;
+                languages = value;
+                RaisePropertyChanged("Languages");
+            }
+        }
 
     }
 }

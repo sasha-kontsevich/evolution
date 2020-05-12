@@ -18,6 +18,7 @@ namespace evolution.ViewModel
             mainWindowViewModel = _mainWindowViewModel;
             Languages.Add("English");
             Languages.Add("Русский");
+            App.Language = new CultureInfo("en-US");
         }
 
         private List<string> languages = new List<string>();
@@ -50,7 +51,7 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { ApplyChanges(); mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage); });
+                return new RelayCommand(obj => { ApplyChanges(); Return(); });
             }
         }
         public RelayCommand SettingsAccept                            //Комманда пункта настроек "Принять"
@@ -64,12 +65,23 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage); });
+                return new RelayCommand(obj => { Return(); });
             }
         }
         public void ApplyChanges()
         {
             ChangeLanguage();
+        }
+        public void Return()
+        {
+            if(mainWindowViewModel.CurrentPage == mainWindowViewModel.SettingsPage)
+            {
+                mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage);
+            }
+            else
+            {
+                mainWindowViewModel.GameContext.GameFrame = null;
+            }
         }
         private void ChangeLanguage()
         {

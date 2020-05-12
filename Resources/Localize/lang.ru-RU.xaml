@@ -33,6 +33,14 @@
     <v:String x:Key="Place">Место</v:String>
     <v:String x:Key="Player">Игрок</v:String>
     <v:String x:Key="Rating">Рейтинг</v:String>
+    <v:String x:Key="Registration">Регистрация</v:String>
+    <v:String x:Key="ConfirmPassword">Подтвердите пароль:</v:String>
+    <v:String x:Key="Nickname">Имя:</v:String>
+    <v:String x:Key="RegistrationToolTip1">Логин может содержать от 6 до 50 алфавитно-цифровых символов и знаков _ - . @</v:String>
+    <v:String x:Key="RegistrationToolTip2">Пароль может содержать от 6 до 30 алфавитно-цифровых символов</v:String>
+    <v:String x:Key="RegistrationToolTip3">Повторите пароль</v:String>
+    <v:String x:Key="RegistrationToolTip4">Имя может содержать от 4 до 30 алфавитно-цифровых символов</v:String>
+
 
 
 

@@ -31,9 +31,21 @@ namespace evolution.ViewModel
         private ProfileViewModel profileContext;
         private GameViewModel gameContext;
 
-        private Page currentPage;
-
         private User currentUser;
+        public User CurrentUser
+        {
+            get { return currentUser; }
+            set
+            {
+                if (currentUser == value)
+                    return;
+
+                currentUser = value;
+                RaisePropertyChanged("CurrentUser");
+            }
+        }
+
+        private Page currentPage;
         public Page CurrentPage
         {
             get { return currentPage; }
@@ -69,6 +81,7 @@ namespace evolution.ViewModel
         public Page ProfilePage { get => profilePage; set => profilePage = value; }
         public Page GamePage { get => gamePage; set => gamePage = value; }
         public LeaderBoardViewModel LeaderBoardContext { get => leaderBoardContext; set => leaderBoardContext = value; }
+        public GameViewModel GameContext { get => gameContext; set => gameContext = value; }
 
         public MainWindowViewModel(MainWindow _window)
         {
@@ -88,7 +101,7 @@ namespace evolution.ViewModel
             rulesDataContex = new RulesViewModel(this);
             LeaderBoardContext = new LeaderBoardViewModel(this);
             profileContext = new ProfileViewModel(this);
-            gameContext = new GameViewModel(this);
+            GameContext = new GameViewModel(this);
 
             MainMenuPage.DataContext = mainMenuDataContext;                 //Задание контекста страниц
             SinglePlayerPage.DataContext = singlePlayerDataContext;
@@ -96,9 +109,10 @@ namespace evolution.ViewModel
             RulesPage.DataContext = rulesDataContex;
             LeaderBoardPage.DataContext = LeaderBoardContext;
             ProfilePage.DataContext = profileContext;
-            GamePage.DataContext = gameContext;
+            GamePage.DataContext = GameContext;
 
             CurrentPage = MainMenuPage;                             //Страница при загрузке
+
         }
 
         public void ChangePage(Page page)

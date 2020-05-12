@@ -17,15 +17,27 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage); });
+                return new RelayCommand(obj => { Return(); });
             }
         }
         public RelayCommand ToSinglePlayer                               //Вернуться в главное меню
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage); });
+                return new RelayCommand(obj => { Return(); });
             }
         }
+        public void Return()
+        {
+            if (mainWindowViewModel.CurrentPage == mainWindowViewModel.RulesPage)
+            {
+                mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage);
+            }
+            else
+            {
+                mainWindowViewModel.GameContext.GameFrame = null;
+            }
+        }
+
     }
 }

@@ -12,6 +12,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/ControlButtons.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="../Styles/GameUI.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/Style.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/SettingsStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -58,11 +60,13 @@
             <Label Content="{DynamicResource Evolution}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="48" RenderTransformOrigin="1.375,0.754" Foreground="Green" BorderBrush="Green" BorderThickness="4" FontWeight="Bold"></Label>
                 <StackPanel Margin="5,5,8,4" Grid.Row="1" Grid.Column="2">
                 <Button Padding="5" Margin="5" Content="{DynamicResource Continue}" Command="{Binding Continue}"></Button>
-                <Button Padding="5" Margin="5" Content="{DynamicResource Rules}" Command="{Binding RulesMenuItem_Click}"></Button>
-                <Button Padding="5" Margin="5" Content="{DynamicResource Settings}" Command="{Binding SettingsMenuItem_Click}"></Button>
+                <Button Padding="5" Margin="5" Content="{DynamicResource Rules}" Command="{Binding RulesMenuItem}"></Button>
+                <Button Padding="5" Margin="5" Content="{DynamicResource Settings}" Command="{Binding SettingsMenuItem}"></Button>
                 <Button Padding="5" Margin="5" Content="{DynamicResource ExitGame}" Command="{Binding ReturnToMenu}">
                     </Button>
                 </StackPanel>
             </Grid>
+        <Frame Content="{Binding GameFrame}"></Frame>
+
     </Grid>
 </Page>

@@ -14,6 +14,7 @@
         <Setter Property="FontSize" Value="36"></Setter>
         <Setter Property="Foreground" Value="Green"></Setter>
         <Setter Property="FontFamily" Value="Myriad Pro" />
+        <Setter Property="HorizontalAlignment"  Value="Center" />
     </Style>
     <Style TargetType="DataGrid">
         <Setter Property="BorderBrush" Value="Green"></Setter>

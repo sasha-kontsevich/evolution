@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace evolution.ViewModel
 {
@@ -45,7 +46,7 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { SignIn(login1,password1,0); });
+                return new RelayCommand(obj => { SignIn(Login1,Password1,0); });
             }
         }
         public RelayCommand SignIn2
@@ -325,7 +326,10 @@ namespace evolution.ViewModel
         }
 
 
-        private string password1;                       //Пароль
+
+
+        private string password1;                    //Пароль
+
         public string Password1
         {
             get { return password1; }
@@ -338,6 +342,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("Password1");
             }
         }
+
         private string password2;
         public string Password2
         {
@@ -401,6 +406,153 @@ namespace evolution.ViewModel
 
                 password6 = value;
                 RaisePropertyChanged("Password6");
+            }
+        }
+
+        private BitmapSource avatarImage1;                       //Аватар
+        public BitmapSource AvatarImage1
+        {
+            get { return avatarImage1; }
+            set
+            {
+                if (avatarImage1 == value)
+                    return;
+                avatarImage1 = value;
+                RaisePropertyChanged("AvatarImage1");
+            }
+        }
+        private BitmapSource avatarImage2;
+        public BitmapSource AvatarImage2
+        {
+            get { return avatarImage2; }
+            set
+            {
+                if (avatarImage2 == value)
+                    return;
+                avatarImage2 = value;
+                RaisePropertyChanged("AvatarImage2");
+            }
+        }
+        private BitmapSource avatarImage3;
+        public BitmapSource AvatarImage3
+        {
+            get { return avatarImage3; }
+            set
+            {
+                if (avatarImage3 == value)
+                    return;
+                avatarImage3 = value;
+                RaisePropertyChanged("AvatarImage3");
+            }
+        }
+        private BitmapSource avatarImage4;
+        public BitmapSource AvatarImage4
+        {
+            get { return avatarImage4; }
+            set
+            {
+                if (avatarImage4 == value)
+                    return;
+                avatarImage4 = value;
+                RaisePropertyChanged("AvatarImage4");
+            }
+        }
+        private BitmapSource avatarImage5;
+        public BitmapSource AvatarImage5
+        {
+            get { return avatarImage5; }
+            set
+            {
+                if (avatarImage5 == value)
+                    return;
+                avatarImage5 = value;
+                RaisePropertyChanged("AvatarImage5");
+            }
+        }
+        private BitmapSource avatarImage6;
+        public BitmapSource AvatarImage6
+        {
+            get { return avatarImage6; }
+            set
+            {
+                if (avatarImage6 == value)
+                    return;
+                avatarImage6 = value;
+                RaisePropertyChanged("AvatarImage6");
+            }
+        }
+
+
+        private BitmapSource statusImage1;                       //Статус
+        public BitmapSource StatusImage1
+        {
+            get { return statusImage1; }
+            set
+            {
+                if (statusImage1 == value)
+                    return;
+                statusImage1 = value;
+                RaisePropertyChanged("StatusImage1");
+            }
+        }
+        private BitmapSource statusImage2;
+        public BitmapSource StatusImage2
+        {
+            get { return statusImage2; }
+            set
+            {
+                if (statusImage2 == value)
+                    return;
+                statusImage2 = value;
+                RaisePropertyChanged("StatusImage2");
+            }
+        }
+        private BitmapSource statusImage3;
+        public BitmapSource StatusImage3
+        {
+            get { return statusImage3; }
+            set
+            {
+                if (statusImage3 == value)
+                    return;
+                statusImage3 = value;
+                RaisePropertyChanged("StatusImage3");
+            }
+        }
+        private BitmapSource statusImage4;
+        public BitmapSource StatusImage4
+        {
+            get { return statusImage4; }
+            set
+            {
+                if (statusImage4 == value)
+                    return;
+                statusImage4 = value;
+                RaisePropertyChanged("StatusImage4");
+            }
+        }
+        private BitmapSource statusImage5;
+        public BitmapSource StatusImage5
+        {
+            get { return statusImage5; }
+            set
+            {
+                if (statusImage5 == value)
+                    return;
+                statusImage5 = value;
+                RaisePropertyChanged("StatusImage5");
+            }
+        }
+        private BitmapSource statusImage6;
+        public BitmapSource StatusImage6
+        {
+            get { return statusImage6; }
+            set
+            {
+                if (statusImage6 == value)
+                    return;
+                statusImage6 = value;
+                RaisePropertyChanged("StatusImage6");
             }
         }
 

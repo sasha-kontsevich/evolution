@@ -29,9 +29,8 @@
         <Setter Property="TextAlignment" Value="Left"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
     </Style>
-    <Style TargetType="ContentControl" x:Key="Avatar">
-        <Setter Property="Margin" Value="3,0,0,0"></Setter>
-        <Setter Property="Padding" Value="1"></Setter>
+    <Style TargetType="Grid" x:Key="Avatar">
+        <Setter Property="Margin" Value="4,1,1,1"></Setter>
     </Style>
     
     <Style TargetType="Image" x:Key="AvatarImage">

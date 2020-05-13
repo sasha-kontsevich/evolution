@@ -82,6 +82,7 @@ namespace evolution.ViewModel
         public Page GamePage { get => gamePage; set => gamePage = value; }
         public LeaderBoardViewModel LeaderBoardContext { get => leaderBoardContext; set => leaderBoardContext = value; }
         public GameViewModel GameContext { get => gameContext; set => gameContext = value; }
+        public ProfileViewModel ProfileContext { get => profileContext; set => profileContext = value; }
 
         public MainWindowViewModel(MainWindow _window)
         {
@@ -100,7 +101,7 @@ namespace evolution.ViewModel
             settingsDataContex = new SettingsViewModel(this);
             rulesDataContex = new RulesViewModel(this);
             LeaderBoardContext = new LeaderBoardViewModel(this);
-            profileContext = new ProfileViewModel(this);
+            ProfileContext = new ProfileViewModel(this);
             GameContext = new GameViewModel(this);
 
             MainMenuPage.DataContext = mainMenuDataContext;                 //Задание контекста страниц
@@ -108,7 +109,7 @@ namespace evolution.ViewModel
             SettingsPage.DataContext = settingsDataContex;
             RulesPage.DataContext = rulesDataContex;
             LeaderBoardPage.DataContext = LeaderBoardContext;
-            ProfilePage.DataContext = profileContext;
+            ProfilePage.DataContext = ProfileContext;
             GamePage.DataContext = GameContext;
 
             CurrentPage = MainMenuPage;                             //Страница при загрузке

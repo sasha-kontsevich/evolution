@@ -13,6 +13,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/ControlButtons.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="../Styles/Style.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/RulesStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -34,6 +35,42 @@
         <Rectangle Grid.RowSpan="3" Grid.Column="3" Fill="Green" Grid.ColumnSpan="1"></Rectangle>
         <Rectangle Grid.RowSpan="1" Grid.Column="2" Fill="#ddd" Grid.ColumnSpan="1" Grid.Row="2"  Opacity="0.9"></Rectangle>
         <Label Content="{DynamicResource Profile}" Grid.Row="0" Grid.Column="2" Style="{StaticResource Title}"></Label>
+        <Grid Grid.Row="1" Grid.Column="2" Visibility="{Binding ProfileVisibility}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Source="../Resources/Images/NoAvatar.jpg" Style="{StaticResource Avatar}"></Image>
+            <Image Source="{Binding AvatarImage}" Style="{StaticResource Avatar}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+            <StackPanel Grid.Column="1">
+                <Label Content="{Binding ProfileNickname}" Style="{StaticResource Heading2}" FontSize="30" Margin="0,10,0,10"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{DynamicResource RatingLabel}" Style="{StaticResource Heading4}" FontSize="20" Margin="0,0,0,0"></Label>
+                    <Label Content="{Binding ProfileRating}" Style="{StaticResource Heading4}" Margin="0" FontSize="20"></Label>
+                </StackPanel>
+                <Label Content="{DynamicResource RegDate}" Style="{StaticResource Heading4}" FontSize="20" Margin="0,0,0,0"></Label>
+                <Label Content="{Binding ProfileRegDate}" Style="{StaticResource Heading4}" FontSize="18" Margin="0"></Label>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <Button Content="{DynamicResource ChangeAvatar}" Command="{Binding ChangeAvatar}" Margin="5,20,5,5"></Button>
+                <Button Content="{DynamicResource JustExit}" Command="{Binding ExitFromProfile}" Margin="5"></Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="3">
+                <Label Content="{DynamicResource Awards}" Style="{StaticResource Heading4}" Margin="0" HorizontalAlignment="Center"></Label>
+                <StackPanel Orientation="Horizontal" Height="70" ></StackPanel>
+                <Label Content="{DynamicResource Matches}" Style="{StaticResource Heading4}" Margin="0" HorizontalAlignment="Center"></Label>
+            </StackPanel>
+            <DataGrid Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding MatchesSource}"  ColumnWidth="*" AlternatingRowBackground="#FFB1FFB1" RowHeight="30" FontSize="18" GridLinesVisibility="None" FrozenColumnCount="3" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False">
+                
+            </DataGrid>
+
+        </Grid>
         <Grid Grid.Row="1" Grid.Column="2" Visibility="{Binding SignInVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>

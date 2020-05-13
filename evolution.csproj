@@ -48,6 +48,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -89,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBEvolutionModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ImageController.cs" />
     <Compile Include="Match.cs">
       <DependentUpon>DBEvolutionModel.tt</DependentUpon>
     </Compile>

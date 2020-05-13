@@ -36,10 +36,16 @@
     <v:String x:Key="Registration">Registration</v:String>
     <v:String x:Key="ConfirmPassword">Confirm password:</v:String>
     <v:String x:Key="Nickname">Nickname:</v:String>
+    <v:String x:Key="ChangeAvatar">Change avatar</v:String>
     <v:String x:Key="RegistrationToolTip1">A login can contain from 6 to 50 alphanumeric characters and such characters as _ - . @</v:String>
     <v:String x:Key="RegistrationToolTip2">Password can contain from 6 to 30 alphanumeric characters</v:String>
     <v:String x:Key="RegistrationToolTip3">Confirm password</v:String>
     <v:String x:Key="RegistrationToolTip4">The nickname can contain from 4 to 30 alphanumeric characters</v:String>
+    <v:String x:Key="JustExit">Exit</v:String>
+    <v:String x:Key="RegDate">Registration date</v:String>
+    <v:String x:Key="Awards">Awards</v:String>
+    <v:String x:Key="Matches">Matches</v:String>
+
 
 
 

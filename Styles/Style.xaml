@@ -21,5 +21,8 @@
         <Setter Property="BorderThickness" Value="2"></Setter>
 
     </Style>
+    <Style TargetType="Image" x:Key="Avatar">
+        <Setter Property="Margin" Value="20"></Setter>
+    </Style>
 
 </ResourceDictionary>

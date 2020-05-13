@@ -36,7 +36,7 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.ProfilePage); });
+                return new RelayCommand(obj => { mainWindowViewModel.ProfileContext.LoadMatchesSource(); mainWindowViewModel.ChangePage(mainWindowViewModel.ProfilePage); });
             }
         }
         public RelayCommand LeaderBoardMenuItem_Click                        //Комманда пункта меню "Рейтинг"

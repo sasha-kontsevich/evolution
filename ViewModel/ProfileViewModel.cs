@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace evolution.ViewModel
 {
@@ -14,17 +15,33 @@ namespace evolution.ViewModel
         public ProfileViewModel(MainWindowViewModel _mainWindowViewModel)
         {
             mainWindowViewModel = _mainWindowViewModel;
-            if(mainWindowViewModel.CurrentUser==null)
+            LoadMatchesSource();
+            if (mainWindowViewModel.CurrentUser==null)
             {
                 SignInVisibility = Visibility.Visible;
                 RegistrationVisibility = Visibility.Hidden;
+                ProfileVisibility = Visibility.Hidden;
             }
             else
             {
                 SignInVisibility = Visibility.Hidden;
-                RegistrationVisibility = Visibility.Visible;
+                RegistrationVisibility = Visibility.Hidden;
+                ProfileVisibility = Visibility.Visible;
             }
         }
+        private IEnumerable<object> matchesSource;
+        public IEnumerable<object> MatchesSource
+        {
+            get { return matchesSource; }
+            set
+            {
+                if (matchesSource == value)
+                    return;
+                matchesSource = value;
+                RaisePropertyChanged("MatchesSource");
+            }
+        }
+
         public RelayCommand BackToMenu
         {
             get
@@ -52,6 +69,19 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("SignInVisibility");
             }
         }
+        private Visibility profileVisibility;
+        public Visibility ProfileVisibility
+        {
+            get { return profileVisibility; }
+            set
+            {
+                if (profileVisibility == value)
+                    return;
+
+                profileVisibility = value;
+                RaisePropertyChanged("ProfileVisibility");
+            }
+        }
         private Visibility registrationVisibility;
         public Visibility RegistrationVisibility
         {
@@ -66,6 +96,45 @@ namespace evolution.ViewModel
             }
         }
 
+        private string profileRating;
+        public string ProfileRating
+        {
+            get { return profileRating; }
+            set
+            {
+                if (profileRating == value)
+                    return;
+
+                profileRating = value;
+                RaisePropertyChanged("ProfileRating");
+            }
+        }
+        private string profileNickname;
+        public string ProfileNickname
+        {
+            get { return profileNickname; }
+            set
+            {
+                if (profileNickname == value)
+                    return;
+
+                profileNickname = value;
+                RaisePropertyChanged("ProfileNickname");
+            }
+        }
+        private string profileRegDate;
+        public string ProfileRegDate
+        {
+            get { return profileRegDate; }
+            set
+            {
+                if (profileRegDate == value)
+                    return;
+
+                profileRegDate = value;
+                RaisePropertyChanged("ProfileRegDate");
+            }
+        }
         private string signInLogin;
         public string SignInLogin
         {
@@ -144,6 +213,18 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("RegistrationNickname");
             }
         }
+        private BitmapSource avatarImage;
+        public BitmapSource AvatarImage
+        {
+            get { return avatarImage; }
+            set
+            {
+                if (avatarImage == value)
+                    return;
+                avatarImage = value;
+                RaisePropertyChanged("AvatarImage");
+            }
+        }
         public RelayCommand ToRegistration
         {
             get
@@ -151,6 +232,34 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => {
                     SignInVisibility = Visibility.Visible;
                     RegistrationVisibility = Visibility.Visible;
+                });
+            }
+        }
+        public RelayCommand ExitFromProfile
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    mainWindowViewModel.CurrentUser = null;
+                    ProfileVisibility = Visibility.Hidden;
+                    SignInVisibility = Visibility.Visible;
+                    RegistrationVisibility = Visibility.Hidden;
+                });
+            }
+        }
+        public RelayCommand ChangeAvatar
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    var context = new EvolutionDBContext();
+                    User user = (from u in context.Users
+                                 where u.ID == mainWindowViewModel.CurrentUser.ID
+                                 select u).First();
+                    ImageController.addFoto(user);
+                    context.SaveChanges();
+                    AvatarImage = ImageController.ConvertByteArrayToImage(user.Avatar);
+
                 });
             }
         }
@@ -171,8 +280,14 @@ namespace evolution.ViewModel
                 return new RelayCommand(obj => {
                     if (SignInMethod(SignInLogin, SignPassword))
                     {
+                        LoadMatchesSource();
+                        AvatarImage = ImageController.ConvertByteArrayToImage(mainWindowViewModel.CurrentUser.Avatar);
+                        ProfileNickname = mainWindowViewModel.CurrentUser.NickName;
+                        ProfileRegDate = mainWindowViewModel.CurrentUser.RegisterDate.Value.ToString("d");
+                        ProfileRating = mainWindowViewModel.CurrentUser.Rating.Value.ToString();
                         SignInVisibility = Visibility.Hidden;
                         RegistrationVisibility = Visibility.Hidden;
+                        ProfileVisibility = Visibility.Visible;
                     }
                 });
             }
@@ -186,6 +301,7 @@ namespace evolution.ViewModel
                     {
                         SignInVisibility = Visibility.Hidden;
                         RegistrationVisibility = Visibility.Hidden;
+                        ProfileVisibility = Visibility.Visible;
                     }
                 });
             }
@@ -262,7 +378,21 @@ namespace evolution.ViewModel
                     MessageBox.Show("Неправильный логин или пароль");
                 }
             }
+
             return false;
+        }
+        public void LoadMatchesSource()
+        {
+            if (mainWindowViewModel.CurrentUser != null)
+            {
+                int UserID = mainWindowViewModel.CurrentUser.ID;
+                var contex = new EvolutionDBContext();
+                IQueryable<object> query = from umr in contex.UserMatchResults
+                                           join m in contex.Matches on umr.MatchID equals m.MatchID
+                                           where umr.UserID == UserID
+                                           select new { MatchID = m.MatchID, Date = m.Date, Place = umr.Place, Score = umr.Score, MatchDuration = m.GameDuration };
+                MatchesSource = query.ToList();
+            }
         }
     }
 }

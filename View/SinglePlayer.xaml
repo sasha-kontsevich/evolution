@@ -94,11 +94,12 @@
                 <custom:BindablePasswordBox Password="{Binding Password1}" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Grid.RowSpan="1" ></custom:BindablePasswordBox>
                 <Button Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3" Command="{Binding SignIn1}" Content="{DynamicResource SignIn}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Green}"></Button>
                 <Button Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" Content="{DynamicResource TakePart}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Green}"></Button>
-                <ContentControl  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
-                    <Image Source="../Resources/Images/NoAvatar.jpg"  Style="{StaticResource AvatarImage}"/>
-                </ContentControl>
+                <Grid  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                    <Image Source="../Resources/Images/NoAvatar.jpg"></Image>
+                    <Image Source="{Binding AvatarImage1}"  Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                </Grid>
                     <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
-                        <Image Source="../Resources/Images/NotReady.png" Grid.Column="1" Grid.Row="3"></Image>
+                        <Image Source="{Binding StatusImage1}" Grid.Column="1" Grid.Row="3"></Image>
                     </ContentControl>
                 <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Content="{DynamicResource Player1}" Grid.RowSpan="3" Style="{StaticResource Name}"/>
                 <StackPanel Grid.Row="3" Grid.Column="3">
@@ -152,12 +153,13 @@
                 <custom:BindablePasswordBox Password="{Binding Password2}"  Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Grid.RowSpan="1" ></custom:BindablePasswordBox>
                 <Button Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3" Command="{Binding SignIn2}" Content="{DynamicResource SignIn}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Cyan}"></Button>
                 <Button Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" Content="{DynamicResource TakePart}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Cyan}"></Button>
-                <ContentControl  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
-                    <Image Source="../Resources/Images/NoAvatar.jpg"  Style="{StaticResource AvatarImage}"/>
+                <Grid  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                    <Image Source="../Resources/Images/NoAvatar.jpg"></Image>
+                    <Image Source="{Binding AvatarImage2}"  Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                </Grid>
+                <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
+                    <Image Source="{Binding StatusImage2}" Grid.Column="1" Grid.Row="3"></Image>
                 </ContentControl>
-                    <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
-                        <Image Source="../Resources/Images/NotReady.png" Grid.Column="1" Grid.Row="3"></Image>
-                    </ContentControl>
                 <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Content="{DynamicResource Player2}" Grid.RowSpan="3" Style="{StaticResource Name}"/>
                 <StackPanel Grid.Row="3" Grid.Column="3">
                     <Label Content="{DynamicResource RatingLabel}" Style="{StaticResource Rating}"></Label>
@@ -210,12 +212,13 @@
                 <custom:BindablePasswordBox Password="{Binding Password3}"  Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Grid.RowSpan="1" ></custom:BindablePasswordBox>
                 <Button Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3"  Command="{Binding SignIn3}" Content="{DynamicResource SignIn}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Blue}"></Button>
                 <Button Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" Content="{DynamicResource TakePart}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Blue}"></Button>
-                <ContentControl  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
-                    <Image Source="../Resources/Images/NoAvatar.jpg"  Style="{StaticResource AvatarImage}"/>
+                <Grid  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                    <Image Source="../Resources/Images/NoAvatar.jpg"></Image>
+                    <Image Source="{Binding AvatarImage3}"  Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                </Grid>
+                <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
+                    <Image Source="{Binding StatusImage3}" Grid.Column="1" Grid.Row="3"></Image>
                 </ContentControl>
-                    <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
-                        <Image Source="../Resources/Images/NotReady.png" Grid.Column="1" Grid.Row="3"></Image>
-                    </ContentControl>
                 <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Content="{DynamicResource Player3}" Grid.RowSpan="3" Style="{StaticResource Name}"/>
                 <StackPanel Grid.Row="3" Grid.Column="3">
                     <Label Content="{DynamicResource RatingLabel}" Style="{StaticResource Rating}"></Label>
@@ -268,12 +271,13 @@
                 <custom:BindablePasswordBox Password="{Binding Password4}"  Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Grid.RowSpan="1" ></custom:BindablePasswordBox>
                 <Button Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3"  Command="{Binding SignIn4}" Content="{DynamicResource SignIn}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Purple}"></Button>
                 <Button Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" Content="{DynamicResource TakePart}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Purple}"></Button>
-                <ContentControl  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
-                    <Image Source="../Resources/Images/NoAvatar.jpg"  Style="{StaticResource AvatarImage}"/>
+                <Grid  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                    <Image Source="../Resources/Images/NoAvatar.jpg"></Image>
+                    <Image Source="{Binding AvatarImage4}"  Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                </Grid>
+                <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
+                    <Image Source="{Binding StatusImage4}" Grid.Column="1" Grid.Row="3"></Image>
                 </ContentControl>
-                    <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
-                        <Image Source="../Resources/Images/NotReady.png" Grid.Column="1" Grid.Row="3"></Image>
-                    </ContentControl>
                 <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Content="{DynamicResource Player4}" Grid.RowSpan="3" Style="{StaticResource Name}"/>
                 <StackPanel Grid.Row="3" Grid.Column="3">
                     <Label Content="{DynamicResource RatingLabel}" Style="{StaticResource Rating}"></Label>
@@ -326,12 +330,13 @@
                 <custom:BindablePasswordBox Password="{Binding Password5}"  Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Grid.RowSpan="1" ></custom:BindablePasswordBox>
                 <Button Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3"  Command="{Binding SignIn5}" Content="{DynamicResource SignIn}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Red}"></Button>
                 <Button Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" Content="{DynamicResource TakePart}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Red}"></Button>
-                <ContentControl  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
-                    <Image Source="../Resources/Images/NoAvatar.jpg"  Style="{StaticResource AvatarImage}"/>
+                <Grid  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                    <Image Source="../Resources/Images/NoAvatar.jpg"></Image>
+                    <Image Source="{Binding AvatarImage5}"  Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                </Grid>
+                <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
+                    <Image Source="{Binding StatusImage5}" Grid.Column="1" Grid.Row="3"></Image>
                 </ContentControl>
-                    <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
-                        <Image Source="../Resources/Images/NotReady.png" Grid.Column="1" Grid.Row="3"></Image>
-                    </ContentControl>
                 <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Content="{DynamicResource Player5}" Grid.RowSpan="3" Style="{StaticResource Name}"/>
                 <StackPanel Grid.Row="3" Grid.Column="3">
                     <Label Content="{DynamicResource RatingLabel}" Style="{StaticResource Rating}"></Label>
@@ -384,12 +389,13 @@
                 <custom:BindablePasswordBox Password="{Binding Password6}"  Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Grid.RowSpan="1" ></custom:BindablePasswordBox>
                 <Button Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="3"  Command="{Binding SignIn6}" Content="{DynamicResource SignIn}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Yellow}"></Button>
                 <Button Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" Content="{DynamicResource TakePart}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Yellow}"></Button>
-                <ContentControl  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
-                    <Image Source="../Resources/Images/NoAvatar.jpg"  Style="{StaticResource AvatarImage}"/>
+                <Grid  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="1" Grid.ColumnSpan="2">
+                    <Image Source="../Resources/Images/NoAvatar.jpg"></Image>
+                    <Image Source="{Binding AvatarImage6}"  Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                </Grid>
+                <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
+                    <Image Source="{Binding StatusImage6}" Grid.Column="1" Grid.Row="3"></Image>
                 </ContentControl>
-                    <ContentControl  Grid.Column="1" Grid.Row="1"  Style="{StaticResource Status}" Grid.RowSpan="1" Grid.ColumnSpan="1">
-                        <Image Source="../Resources/Images/NotReady.png" Grid.Column="1" Grid.Row="3"></Image>
-                    </ContentControl>
                 <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Content="{DynamicResource Player6}" Grid.RowSpan="3" Style="{StaticResource Name}"/>
                 <StackPanel Grid.Row="3" Grid.Column="3">
                     <Label Content="{DynamicResource RatingLabel}" Style="{StaticResource Rating}"></Label>

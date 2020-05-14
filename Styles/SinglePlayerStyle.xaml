@@ -19,6 +19,15 @@
         <Setter Property="BorderThickness" Value="0"></Setter>
         <Setter Property="Margin" Value="3,0,3,0"></Setter>
     </Style>
+    <Style TargetType="ToggleButton" x:Key="SmallTButton">
+        <Setter Property="Button.Background" Value="Green" />
+        <Setter Property="Button.Foreground" Value="#222" />
+        <Setter Property="Button.FontFamily" Value="Andy" />
+        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="BorderBrush" Value="Green"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="Margin" Value="3,0,3,0"></Setter>
+    </Style>
     <Style TargetType="TextBox" x:Key="TextBox">
         <Setter Property="Button.Foreground" Value="#222" />
         <Setter Property="Button.FontFamily" Value="Andy" />

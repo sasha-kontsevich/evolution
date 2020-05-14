@@ -37,15 +37,7 @@ namespace evolution
             }
         }
 
-        private static void delFoto( )
-        {
-            var show = MessageBox.Show("Вы действительно хотите удалить фото?", "Внимание!", MessageBoxButton.OKCancel);
-            if (show == MessageBoxResult.OK)
-            {
-                //patient.Foto = null;
-                //patientViewSource.View.Refresh();
-            }
-        }
+
 
         public static BitmapImage ConvertByteArrayToImage(byte[] array)
         {

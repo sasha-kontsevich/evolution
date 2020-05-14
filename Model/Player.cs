@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,25 +10,22 @@ namespace evolution.Model
 {
     public class Player
     {
-        Image image;
-        string login;
-        string password;
-        string nickname;
-        int rating;
-        int score;
-        List<Reward> rewards;
+        private int number;
+        private User user;
+        Color color;
 
-        public Image Image { get => image; set => image = value; }
-        public string Login { get => login; set => login = value; }
-        public string Nickname { get => nickname; set => nickname = value; }
-        public string Password { get => password; set => password = value; }
-        public int Rating { get => rating; set => rating = value; }
-        public int Score { get => score; set => score = value; }
-        public List<Reward> Rewards { get => rewards; set => rewards = value; }
-
+        public Player(User _user, int _number)
+        {
+            User = _user;
+            Number = _number;
+        }
         public Player()
         {
 
         }
+
+        public User User { get => user; set => user = value; }
+        public Color Color { get => color; set => color = value; }
+        public int Number { get => number; set => number = value; }
     }
 }

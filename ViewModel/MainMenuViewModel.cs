@@ -29,7 +29,16 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => {mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage); });
+                return new RelayCommand(obj => {mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage);
+                    //if (App.Language.Name == "en-US")
+                    //{
+                    //    SinglePlayerViewModel.playerLabel = "Player";
+                    //}
+                    //else
+                    //{
+                    //    SinglePlayerViewModel.playerLabel = "Игрок";
+                    //}
+                });
             }
         }
         public RelayCommand ProfileMenuItem_Click                        //Комманда пункта меню "Рейтинг"

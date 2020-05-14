@@ -1,4 +1,5 @@
-﻿using System;
+﻿using evolution.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace evolution.ViewModel
     public class GameViewModel:BaseViewModel
     {
         MainWindowViewModel mainWindowViewModel;
+        List<Player> players = new List<Player>();
+        public List<Player> Players { get => players; set => players = value; }
 
         public GameViewModel(MainWindowViewModel _mainWindowViewModel)
         {
@@ -64,10 +67,12 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { MenuOpacity = 1; MenuVisibility = Visibility.Visible; });
+                return new RelayCommand(obj => {
+                    MenuOpacity = 1; 
+                    MenuVisibility = Visibility.Visible; 
+                });
             }
         }
-        #endregion
 
         private Page gameFrame;
         public Page GameFrame
@@ -107,6 +112,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("Languages");
             }
         }
+        #endregion
 
     }
 }

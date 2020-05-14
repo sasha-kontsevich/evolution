@@ -189,8 +189,7 @@
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="Background" Property="Fill" Value="#0b0"></Setter>
                             <Setter TargetName="GreenBorder" Property="Fill" Value="#0b0"></Setter>
-                            <Setter TargetName="BlackBorder" Property="Width" Value="87"></Setter>
-                            <Setter TargetName="BlackBorder" Property="Height" Value="87"></Setter>
+                            <Setter TargetName="BlackBorder" Property="Opacity" Value="0"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

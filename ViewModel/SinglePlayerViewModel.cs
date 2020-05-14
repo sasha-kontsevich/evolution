@@ -1,6 +1,8 @@
 ﻿using evolution.Model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,19 +14,42 @@ namespace evolution.ViewModel
     public class SinglePlayerViewModel : BaseViewModel
     {
         MainWindowViewModel mainWindowViewModel;
-        Dictionary<int, Player> players = new Dictionary<int, Player>();
+        List< Player> players = new List< Player>();
+        public static string playerLabel = "Player";
+        static BitmapImage ready = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "../../../Resources/Images/Ready.png", UriKind.RelativeOrAbsolute));
+        static BitmapImage notReady = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "../../../Resources/Images/NotReady.png", UriKind.RelativeOrAbsolute));
+
+
         public SinglePlayerViewModel(MainWindowViewModel _mainWindowViewModel)
         {
             mainWindowViewModel = _mainWindowViewModel;
-            for (int i = 0; i < 6; i++)
-            {
-                players.Add(i, new Player());
-            }
         }
 
-        public void SignIn(string login, string password, int i)
+        public User SignIn(string _login, string _password )
         {
-            MessageBox.Show(login + password + i.ToString());
+            User user = new User();
+            var context = new EvolutionDBContext();
+            var query = from u in context.Users
+                        where u.Login == _login && u.Password == _password
+                        select u;
+            try
+            {
+                user = query.ToList().First();
+            }
+            catch
+            {
+                if (App.Language.Name == "en-US")
+                {
+                    MessageBox.Show("Invalid login or password");
+                }
+                else
+                {
+                    MessageBox.Show("Неправильный логин или пароль");
+                }
+                return null;
+            }
+            
+            return user;
         }
 
         public RelayCommand BackToMenu                               //Вернуться в главное меню
@@ -38,7 +63,16 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.GamePage); });
+                return new RelayCommand(obj => {
+                    if(players.Count >=2)
+                    {
+                        mainWindowViewModel.ChangePage(mainWindowViewModel.GamePage);
+                        mainWindowViewModel.GameContext.Players = players;
+                    }
+                    else
+                    {
+                    }
+                });
             }
         }
 
@@ -46,47 +80,216 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { SignIn(Login1,Password1,0); });
+                return new RelayCommand(obj => {
+                    User user = SignIn(Login1, Password1);
+                    if(user != null)
+                    {
+                        player1 = new Player(user, 0);
+                        NickName1 = user.NickName;
+                        Rating1 = (int)user.Rating;
+                        AvatarImage1 = ImageController.ConvertByteArrayToImage(user.Avatar);
+                    }
+                });
             }
         }
         public RelayCommand SignIn2
         {
             get
             {
-                return new RelayCommand(obj => { SignIn(login2, password2, 1); });
+                return new RelayCommand(obj => {
+                    User user = SignIn(Login2, Password2);
+                    if (user != null)
+                    {
+                        player2 = new Player(user, 1);
+                        NickName2 = user.NickName;
+                        Rating2 = (int)user.Rating;
+                        AvatarImage2 = ImageController.ConvertByteArrayToImage(user.Avatar);
+                    }
+                });
             }
         }
         public RelayCommand SignIn3
         {
             get
             {
-                return new RelayCommand(obj => { SignIn(login3, password3, 2); });
+                return new RelayCommand(obj => {
+                    User user = SignIn(Login3, Password3);
+                    if (user != null)
+                    {
+                        player3 = new Player(user, 2);
+                        NickName3 = user.NickName;
+                        Rating3 = (int)user.Rating;
+                        AvatarImage3 = ImageController.ConvertByteArrayToImage(user.Avatar);
+                    }
+                });
             }
         }
         public RelayCommand SignIn4
         {
             get
             {
-                return new RelayCommand(obj => { SignIn(login4, password4, 3); });
+                return new RelayCommand(obj => {
+                    User user = SignIn(Login4, Password4);
+                    if (user != null)
+                    {
+                        player4 = new Player(user, 3);
+                        NickName4 = user.NickName;
+                        Rating4 = (int)user.Rating;
+                        AvatarImage4 = ImageController.ConvertByteArrayToImage(user.Avatar);
+                    }
+                });
             }
         }
         public RelayCommand SignIn5
         {
             get
             {
-                return new RelayCommand(obj => { SignIn(login5, password5, 4); });
+                return new RelayCommand(obj => {
+                    User user = SignIn(Login5, Password5);
+                    if (user != null)
+                    {
+                        player5 = new Player(user, 4);
+                        NickName5 = user.NickName;
+                        Rating5 = (int)user.Rating;
+                        AvatarImage5 = ImageController.ConvertByteArrayToImage(user.Avatar);
+                    }
+                });
             }
         }
         public RelayCommand SignIn6
         {
             get
             {
-                return new RelayCommand(obj => { SignIn(login6, password6, 5); });
+                return new RelayCommand(obj => {
+                    User user = SignIn(Login6, Password6);
+                    if (user != null)
+                    {
+                        player6 = new Player(user, 5);
+                        NickName6 = user.NickName;
+                        Rating6 = (int)user.Rating;
+                        AvatarImage6 = ImageController.ConvertByteArrayToImage(user.Avatar);
+                    }
+                });
             }
         }
 
+        public RelayCommand TakePart1
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(players.Contains(player1))
+                    {
+                        players.Remove(player1);
+                        StatusImage1 = notReady;
+                    }
+                    else
+                    {
+                        StatusImage1 = ready;
+                        players.Add(player1);
+                    }
+                });
+            }
+        }
+        public RelayCommand TakePart2
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(players.Contains(player2))
+                    {
+                        players.Remove(player2);
+                        StatusImage2 = notReady;
+                    }
+                    else
+                    {
+                        StatusImage2 = ready;
+                        players.Add(player2);
+                    }
+                });
+            }
+        }
+        public RelayCommand TakePart3
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(players.Contains(player3))
+                    {
+                        players.Remove(player3);
+                        StatusImage3 = notReady;
+                    }
+                    else
+                    {
+                        StatusImage3 = ready;
+                        players.Add(player3);
+                    }
+                });
+            }
+        }
+        public RelayCommand TakePart4
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(players.Contains(player4))
+                    {
+                        players.Remove(player4);
+                        StatusImage4 = notReady;
+                    }
+                    else
+                    {
+                        StatusImage4 = ready;
+                        players.Add(player4);
+                    }
+                });
+            }
+        }
+        public RelayCommand TakePart5
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(players.Contains(player5))
+                    {
+                        players.Remove(player5);
+                        StatusImage5 = notReady;
+                    }
+                    else
+                    {
+                        StatusImage5 = ready;
+                        players.Add(player5);
+                    }
+                });
+            }
+        }
+        public RelayCommand TakePart6
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(players.Contains(player6))
+                    {
+                        players.Remove(player6);
+                        StatusImage6 = notReady;
+                    }
+                    else
+                    {
+                        StatusImage6 = ready;
+                        players.Add(player6);
+                    }
+                });
+            }
+        }
 
-        private string nickName1;                       //Ник
+        private Player player1 = new Player(new User() { NickName = "Player 1" }, 0);
+        private Player player2 = new Player(new User() { NickName = "Player 2" }, 1);
+        private Player player3 = new Player(new User() { NickName = "Player 3" }, 2);
+        private Player player4 = new Player(new User() { NickName = "Player 4" }, 3);
+        private Player player5 = new Player(new User() { NickName = "Player 5" }, 4);
+        private Player player6 = new Player(new User() { NickName = "Player 6" }, 5);
+
+        private string nickName1 = playerLabel + " 1";                       //Ник
         public string NickName1
         {
             get { return nickName1; }
@@ -99,7 +302,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("NickName1");
             }
         }
-        private string nickName2;
+        private string nickName2 = playerLabel + " 2";
         public string NickName2
         {
             get { return nickName2; }
@@ -112,7 +315,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("NickName2");
             }
         }
-        private string nickName3;
+        private string nickName3 = playerLabel + " 3";
         public string NickName3
         {
             get { return nickName3; }
@@ -125,7 +328,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("NickName3");
             }
         }
-        private string nickName4;
+        private string nickName4 = playerLabel + " 4";
         public string NickName4
         {
             get { return nickName4; }
@@ -138,7 +341,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("NickName4");
             }
         }
-        private string nickName5;
+        private string nickName5 = playerLabel + " 5";
         public string NickName5
         {
             get { return nickName5; }
@@ -151,7 +354,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("NickName5");
             }
         }
-        private string nickName6;
+        private string nickName6 = playerLabel + " 5";
         public string NickName6
         {
             get { return nickName6; }
@@ -329,7 +532,6 @@ namespace evolution.ViewModel
 
 
         private string password1;                    //Пароль
-
         public string Password1
         {
             get { return password1; }
@@ -337,7 +539,6 @@ namespace evolution.ViewModel
             {
                 if (password1 == value)
                     return;
-
                 password1 = value;
                 RaisePropertyChanged("Password1");
             }
@@ -483,7 +684,7 @@ namespace evolution.ViewModel
         }
 
 
-        private BitmapSource statusImage1;                       //Статус
+        private BitmapSource statusImage1 = notReady;                       //Статус
         public BitmapSource StatusImage1
         {
             get { return statusImage1; }
@@ -495,7 +696,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("StatusImage1");
             }
         }
-        private BitmapSource statusImage2;
+        private BitmapSource statusImage2 = notReady;
         public BitmapSource StatusImage2
         {
             get { return statusImage2; }
@@ -507,7 +708,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("StatusImage2");
             }
         }
-        private BitmapSource statusImage3;
+        private BitmapSource statusImage3 = notReady;
         public BitmapSource StatusImage3
         {
             get { return statusImage3; }
@@ -519,7 +720,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("StatusImage3");
             }
         }
-        private BitmapSource statusImage4;
+        private BitmapSource statusImage4 = notReady;
         public BitmapSource StatusImage4
         {
             get { return statusImage4; }
@@ -531,7 +732,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("StatusImage4");
             }
         }
-        private BitmapSource statusImage5;
+        private BitmapSource statusImage5 = notReady;
         public BitmapSource StatusImage5
         {
             get { return statusImage5; }
@@ -543,7 +744,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("StatusImage5");
             }
         }
-        private BitmapSource statusImage6;
+        private BitmapSource statusImage6 = notReady;
         public BitmapSource StatusImage6
         {
             get { return statusImage6; }

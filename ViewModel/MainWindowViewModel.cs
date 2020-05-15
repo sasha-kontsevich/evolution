@@ -21,7 +21,7 @@ namespace evolution.ViewModel
         private Page rulesPage;
         private Page leaderBoardPage;
         private Page profilePage;
-        private Page gamePage;
+        private Game gamePage;
 
         private SinglePlayerViewModel singlePlayerDataContext;
         private MainMenuViewModel mainMenuDataContext;
@@ -79,7 +79,7 @@ namespace evolution.ViewModel
         public Page RulesPage { get => rulesPage; set => rulesPage = value; }
         public Page LeaderBoardPage { get => leaderBoardPage; set => leaderBoardPage = value; }
         public Page ProfilePage { get => profilePage; set => profilePage = value; }
-        public Page GamePage { get => gamePage; set => gamePage = value; }
+        public Game GamePage { get => gamePage; set => gamePage = value; }
         public LeaderBoardViewModel LeaderBoardContext { get => leaderBoardContext; set => leaderBoardContext = value; }
         public GameViewModel GameContext { get => gameContext; set => gameContext = value; }
         public ProfileViewModel ProfileContext { get => profileContext; set => profileContext = value; }
@@ -94,7 +94,8 @@ namespace evolution.ViewModel
             RulesPage = new Rules();
             LeaderBoardPage = new LeaderBoard();
             ProfilePage = new Profile();
-            GamePage = new Game();
+            GamePage = new Game(this);
+            
 
             mainMenuDataContext = new MainMenuViewModel(this);              //Инициализация контекста для страниц
             singlePlayerDataContext = new SinglePlayerViewModel(this);
@@ -102,7 +103,7 @@ namespace evolution.ViewModel
             rulesDataContex = new RulesViewModel(this);
             LeaderBoardContext = new LeaderBoardViewModel(this);
             ProfileContext = new ProfileViewModel(this);
-            GameContext = new GameViewModel(this);
+            GameContext = new GameViewModel(this, GamePage.cvs);
 
             MainMenuPage.DataContext = mainMenuDataContext;                 //Задание контекста страниц
             SinglePlayerPage.DataContext = singlePlayerDataContext;

@@ -45,6 +45,7 @@
     <v:String x:Key="RegDate">Дата регистрации</v:String>
     <v:String x:Key="Awards">Награды</v:String>
     <v:String x:Key="Matches">Матчи</v:String>
+    <v:String x:Key="Turn">Ход</v:String>
 
 
 

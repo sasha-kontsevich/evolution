@@ -1,23 +1,123 @@
-﻿using evolution.Model;
+﻿using evolution.Custom;
+using evolution.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace evolution.ViewModel
 {
     public class GameViewModel:BaseViewModel
     {
+        public static Card SelectedCard;
         MainWindowViewModel mainWindowViewModel;
-        List<Player> players = new List<Player>();
-        public List<Player> Players { get => players; set => players = value; }
+        public static double cvsH=0;
+        public static double cvsW=0;
+        Map map = new Map();
 
-        public GameViewModel(MainWindowViewModel _mainWindowViewModel)
+        Canvas cvs;
+        List<Player> players = new List<Player>();
+        List<Card> cards = new List<Card>();
+        public List<Player> Players { get => players; set => players = value; }
+        public Canvas Cvs { get => cvs; set => cvs = value; }
+        public List<Card> Cards { get => cards; set => cards = value; }
+        int x = 0;
+        int y = 0;
+
+
+        public GameViewModel(MainWindowViewModel _mainWindowViewModel, Canvas _canvas)
         {
             mainWindowViewModel = _mainWindowViewModel;
+            cvs = _canvas;
+
+        }
+        private int gameTurn = 0;
+
+        public int GameTurn
+        {
+            get { return gameTurn; }
+            set
+            {
+                if (gameTurn == value)
+                    return;
+
+                gameTurn = value;
+                RaisePropertyChanged("GameTurn");
+            }
+        }
+
+        public void StartGame()
+        {
+            Cvs.Children.Add(map);
+            InitializeCards();
+            DisplayCards();
+            ReDraw();
+        }
+        public void InitializeCards()
+        {
+            Cards.Add(new Card(2, "Burrowing"));
+            Cards.Add(new Card(3, "Burrowing"));
+            Cards.Add(new Card(4, "Burrowing"));
+            Cards.Add(new Card(-2, "Carnivorous"));
+            Cards.Add(new Card(-3, "Carnivorous"));
+            Cards.Add(new Card(2, "Carnivorous"));
+            Cards.Add(new Card(2, "Ambush"));
+            Cards.Add(new Card(3, "Ambush"));
+            Cards.Add(new Card(4, "Cooperation"));
+            Cards.Add(new Card(2, "Cooperation"));
+            Cards.Add(new Card(3, "Cooperation"));
+            Cards.Add(new Card(4, "GoodEyesight"));
+        }
+        public void DisplayCards()
+        {
+            int x = 0;
+            int y = 0;
+            foreach(Card card in Cards)
+            {
+                card.RenderTransform.Value.ScalePrepend(3, 3);
+                //Cvs.Children.Add(card);
+                //Canvas.SetLeft(card, Cvs.ActualWidth *0.3f + x);
+                //Canvas.SetTop(card, Cvs.ActualHeight * 0.7f + y);
+                x += 100;
+                y += 5;
+                mainWindowViewModel.GamePage.Arm.Children.Add(card);
+            }
+        }
+        public void ChangePosition(double dx, double dy)
+        {
+            map.X += dx;
+            map.Y += dy;
+            ReDraw();
+        }
+        public void ReDraw()
+        {
+            Canvas.SetLeft(map, map.X + x);
+            Canvas.SetTop(map, map.Y + y);
+
+        }
+
+        public RelayCommand RemoveCard
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    mainWindowViewModel.GamePage.Arm.Children.Remove(SelectedCard);
+                });
+            }
+        }
+        public RelayCommand EatPlant
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    map.RemoveFoodToken();
+                });
+            }
         }
 
         #region Menu
@@ -112,6 +212,7 @@ namespace evolution.ViewModel
                 RaisePropertyChanged("Languages");
             }
         }
+
         #endregion
 
     }

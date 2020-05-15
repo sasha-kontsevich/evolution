@@ -68,6 +68,7 @@ namespace evolution.ViewModel
                     {
                         mainWindowViewModel.ChangePage(mainWindowViewModel.GamePage);
                         mainWindowViewModel.GameContext.Players = players;
+                        mainWindowViewModel.GameContext.StartGame();
                     }
                     else
                     {

@@ -30,14 +30,6 @@ namespace evolution.ViewModel
             get
             {
                 return new RelayCommand(obj => {mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage);
-                    //if (App.Language.Name == "en-US")
-                    //{
-                    //    SinglePlayerViewModel.playerLabel = "Player";
-                    //}
-                    //else
-                    //{
-                    //    SinglePlayerViewModel.playerLabel = "Игрок";
-                    //}
                 });
             }
         }

@@ -45,6 +45,7 @@
     <v:String x:Key="RegDate">Registration date</v:String>
     <v:String x:Key="Awards">Awards</v:String>
     <v:String x:Key="Matches">Matches</v:String>
+    <v:String x:Key="Turn">Turn</v:String>
 
 
 

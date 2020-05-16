@@ -46,6 +46,17 @@
     <v:String x:Key="Awards">Награды</v:String>
     <v:String x:Key="Matches">Матчи</v:String>
     <v:String x:Key="Turn">Ход</v:String>
+    <v:String x:Key="Food">Пища</v:String>
+    <v:String x:Key="Population">Популяция</v:String>
+    <v:String x:Key="BodySize">Размер тела</v:String>
+    <v:String x:Key="EatPlant">Съесть растение</v:String>
+    <v:String x:Key="Attack">Напасть на вид</v:String>
+    <v:String x:Key="NextPlayer">Передать ход</v:String>
+    <v:String x:Key="AddTrait">Добавить свойство</v:String>
+    <v:String x:Key="NewSpeciesL">Новый вид слева</v:String>
+    <v:String x:Key="NewSpeciesR">Новый вид справа</v:String>
+    <v:String x:Key="IncreasePopulation">Увеличить популяцию</v:String>
+    <v:String x:Key="IncreaseBodySize">Увеличить размер тела</v:String>
 
 
 

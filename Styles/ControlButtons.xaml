@@ -8,5 +8,50 @@
         <Setter Property="Button.FontSize" Value="18"></Setter>
         <Setter Property="Button.BorderThickness" Value="2"></Setter>
         <Setter Property="Button.BorderBrush" Value="Green"></Setter>
+        <Setter Property="Button.Margin" Value="5"></Setter>
     </Style>
+    <Style x:Key="StandartButton" TargetType="Button">
+        <Setter Property="FontSize" Value="18"></Setter>
+        <Setter Property="FontFamily" Value="Myriad Pro"></Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1"></ColumnDefinition>
+                            <ColumnDefinition Width="3"></ColumnDefinition>
+                            <ColumnDefinition Width="90"></ColumnDefinition>
+                            <ColumnDefinition Width="3"></ColumnDefinition>
+                            <ColumnDefinition Width="1"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1"></RowDefinition>
+                            <RowDefinition Height="3"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="3"></RowDefinition>
+                            <RowDefinition Height="1"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Rectangle x:Name="BlackBorder" Grid.ColumnSpan="5" Grid.RowSpan="5" Fill="#000"/>
+                        <Rectangle x:Name="GreenBorder" Grid.Column="1" Grid.Row="1"  Grid.ColumnSpan="3" Grid.RowSpan="3" Fill="Green"/>
+                        <Rectangle x:Name="Background"  Grid.Column="2" Grid.Row="2" Fill="#eee"></Rectangle>
+                        <ContentPresenter x:Name="ContentPresenter" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Background" Property="Fill" Value="#fff"></Setter>
+                            <Setter TargetName="GreenBorder" Property="Fill" Value="#1c1"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="Background" Property="Fill" Value="#0b0"></Setter>
+                            <Setter TargetName="GreenBorder" Property="Fill" Value="#0b0"></Setter>
+                            <Setter TargetName="BlackBorder" Property="Opacity" Value="0"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

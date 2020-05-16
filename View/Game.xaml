@@ -10,11 +10,12 @@
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles/ControlButtons.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="../Styles/GameUI.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="../Styles/Style.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="../Styles/RulesStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="../Styles/SettingsStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/ControlButtons.xaml"></ResourceDictionary>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -53,21 +54,30 @@
                     <Label Content="{Binding GameTurn}" Style="{DynamicResource Title}" FontSize="30" Foreground="#333" FontWeight="Bold"></Label>
                 </StackPanel>
             </Grid>
-            <Grid  Grid.Row="2" Grid.Column="1">
+            <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Width="auto" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <DataGrid ItemsSource="{Binding PlayersTable}"  AlternatingRowBackground="#FFd1FFd1" RowHeight="30" FontSize="18" GridLinesVisibility="None" FrozenColumnCount="3" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False"></DataGrid>                
+            </Grid>
+            <Grid  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ScrollViewer HorizontalScrollBarVisibility="Visible">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center" MouseEnter="ScrollViewer_MouseEnter" MouseLeave="ScrollViewer_MouseLeave" VerticalAlignment="Bottom">
                     <StackPanel Height="150" x:Name="Arm" Orientation="Horizontal" MouseUp="Arm_MouseUp" MouseEnter="Arm_MouseEnter" MouseLeave="Arm_MouseLeave">
 
                     </StackPanel>
 
                 </ScrollViewer>
                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
-                    <Button Command="{Binding RemoveCard}" Content="wfewe"></Button>
-                    <Button Command="{Binding EatPlant}" Content="Eat Plant"></Button>
-                    <Button Content="wfewe"></Button>
+                    <Button Command="{Binding NewSpeciesL}" Visibility="{Binding VNewSpeciesL}" Content="{DynamicResource NewSpeciesL}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding NewSpeciesR}" Visibility="{Binding VNewSpeciesR}" Content="{DynamicResource NewSpeciesR}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding IncreasePopulation}" Visibility="{Binding VIncreasePopulation}" Content="{DynamicResource IncreasePopulation}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding IncreaseBodySize}" Visibility="{Binding VIncreaseBodySize}" Content="{DynamicResource IncreaseBodySize}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding AddTrait}" Visibility="{Binding VAddTrait}" Content="{DynamicResource AddTrait}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding AddTrait}" Visibility="{Binding VAddTrait}" Content="{DynamicResource AddTrait}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding Attack}" Visibility="{Binding VAttack}" Content="{DynamicResource Attack}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding EatPlant}" Visibility="{Binding VEatPlant}" Content="{DynamicResource EatPlant}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding NextPlayer}" Visibility="{Binding VNextPlayer}" Content="{DynamicResource NextPlayer}" Padding="3" Margin="2"></Button>
                 </StackPanel>
             </Grid>
         </Grid>

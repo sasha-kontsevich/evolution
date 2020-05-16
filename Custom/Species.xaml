@@ -5,32 +5,76 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:evolution.Custom"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="species" Height="200" Width="350">
+             d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/RulesStyle.xaml"></ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="species" Height="300" Width="160" MouseUp="species_MouseUp">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"></RowDefinition>
+            <RowDefinition Height="15*"></RowDefinition>
+            <RowDefinition Height="60*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="143"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="4*"></RowDefinition>
-            <RowDefinition Height="1.2*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <ContentControl Grid.Column="1" >
-                <local:Card></local:Card>
-        </ContentControl>
-        <ContentControl Grid.Column="2">
-            <local:Card></local:Card>
-        </ContentControl>
-        <ContentControl Grid.Column="3">
-            <local:Card></local:Card>
-        </ContentControl>
-        <Rectangle Fill="#884" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="1" Margin="20,0,20,0"></Rectangle>
-        <Rectangle Fill="#d84" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="2" Margin="20,0,20,0"></Rectangle>
-        <Rectangle Fill="#dd4" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="3" Margin="20,0,20,3"></Rectangle>
+        <Rectangle x:Name="selectionBorder" Grid.ColumnSpan="3" Grid.RowSpan="4"  Stroke="#fff" StrokeThickness="10" Visibility="Hidden">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="200" ShadowDepth="5" Direction="315" Color="#fff" Opacity="1" RenderingBias="Performance" ></DropShadowEffect>
+            </Rectangle.Effect>
+
+        </Rectangle>
+        <Rectangle Grid.Column="1" Fill="#bbb" Grid.RowSpan="4" Opacity="0.7">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="5" Direction="315" Color="#444"></DropShadowEffect>
+            </Rectangle.Effect>
+        </Rectangle>
+        <local:Card x:Name="Trait3" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2"></local:Card>
+        <local:Card x:Name="Trait2" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2"></local:Card>
+        <local:Card x:Name="Trait1" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2"></local:Card>
+        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="18"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.RowSpan="3" Fill="#feb" Grid.ColumnSpan="3" Stroke="#eed" StrokeThickness="3" >
+                <Rectangle.Effect >
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="5" Direction="315" Color="#444" Opacity="0.9"></DropShadowEffect>
+                </Rectangle.Effect>
+            </Rectangle>
+            <Rectangle Grid.Row="1" Grid.ColumnSpan="3" Fill="#db9" ></Rectangle>
+            <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Fill="#fd8"></Rectangle>
+            <Ellipse Grid.Row="0"  Grid.Column="2" Grid.ColumnSpan="2" Fill="#dc9" Stroke="#eed" StrokeThickness="3" ></Ellipse>
+            <Ellipse Grid.Row="1"  Grid.Column="2" Grid.ColumnSpan="2" Fill="#a97" Stroke="#eed" StrokeThickness="3" ></Ellipse>
+            <Ellipse Grid.Row="2"  Grid.Column="2" Grid.ColumnSpan="2" Fill="#db6" Stroke="#eed" StrokeThickness="3" ></Ellipse>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource Text}" Margin="8" Text="{DynamicResource Food}">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" ShadowDepth="2" Direction="315" Color="AliceBlue"></DropShadowEffect>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource Text}" Margin="8" Text="{DynamicResource Population}">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" ShadowDepth="2" Direction="315" Color="AliceBlue"></DropShadowEffect>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource Text}" Margin="8" Text="{DynamicResource BodySize}">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" ShadowDepth="2" Direction="315" Color="AliceBlue"></DropShadowEffect>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock x:Name="FoodCountText"   Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource Text}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"></TextBlock>
+            <TextBlock x:Name="PopulationText"  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource Text}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"></TextBlock>
+            <TextBlock x:Name="BodySizeText"    Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource Text}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"></TextBlock>
+        </Grid>
     </Grid>
 </UserControl>

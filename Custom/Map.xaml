@@ -5,36 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:evolution.Custom"
              mc:Ignorable="d" 
-             d:DesignHeight="3000" d:DesignWidth="3000">
-    <Grid>
+             d:DesignHeight="4000" d:DesignWidth="4000">
+    <Grid Height="3000"  Width="4000">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="227*"></ColumnDefinition>
-            <ColumnDefinition Width="879*"></ColumnDefinition>
-            <ColumnDefinition Width="52*"></ColumnDefinition>
-            <ColumnDefinition Width="781*"></ColumnDefinition>
-            <ColumnDefinition Width="82*"></ColumnDefinition>
-            <ColumnDefinition Width="710*"></ColumnDefinition>
-            <ColumnDefinition Width="268*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="622*"></RowDefinition>
-            <RowDefinition Height="398*"></RowDefinition>
-            <RowDefinition Height="154*"></RowDefinition>
-            <RowDefinition Height="662*"></RowDefinition>
-            <RowDefinition Height="378*"></RowDefinition>
-            <RowDefinition Height="357*"></RowDefinition>
-            <RowDefinition Height="428*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Source="../Resources/Images/трава_36.jpg" Grid.ColumnSpan="7" Grid.RowSpan="7" Stretch="UniformToFill" Margin="0,0,-0.573,-0.549"></Image>
-        <Grid Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Margin="2.6,0.149,79.027,377.651" Grid.RowSpan="2">
+        <Image Source="../Resources/Images/трава_36.jpg" Grid.ColumnSpan="5" Grid.RowSpan="7" Stretch="UniformToFill" Margin="0,0,11,-4" ></Image>
+        <Grid Grid.Column="2" Grid.Row="3" >
             <Image x:Name="waterholeImage" Height="400" Width="500" Stretch="Fill"></Image>
             <WrapPanel x:Name="TokensPanel" Width="350" Height="300">
 
             </WrapPanel>
 
         </Grid>
-        <StackPanel x:Name="player1Species" Grid.Row="3" Grid.ColumnSpan="2" Height="170" HorizontalAlignment="Right">
-            
-        </StackPanel>
+        <StackPanel x:Name="player1Species" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player2Species" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player3Species" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player4Species" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player5Species" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player6Species" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="auto" Width="auto"/>
     </Grid>
 </UserControl>

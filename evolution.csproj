@@ -115,6 +115,7 @@
     <Compile Include="User.cs">
       <DependentUpon>DBEvolutionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserFunctions.cs" />
     <Compile Include="UserMatchResults.cs">
       <DependentUpon>DBEvolutionModel.tt</DependentUpon>
     </Compile>
@@ -318,6 +319,26 @@
       <DependentUpon>DBEvolutionModel.edmx</DependentUpon>
       <LastGenOutput>DBEvolutionModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Images\Carnivore.png" />
+    <Resource Include="Resources\Images\Climbing.png" />
+    <Resource Include="Resources\Images\DefensiveHerding.png" />
+    <Resource Include="Resources\Images\EvolutionRules-13.png" />
+    <Resource Include="Resources\Images\Evo_food_large.png" />
+    <Resource Include="Resources\Images\FatTissue.png" />
+    <Resource Include="Resources\Images\Fertile.png" />
+    <Resource Include="Resources\Images\Foraging.png" />
+    <Resource Include="Resources\Images\HardShell.png" />
+    <Resource Include="Resources\Images\Intelligence.png" />
+    <Resource Include="Resources\Images\PackHunting.png" />
+    <Resource Include="Resources\Images\pic2009643.png" />
+    <Resource Include="Resources\Images\Plant1.png" />
+    <Resource Include="Resources\Images\Plant2.png" />
+    <Resource Include="Resources\Images\Plant3.png" />
+    <Resource Include="Resources\Images\Plant4.png" />
+    <Resource Include="Resources\Images\Plant5.png" />
+    <Resource Include="Resources\Images\Symbiosis.png" />
+    <Resource Include="Resources\Images\WarningCall.png" />
+    <Resource Include="Resources\Images\Waterhole.png" />
     <Resource Include="Resources\Images\NewTrait.png" />
     <Resource Include="Resources\Images\трава_36.jpg" />
     <Resource Include="Resources\Images\Ambush.png" />

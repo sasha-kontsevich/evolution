@@ -1,4 +1,5 @@
-﻿using System;
+﻿using evolution.Custom;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace evolution.Model
         private int number;
         private User user;
         Color color;
-
+        public List<Card> Cards = new List<Card>();
         public Player(User _user, int _number)
         {
             User = _user;

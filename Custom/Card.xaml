@@ -6,13 +6,32 @@
              xmlns:local="clr-namespace:evolution.Custom"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="215">
-    <Grid x:Name="card" Height="300" Width="215">
-        <Rectangle Fill="White" Opacity="0.5">
-            <Rectangle.Effect>
-                <DropShadowEffect BlurRadius="16" ShadowDepth="6" Direction="315" Color="#000"></DropShadowEffect>
-            </Rectangle.Effect>
-        </Rectangle>
-        <Image x:Name="cardImage" Stretch="UniformToFill"></Image>
-        <Button x:Name="button" Background="#fff"></Button>
-    </Grid>
+    <Border x:Name="card" Height="200" Width="143">
+        <ContentPresenter>
+            <ContentPresenter.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90*"></ColumnDefinition>
+                        <ColumnDefinition Width="15*"></ColumnDefinition>
+                        <ColumnDefinition Width="6*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90*"></RowDefinition>
+                        <RowDefinition Height="12*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Rectangle Fill="White" Opacity="0.5" Grid.ColumnSpan="3" Grid.RowSpan="3">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="16" ShadowDepth="6" Direction="315" Color="#000"></DropShadowEffect>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Image x:Name="cardImage" Stretch="UniformToFill"  Grid.ColumnSpan="3" Grid.RowSpan="3"></Image>
+                    <Ellipse Grid.Column="1" Grid.Row="1" Fill="#301411"></Ellipse>
+                    <TextBlock x:Name="FoodCountText" Grid.Column="1" Grid.Row="1" Foreground="#edb" Text="-6" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16"></TextBlock>
+                    <Button x:Name="button" Background="#fff"  Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0"></Button>
+
+                </Grid>
+            </ContentPresenter.Content>
+        </ContentPresenter>
+    </Border>
 </UserControl>

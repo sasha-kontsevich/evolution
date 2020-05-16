@@ -14,27 +14,42 @@ namespace evolution.ViewModel
 {
     public class GameViewModel:BaseViewModel
     {
-        public static Card SelectedCard;
-        MainWindowViewModel mainWindowViewModel;
+        public static int GameSize = 0;
         public static double cvsH=0;
         public static double cvsW=0;
-        Map map = new Map();
-
-        Canvas cvs;
+        public static int FirstPlayerToken=0;
+        Map map;
+        public List<Card> Deck = new List<Card>();
+        public static Card SelectedCard;
+        public static int? SelectedCardIndex = null;
+        public static Species SelectedSpecies;
+        private Player currentPlayer;
+        private bool currentPlayerTurnEnded = false;
         List<Player> players = new List<Player>();
         List<Card> cards = new List<Card>();
         public List<Player> Players { get => players; set => players = value; }
-        public Canvas Cvs { get => cvs; set => cvs = value; }
         public List<Card> Cards { get => cards; set => cards = value; }
         int x = 0;
         int y = 0;
+        public Player CurrentPlayer 
+        {
+            get { return currentPlayer; }
+            set
+            {
+                if (currentPlayer == value)
+                    return;
+                UpdateCardsInArm();
+                currentPlayer = value;
+            }
+        }
 
-
+        Canvas cvs;
+        public Canvas Cvs { get => cvs; set => cvs = value; }
+        MainWindowViewModel mainWindowViewModel;
         public GameViewModel(MainWindowViewModel _mainWindowViewModel, Canvas _canvas)
         {
             mainWindowViewModel = _mainWindowViewModel;
             cvs = _canvas;
-
         }
         private int gameTurn = 0;
 
@@ -53,38 +68,41 @@ namespace evolution.ViewModel
 
         public void StartGame()
         {
+            map = new Map();
+            
+            UptadePlayersTable();
             Cvs.Children.Add(map);
             InitializeCards();
-            DisplayCards();
+            map.MapBegin(Players.Count);
             ReDraw();
+            GameCycle();    //главный цикл игры
         }
-        public void InitializeCards()
+        public void GameCycle() //главный цикл игры
         {
-            Cards.Add(new Card(2, "Burrowing"));
-            Cards.Add(new Card(3, "Burrowing"));
-            Cards.Add(new Card(4, "Burrowing"));
-            Cards.Add(new Card(-2, "Carnivorous"));
-            Cards.Add(new Card(-3, "Carnivorous"));
-            Cards.Add(new Card(2, "Carnivorous"));
-            Cards.Add(new Card(2, "Ambush"));
-            Cards.Add(new Card(3, "Ambush"));
-            Cards.Add(new Card(4, "Cooperation"));
-            Cards.Add(new Card(2, "Cooperation"));
-            Cards.Add(new Card(3, "Cooperation"));
-            Cards.Add(new Card(4, "GoodEyesight"));
+            DealCards();//раздача карт
+            CurrentPlayer = Players.ToArray()[FirstPlayerToken];
+            UpdateCardsInArm();
+            UptadePlayersTable();
+            //Определение кормовой базы
+
+        }
+
+        public void DealCards()
+        {
+            foreach(Player player in Players)
+            {
+                for (int i = 0; i < 3; i++) 
+                if(Deck.Count!=0)
+                {
+                    player.Cards.Add(Deck.Last());
+                    Deck.Remove(Deck.Last());
+                }
+            }
         }
         public void DisplayCards()
         {
-            int x = 0;
-            int y = 0;
-            foreach(Card card in Cards)
+            foreach(Card card in Deck)
             {
-                card.RenderTransform.Value.ScalePrepend(3, 3);
-                //Cvs.Children.Add(card);
-                //Canvas.SetLeft(card, Cvs.ActualWidth *0.3f + x);
-                //Canvas.SetTop(card, Cvs.ActualHeight * 0.7f + y);
-                x += 100;
-                y += 5;
                 mainWindowViewModel.GamePage.Arm.Children.Add(card);
             }
         }
@@ -101,12 +119,79 @@ namespace evolution.ViewModel
 
         }
 
-        public RelayCommand RemoveCard
+        public RelayCommand NewSpeciesR
         {
             get
             {
                 return new RelayCommand(obj => {
-                    mainWindowViewModel.GamePage.Arm.Children.Remove(SelectedCard);
+                    if(SelectedCard!=null&&!currentPlayerTurnEnded)
+                    {
+                        Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
+                        SelectedCard = null;
+                        UpdateCardsInArm();
+                        map.AddSpecies(Players.IndexOf(currentPlayer));
+                        currentPlayerTurnEnded = true;
+                    }
+                });
+            }
+        }
+        public RelayCommand IncreasePopulation
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(SelectedCard!=null&&!currentPlayerTurnEnded&& SelectedSpecies!=null&& SelectedSpecies.Population<6)
+                    {
+                        Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
+                        SelectedCard = null;
+                        UpdateCardsInArm();
+                        SelectedSpecies.Population += 1;
+                        currentPlayerTurnEnded = true;
+                        EndPlayersTurn();
+                    }
+                });
+            }
+        }
+        public RelayCommand IncreaseBodySize
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(SelectedCard!=null&&!currentPlayerTurnEnded&& SelectedSpecies!=null&& SelectedSpecies.BodySize < 6)
+                    {
+                        Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
+                        SelectedCard = null;
+                        UpdateCardsInArm();
+                        SelectedSpecies.BodySize += 1;
+                        currentPlayerTurnEnded = true;
+                        EndPlayersTurn();
+                    }
+                });
+            }
+        }
+        public RelayCommand AddTrait
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    if(SelectedCard!=null&&!currentPlayerTurnEnded&& SelectedSpecies!=null&& SelectedSpecies.AddTrait(SelectedCard))
+                    {
+                        Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
+                        
+                        SelectedCard = null;
+                        UpdateCardsInArm();
+                        currentPlayerTurnEnded = true;
+                        EndPlayersTurn();
+                    }
+                });
+            }
+        }
+        public RelayCommand NextPlayer
+        {
+            get
+            {
+                return new RelayCommand(obj => {
+                    EndPlayersTurn();
                 });
             }
         }
@@ -115,11 +200,73 @@ namespace evolution.ViewModel
             get
             {
                 return new RelayCommand(obj => {
-                    map.RemoveFoodToken();
+                    if(SelectedSpecies!=null&&SelectedSpecies.FoodCount<SelectedSpecies.Population && map.RemoveFoodToken())
+                    {
+                        SelectedSpecies.FoodCount += 1;
+                        EndPlayersTurn();
+                    }
                 });
             }
         }
 
+
+        public void EndPlayersTurn()
+        {
+            if(CurrentPlayer!=Players.Last())
+            {
+                int n = Players.IndexOf(CurrentPlayer);
+                CurrentPlayer = Players.ToArray()[n+1];
+            }
+            else
+            {
+                CurrentPlayer = Players.First();
+            }
+            SelectedCard = null;
+            SelectedSpecies = null;
+            UpdateCardsInArm();
+            currentPlayerTurnEnded = false;
+            UptadePlayersTable();
+        }
+
+        public void ClearMatch()
+        {
+            Cvs.Children.Remove(map);
+            Deck.Clear();
+            Players.Clear();
+        }
+
+        private IEnumerable<object> playersTable;
+        public IEnumerable<object> PlayersTable
+        {
+            get { return playersTable; }
+            set
+            {
+                if (playersTable == value)
+                    return;
+                playersTable = value;
+                RaisePropertyChanged("PlayersTable");
+            }
+        }
+        public void UpdateCardsInArm()
+        {
+            if(CurrentPlayer!=null)
+            {
+                mainWindowViewModel.GamePage.Arm.Children.Clear();
+                foreach (Card card in CurrentPlayer.Cards)
+                {
+                    mainWindowViewModel.GamePage.Arm.Children.Add(card);
+                }
+                UptadePlayersTable();
+            }
+        }
+        public void UptadePlayersTable()
+        {
+            
+            var query = from p in Players
+                        select new {Current = p==CurrentPlayer, Number = p.Number+1, Name = p.User.NickName, CardsCount = p.Cards.Count.ToString() };
+            PlayersTable = query.ToList();
+
+        }
         #region Menu
         private double menuOpacity = 0;
         public double MenuOpacity
@@ -160,6 +307,7 @@ namespace evolution.ViewModel
             {
                 return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage);
                     MenuOpacity = 0; MenuVisibility = Visibility.Hidden;
+                    ClearMatch();
                 });
             }
         }
@@ -213,7 +361,89 @@ namespace evolution.ViewModel
             }
         }
 
+
         #endregion
+        public void InitializeCards()
+        {
+            Deck.Add(new Card(2, "Burrowing"));
+            Deck.Add(new Card(3, "Burrowing"));
+            Deck.Add(new Card(4, "Burrowing"));
+
+            Deck.Add(new Card(-2, "Carnivore"));
+            Deck.Add(new Card(-3, "Carnivore"));
+            Deck.Add(new Card(2, "Carnivore"));
+            Deck.Add(new Card(4, "Carnivore"));
+            Deck.Add(new Card(6, "Carnivore"));
+            Deck.Add(new Card(1, "Carnivore"));
+            Deck.Add(new Card(5, "Carnivore"));
+            Deck.Add(new Card(7, "Carnivore"));
+
+            Deck.Add(new Card(2, "Ambush"));
+            Deck.Add(new Card(3, "Ambush"));
+            Deck.Add(new Card(-3, "Ambush"));
+
+            Deck.Add(new Card(4, "Cooperation"));
+            Deck.Add(new Card(2, "Cooperation"));
+            Deck.Add(new Card(3, "Cooperation"));
+
+            //Deck.Add(new Card(4, "GoodEyesight"));
+            //Deck.Add(new Card(-1, "GoodEyesight"));
+            //Deck.Add(new Card(5, "GoodEyesight"));
+
+            Deck.Add(new Card(4, "Horns"));
+            Deck.Add(new Card(5, "Horns"));
+            Deck.Add(new Card(1, "Horns"));
+
+            Deck.Add(new Card(3, "LongNeck"));
+            Deck.Add(new Card(1, "LongNeck"));
+            Deck.Add(new Card(6, "LongNeck"));
+
+            Deck.Add(new Card(1, "Scavenger"));
+            Deck.Add(new Card(-1, "Scavenger"));
+            Deck.Add(new Card(2, "Scavenger"));
+
+            Deck.Add(new Card(4, "Climbing"));
+            Deck.Add(new Card(3, "Climbing"));
+            Deck.Add(new Card(4, "Climbing"));
+
+            Deck.Add(new Card(5, "Fertile"));
+            Deck.Add(new Card(3, "Fertile"));
+            Deck.Add(new Card(7, "Fertile"));
+
+            Deck.Add(new Card(5, "Foraging"));
+            Deck.Add(new Card(4, "Foraging"));
+            Deck.Add(new Card(7, "Foraging"));
+
+            Deck.Add(new Card(3, "PackHunting"));
+            Deck.Add(new Card(4, "PackHunting"));
+            Deck.Add(new Card(5, "PackHunting"));
+
+            Deck.Add(new Card(5, "Symbiosis"));
+            Deck.Add(new Card(3, "Symbiosis"));
+            Deck.Add(new Card(6, "Symbiosis"));
+
+            Deck.Add(new Card(1, "WarningCall"));
+            Deck.Add(new Card(0, "WarningCall"));
+            Deck.Add(new Card(5, "WarningCall"));
+
+            Deck.Add(new Card(7, "HardShell"));
+            Deck.Add(new Card(5, "HardShell"));
+            Deck.Add(new Card(6, "HardShell"));
+
+            Deck.Add(new Card(6, "DefensiveHerding"));
+            Deck.Add(new Card(5, "DefensiveHerding"));
+            Deck.Add(new Card(4, "DefensiveHerding"));
+
+            //Deck.Add(new Card(7, "FatTissue"));
+            //Deck.Add(new Card(5, "FatTissue"));
+            //Deck.Add(new Card(-3, "FatTissue"));
+
+            //Deck.Add(new Card(4, "Intelligence"));
+            //Deck.Add(new Card(1, "Intelligence"));
+            //Deck.Add(new Card(2, "Intelligence"));
+
+            UserFunctions.Shuffle(Deck);
+        }
 
     }
 }

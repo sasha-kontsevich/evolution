@@ -46,7 +46,17 @@
     <v:String x:Key="Awards">Awards</v:String>
     <v:String x:Key="Matches">Matches</v:String>
     <v:String x:Key="Turn">Turn</v:String>
-
+    <v:String x:Key="Food">Food</v:String>
+    <v:String x:Key="Population">Population</v:String>
+    <v:String x:Key="BodySize">Body size</v:String>
+    <v:String x:Key="EatPlant">Eat plant</v:String>
+    <v:String x:Key="Attack">Attack other species</v:String>
+    <v:String x:Key="NextPlayer">Next player</v:String>
+    <v:String x:Key="AddTrait">Add trait</v:String>
+    <v:String x:Key="NewSpeciesL">New species left</v:String>
+    <v:String x:Key="NewSpeciesR">New species right</v:String>
+    <v:String x:Key="IncreasePopulation">Increase population</v:String>
+    <v:String x:Key="IncreaseBodySize">Increase body size</v:String>
 
 
 

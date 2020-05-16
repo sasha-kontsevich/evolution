@@ -270,8 +270,8 @@
                 <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"  Text="{Binding Login4}" Style="{StaticResource TextBox}" VerticalAlignment="Stretch" Grid.RowSpan="3" Margin="2.8,1.2,2.6,2.2" />
                 <Label Content="{DynamicResource Password}"  Grid.Row="9"  Grid.Column="1" Grid.ColumnSpan="4" FontSize="12" Margin="2.8,2.2,1.2,0.4" Padding="0" Grid.RowSpan="3"></Label>
                 <custom:BindablePasswordBox Password="{Binding Password4, Mode=OneWayToSource}"  Grid.Row="11" Grid.ColumnSpan="5" VerticalAlignment="Stretch" Grid.RowSpan="3" Margin="3,0.4,1.2,3.8" />
-                <Button Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="3"  Command="{Binding SignIn4}" Content="{DynamicResource SignIn}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Purple}" Margin="2.8,0.2,2.6,0.2"></Button>
-                <ToggleButton Command="{Binding TakePart4}" Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="3" Content="{DynamicResource TakePart}" Style="{StaticResource SmallTButton}" Grid.RowSpan="3" Background="{StaticResource Purple}" Margin="2.8,3.8,2.6,3.6"></ToggleButton>
+                <Button Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="3"  Command="{Binding SignIn4}" Content="{DynamicResource SignIn}" Style="{StaticResource SmallButton}" Grid.RowSpan="1" Background="{StaticResource Purple}" ></Button>
+                <ToggleButton Command="{Binding TakePart4}" Grid.Row="16" Grid.Column="1" Grid.ColumnSpan="3" Content="{DynamicResource TakePart}" Style="{StaticResource SmallTButton}" Grid.RowSpan="1" Background="{StaticResource Purple}" ></ToggleButton>
                 <Grid  Grid.Column="1" Grid.Row="3"  Style="{StaticResource Avatar}" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="3.8,1.2,0.6,1.4">
                     <Image Source="../Resources/Images/NoAvatar.jpg"></Image>
                     <Image Source="{Binding AvatarImage4}"  Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>

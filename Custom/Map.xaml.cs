@@ -21,9 +21,9 @@ namespace evolution.Custom
     /// </summary>
     public partial class Map : UserControl
     {
-        public double X = -1000;
-        public double Y = -1000;
-
+        public double X = -1450;
+        public double Y = -1200;
+        List<StackPanel> playersSpecies = new List<StackPanel>();
         public Map()
         {
             InitializeComponent();
@@ -32,9 +32,12 @@ namespace evolution.Custom
             {
                 TokensPanel.Children.Add(new FoodToken());
             }
-            player1Species.Children.Add(new Species());
+
         }
-        public void RemoveFoodToken()
+
+        public List<StackPanel> PlayersSpecies { get => playersSpecies; set => playersSpecies = value; }
+
+        public bool RemoveFoodToken()
         {
             try
                 {
@@ -42,9 +45,48 @@ namespace evolution.Custom
                 }
             catch
             {
+                return false;
+            }
+            return true;
+        }
+        public void InitializeStackPanels(int n)
+        {
+            PlayersSpecies.Add(player1Species);
+            PlayersSpecies.Add(player2Species);
+            if (n == 2) return;
+            PlayersSpecies.Add(player3Species);
+            if (n == 3) return;
+            PlayersSpecies.Add(player4Species);
+            if (n == 4) return;
+            PlayersSpecies.Add(player5Species);
+            if (n == 5) return;
+            PlayersSpecies.Add(player6Species);
+        }
+        public void MapBegin(int n)
+        {
+            InitializeStackPanels(n);
+            foreach (StackPanel stackPanel in PlayersSpecies)
+            {
+                stackPanel.Children.Add(new Species());
+            }
+        }
+        public void AddSpecies(int i)
+        {
+            PlayersSpecies.ToArray()[i].Children.Add(new Species());
+        }
+        public void IncreasePopulation(int i, Species species)
+        {
+            species.Population += 1;
+            int n = PlayersSpecies.ToArray()[i].Children.IndexOf(species);
+            try
+            {
+                PlayersSpecies.ToArray()[i].Children.RemoveAt(n);
+                PlayersSpecies.ToArray()[i].Children.Insert(n, species);
+            }
+            catch
+            {
 
             }
-
         }
     }
 }

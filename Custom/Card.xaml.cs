@@ -28,12 +28,21 @@ namespace evolution.Custom
         private int foodCount;
 
         public string CardName { get => cardName; set => cardName = value; }
-        public int FoodCount { get => foodCount; set => foodCount = value; }
+        public int FoodCount
+        {
+            get { return foodCount; }
+            set
+            {
+                if (foodCount == value)
+                    return;
+            }
+
+        }
 
         public Card()
         {
             InitializeComponent();
-            cardImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + @"../../../Resources/Images/Burrowing.png", UriKind.RelativeOrAbsolute));
+            cardImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + @"../../../Resources/Images/NewTrait.png", UriKind.RelativeOrAbsolute));
             CardName = "empty";
 
             button.Opacity = 0;
@@ -46,7 +55,7 @@ namespace evolution.Custom
             FoodCount = _foodCount;
             CardName = _cardName;
             button.Command = SelectCard;
-            
+            FoodCountText.Text = _foodCount.ToString();
             button.Opacity = 0;
         }
 

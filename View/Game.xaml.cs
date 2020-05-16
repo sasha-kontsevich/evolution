@@ -1,4 +1,5 @@
-﻿using evolution.ViewModel;
+﻿using evolution.Custom;
+using evolution.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,6 @@ namespace evolution.View
         }
         bool mouseDown = false;
 
-         public Canvas Cvs;
 
         private void Arm_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -39,12 +39,10 @@ namespace evolution.View
 
         private void Arm_MouseEnter(object sender, MouseEventArgs e)
         {
-            Arm.Height = 300;
         }
 
         private void Arm_MouseLeave(object sender, MouseEventArgs e)
         {
-            Arm.Height = 100;
         }
 
         private void cvs_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -75,6 +73,16 @@ namespace evolution.View
             mouseDown = false;
             point2 = Mouse.GetPosition(this);
             mainWindowViewModel.GameContext.ChangePosition(point2.X-point1.X, point2.Y - point1.Y);
+        }
+
+        private void ScrollViewer_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Arm.Height = 200;
+        }
+
+        private void ScrollViewer_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Arm.Height = 70;
         }
     }
 }

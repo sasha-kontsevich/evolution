@@ -57,6 +57,9 @@
     <v:String x:Key="NewSpeciesR">New species right</v:String>
     <v:String x:Key="IncreasePopulation">Increase population</v:String>
     <v:String x:Key="IncreaseBodySize">Increase body size</v:String>
+    <v:String x:Key="PutOnTheWaterHole">Put on the WaterHole</v:String>
+    <v:String x:Key="SelectAim">Select aim</v:String>
+    <v:String x:Key="NextPhase">Next phase</v:String>
 
 
 

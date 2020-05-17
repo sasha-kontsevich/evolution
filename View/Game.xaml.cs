@@ -32,10 +32,6 @@ namespace evolution.View
         bool mouseDown = false;
 
 
-        private void Arm_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Arm.Children.Remove(GameViewModel.SelectedCard);
-        }
 
         private void Arm_MouseEnter(object sender, MouseEventArgs e)
         {

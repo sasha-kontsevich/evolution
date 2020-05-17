@@ -28,16 +28,7 @@ namespace evolution.Custom
         private int foodCount;
 
         public string CardName { get => cardName; set => cardName = value; }
-        public int FoodCount
-        {
-            get { return foodCount; }
-            set
-            {
-                if (foodCount == value)
-                    return;
-            }
-
-        }
+        public int FoodCount { get => foodCount; set => foodCount = value; }
 
         public Card()
         {

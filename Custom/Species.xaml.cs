@@ -74,15 +74,32 @@ namespace evolution.Custom
 
         private void species_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if(GameViewModel.SelectedSpecies!=this)
+
+            if(GameViewModel.isAttacked)
             {
-                GameViewModel.SelectedSpecies = this;
-                selectionBorder.Visibility = Visibility.Visible;
+                if (GameViewModel.AttackedSpecies != this)
+                {
+                    GameViewModel.AttackedSpecies = this;
+                    selectionBorder.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    GameViewModel.AttackedSpecies = null;
+                    selectionBorder.Visibility = Visibility.Hidden;
+                }
             }
             else
             {
-                GameViewModel.SelectedSpecies = null;
-                selectionBorder.Visibility = Visibility.Hidden;
+                if (GameViewModel.SelectedSpecies != this)
+                {
+                    GameViewModel.SelectedSpecies = this;
+                    selectionBorder.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    GameViewModel.SelectedSpecies = null;
+                    selectionBorder.Visibility = Visibility.Hidden;
+                }
             }
         }
         public bool AddTrait(Card card)

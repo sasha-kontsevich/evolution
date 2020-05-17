@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,17 +13,20 @@ using System.Windows.Media.Imaging;
 
 namespace evolution.ViewModel
 {
-    public class GameViewModel:BaseViewModel
+    public class GameViewModel : BaseViewModel
     {
+        public int Phase = 0;
         public static int GameSize = 0;
-        public static double cvsH=0;
-        public static double cvsW=0;
-        public static int FirstPlayerToken=0;
+        public static double cvsH = 0;
+        public static double cvsW = 0;
+        public static int FirstPlayerToken = 0;
+        public static bool isAttacked = false;
         Map map;
         public List<Card> Deck = new List<Card>();
-        public static Card SelectedCard;
+        private static Card selectedCard;
         public static int? SelectedCardIndex = null;
-        public static Species SelectedSpecies;
+        private static Species selectedSpecies;
+        private static Species attackedSpecies;
         private Player currentPlayer;
         private bool currentPlayerTurnEnded = false;
         List<Player> players = new List<Player>();
@@ -31,7 +35,50 @@ namespace evolution.ViewModel
         public List<Card> Cards { get => cards; set => cards = value; }
         int x = 0;
         int y = 0;
-        public Player CurrentPlayer 
+        public int NextPhaseCount = 0;
+        public static Card SelectedCard
+        {
+            get { return selectedCard; }
+            set
+            {
+                if(selectedCard!=null)
+                SelectedCard.button.Opacity = 0;
+                if (selectedCard == value)
+                {
+                    return;
+                }
+                selectedCard = value;
+            }
+        }
+        public static Species SelectedSpecies
+        {
+            get { return selectedSpecies; }
+            set
+            {
+                    if (selectedSpecies != null)
+                        SelectedSpecies.selectionBorder.Visibility = Visibility.Hidden;
+                    if (selectedSpecies == value)
+                    {
+                        return;
+                    }
+                    selectedSpecies = value;
+            }
+        }
+        public static Species AttackedSpecies
+        {
+            get { return attackedSpecies; }
+            set
+            {
+                    if (attackedSpecies != null)
+                    attackedSpecies.selectionBorder.Visibility = Visibility.Hidden;
+                    if (attackedSpecies == value)
+                    {
+                        return;
+                    }
+                attackedSpecies = value;
+            }
+        }
+        public Player CurrentPlayer
         {
             get { return currentPlayer; }
             set
@@ -40,6 +87,7 @@ namespace evolution.ViewModel
                     return;
                 UpdateCardsInArm();
                 currentPlayer = value;
+                Map.currentPlayerNumber = Players.IndexOf(currentPlayer);
             }
         }
 
@@ -69,7 +117,7 @@ namespace evolution.ViewModel
         public void StartGame()
         {
             map = new Map();
-            
+
             UptadePlayersTable();
             Cvs.Children.Add(map);
             InitializeCards();
@@ -77,31 +125,46 @@ namespace evolution.ViewModel
             ReDraw();
             GameCycle();    //главный цикл игры
         }
-        public void GameCycle() //главный цикл игры
+        public void GameCycle() 
         {
             DealCards();//раздача карт
             CurrentPlayer = Players.ToArray()[FirstPlayerToken];
+            map.SelectSpecies(Players.IndexOf(currentPlayer));
             UpdateCardsInArm();
             UptadePlayersTable();
             //Определение кормовой базы
-
+            Phase = 1;
+            SelectFoodChangeButtonsVisibility();
+        }
+        //разыгрывание карт
+        public void PlayCards()
+        {
+            Phase = 2;
+            NextPhaseCount = 0;
+            PlayCardsChangeButtonsVisibility();
+        }
+        //кормление
+        public void Feeding()
+        {
+            Phase = 3;
+            FeedingChangeButtonsVisibility();
         }
 
         public void DealCards()
         {
-            foreach(Player player in Players)
+            foreach (Player player in Players)
             {
-                for (int i = 0; i < 3; i++) 
-                if(Deck.Count!=0)
-                {
-                    player.Cards.Add(Deck.Last());
-                    Deck.Remove(Deck.Last());
-                }
+                for (int i = 0; i < 3+map.GetPlayersSpeciesCount(Players.IndexOf(player)); i++)
+                    if (Deck.Count != 0)
+                    {
+                        player.Cards.Add(Deck.Last());
+                        Deck.Remove(Deck.Last());
+                    }
             }
         }
         public void DisplayCards()
         {
-            foreach(Card card in Deck)
+            foreach (Card card in Deck)
             {
                 mainWindowViewModel.GamePage.Arm.Children.Add(card);
             }
@@ -119,18 +182,39 @@ namespace evolution.ViewModel
 
         }
 
+        public RelayCommand PutOnTheWaterHole
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedCard != null && !currentPlayerTurnEnded)
+                    {
+                        map.TotalFood += SelectedCard.FoodCount;
+                        Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
+                        SelectedCard = null;
+                        UpdateCardsInArm();
+                        
+                        currentPlayerTurnEnded = true;
+                        NextPhaseCount++;
+                    }
+                });
+            }
+        }
         public RelayCommand NewSpeciesR
         {
             get
             {
-                return new RelayCommand(obj => {
-                    if(SelectedCard!=null&&!currentPlayerTurnEnded)
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedCard != null && !currentPlayerTurnEnded)
                     {
                         Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
                         SelectedCard = null;
                         UpdateCardsInArm();
                         map.AddSpecies(Players.IndexOf(currentPlayer));
                         currentPlayerTurnEnded = true;
+                        NextPhaseCount = 0;
                     }
                 });
             }
@@ -139,8 +223,9 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => {
-                    if(SelectedCard!=null&&!currentPlayerTurnEnded&& SelectedSpecies!=null&& SelectedSpecies.Population<6)
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedCard != null && !currentPlayerTurnEnded && SelectedSpecies != null && SelectedSpecies.Population < 6)
                     {
                         Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
                         SelectedCard = null;
@@ -148,6 +233,7 @@ namespace evolution.ViewModel
                         SelectedSpecies.Population += 1;
                         currentPlayerTurnEnded = true;
                         EndPlayersTurn();
+                        NextPhaseCount = 0;
                     }
                 });
             }
@@ -156,8 +242,9 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => {
-                    if(SelectedCard!=null&&!currentPlayerTurnEnded&& SelectedSpecies!=null&& SelectedSpecies.BodySize < 6)
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedCard != null && !currentPlayerTurnEnded && SelectedSpecies != null && SelectedSpecies.BodySize < 6)
                     {
                         Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
                         SelectedCard = null;
@@ -165,6 +252,7 @@ namespace evolution.ViewModel
                         SelectedSpecies.BodySize += 1;
                         currentPlayerTurnEnded = true;
                         EndPlayersTurn();
+                        NextPhaseCount = 0;
                     }
                 });
             }
@@ -173,15 +261,17 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => {
-                    if(SelectedCard!=null&&!currentPlayerTurnEnded&& SelectedSpecies!=null&& SelectedSpecies.AddTrait(SelectedCard))
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedCard != null && !currentPlayerTurnEnded && SelectedSpecies != null && SelectedSpecies.AddTrait(SelectedCard))
                     {
                         Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
-                        
+
                         SelectedCard = null;
                         UpdateCardsInArm();
                         currentPlayerTurnEnded = true;
                         EndPlayersTurn();
+                        NextPhaseCount = 0;
                     }
                 });
             }
@@ -190,7 +280,8 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => {
+                return new RelayCommand(obj =>
+                {
                     EndPlayersTurn();
                 });
             }
@@ -199,33 +290,122 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => {
-                    if(SelectedSpecies!=null&&SelectedSpecies.FoodCount<SelectedSpecies.Population && map.RemoveFoodToken())
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedSpecies != null)
                     {
-                        SelectedSpecies.FoodCount += 1;
-                        EndPlayersTurn();
+                        if(!SelectedSpecies.Contains("Carnivore") && SelectedSpecies.Population != 0)
+                        {
+                            if (SelectedSpecies.FoodCount < SelectedSpecies.Population && map.RemoveFoodToken())
+                            {
+                                SelectedSpecies.FoodCount += 1;
+                                EndPlayersTurn();
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        public RelayCommand Attack
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedSpecies != null)
+                    {
+                        if(SelectedSpecies.Contains("Carnivore"))
+                        {
+                            if(AttackedSpecies!=null&&isAttacked)
+                            {
+                                if (SelectedSpecies.FoodCount < SelectedSpecies.Population&&SelectedSpecies.BodySize>AttackedSpecies.BodySize)
+                                {
+                                    AttackedSpecies.Population--;
+                                    map.Extinction();
+                                    SelectedSpecies.FoodCount += AttackedSpecies.BodySize;
+                                    map.RemoveSpecies(Players.IndexOf(currentPlayer),AttackedSpecies);
+                                    isAttacked = false;
+                                }
+                            }
+                        }
                     }
                 });
             }
         }
 
+        public RelayCommand SelectAim
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedSpecies != null)
+                    {
+                        if (SelectedSpecies.Contains("Carnivore") && SelectedSpecies.Population != 0)
+                        {
+                            isAttacked = true;
+                        }
+                    }
+                });
+            }
+        }
+        public RelayCommand NextPhase
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    foreach(StackPanel stackPanel in map.PlayersSpecies)
+                    {
+                        foreach(Species species in stackPanel.Children)
+                        {
+                            if(species.FoodCount<species.Population)
+                            {
+                                species.Population = species.FoodCount;
+                            }
+                        }
+                    }
+                    map.Extinction();
+                    GameCycle();
+                    NextPhaseCount = 0;
+                });
+            }
+        }
 
         public void EndPlayersTurn()
         {
-            if(CurrentPlayer!=Players.Last())
+            if (CurrentPlayer != Players.Last())
             {
                 int n = Players.IndexOf(CurrentPlayer);
-                CurrentPlayer = Players.ToArray()[n+1];
+                CurrentPlayer = Players.ToArray()[n + 1];
             }
             else
             {
                 CurrentPlayer = Players.First();
             }
+            map.SelectSpecies(Players.IndexOf(currentPlayer));
             SelectedCard = null;
             SelectedSpecies = null;
             UpdateCardsInArm();
             currentPlayerTurnEnded = false;
             UptadePlayersTable();
+
+            if (Phase == 1)
+            {
+                if (NextPhaseCount == Players.Count)
+                {
+                    map.PutFood();
+                    PlayCards();
+                }
+            }
+            else if (Phase == 2)
+            {
+                NextPhaseCount++;
+                if (NextPhaseCount == Players.Count)
+                {
+                    Feeding();
+                }
+            }
         }
 
         public void ClearMatch()
@@ -249,7 +429,7 @@ namespace evolution.ViewModel
         }
         public void UpdateCardsInArm()
         {
-            if(CurrentPlayer!=null)
+            if (CurrentPlayer != null)
             {
                 mainWindowViewModel.GamePage.Arm.Children.Clear();
                 foreach (Card card in CurrentPlayer.Cards)
@@ -261,9 +441,9 @@ namespace evolution.ViewModel
         }
         public void UptadePlayersTable()
         {
-            
+
             var query = from p in Players
-                        select new {Current = p==CurrentPlayer, Number = p.Number+1, Name = p.User.NickName, CardsCount = p.Cards.Count.ToString() };
+                        select new { Current = p == CurrentPlayer, Number = p.Number + 1, Name = p.User.NickName, CardsCount = p.Cards.Count.ToString() };
             PlayersTable = query.ToList();
 
         }
@@ -305,7 +485,9 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => { mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage);
+                return new RelayCommand(obj =>
+                {
+                    mainWindowViewModel.ChangePage(mainWindowViewModel.MainMenuPage);
                     MenuOpacity = 0; MenuVisibility = Visibility.Hidden;
                     ClearMatch();
                 });
@@ -315,9 +497,10 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => {
-                    MenuOpacity = 1; 
-                    MenuVisibility = Visibility.Visible; 
+                return new RelayCommand(obj =>
+                {
+                    MenuOpacity = 1;
+                    MenuVisibility = Visibility.Visible;
                 });
             }
         }
@@ -363,6 +546,50 @@ namespace evolution.ViewModel
 
 
         #endregion
+
+        public void SelectFoodChangeButtonsVisibility()
+        {
+            VNewSpeciesR = Visibility.Collapsed;
+            VNewSpeciesL = Visibility.Collapsed;
+            VIncreaseBodySize = Visibility.Collapsed;
+            VIncreasePopulation = Visibility.Collapsed;
+            VAddTrait = Visibility.Collapsed;
+            VPutOnTheWaterHole = Visibility.Visible;
+            VAttack = Visibility.Collapsed;
+            VSelectAim = Visibility.Collapsed;
+            VEatPlant = Visibility.Collapsed;
+            VNextPlayer = Visibility.Visible;
+            VNextPhase = Visibility.Collapsed;
+        }
+        public void PlayCardsChangeButtonsVisibility()
+        {
+            VNewSpeciesR = Visibility.Visible;
+            VNewSpeciesL = Visibility.Visible;
+            VIncreaseBodySize = Visibility.Visible;
+            VIncreasePopulation = Visibility.Visible;
+            VAddTrait = Visibility.Visible;
+            VPutOnTheWaterHole = Visibility.Collapsed;
+            VAttack = Visibility.Collapsed;
+            VSelectAim = Visibility.Collapsed;
+            VEatPlant = Visibility.Collapsed;
+            VNextPlayer = Visibility.Visible;
+            VNextPhase = Visibility.Collapsed;
+        }
+        public void FeedingChangeButtonsVisibility()
+        {
+            VNewSpeciesR = Visibility.Collapsed;
+            VNewSpeciesL = Visibility.Collapsed;
+            VIncreaseBodySize = Visibility.Collapsed;
+            VIncreasePopulation = Visibility.Collapsed;
+            VAddTrait = Visibility.Collapsed;
+            VPutOnTheWaterHole = Visibility.Collapsed;
+            VAttack = Visibility.Visible;
+            VSelectAim = Visibility.Visible;
+            VEatPlant = Visibility.Visible;
+            VNextPlayer = Visibility.Visible;
+            VNextPhase = Visibility.Visible;
+        }
+
         public void InitializeCards()
         {
             Deck.Add(new Card(2, "Burrowing"));
@@ -443,6 +670,138 @@ namespace evolution.ViewModel
             //Deck.Add(new Card(2, "Intelligence"));
 
             UserFunctions.Shuffle(Deck);
+        }
+        private Visibility vNewSpeciesL;
+        public Visibility VNewSpeciesL
+        {
+            get { return vNewSpeciesL; }
+            set
+            {
+                if (vNewSpeciesL == value)
+                    return;
+                vNewSpeciesL = value;
+                RaisePropertyChanged("VNewSpeciesL");
+            }
+        }
+        private Visibility vNewSpeciesR;
+        public Visibility VNewSpeciesR
+        {
+            get { return vNewSpeciesR; }
+            set
+            {
+                if (vNewSpeciesR == value)
+                    return;
+                vNewSpeciesR = value;
+                RaisePropertyChanged("VNewSpeciesR");
+            }
+        }
+        private Visibility vIncreasePopulation;
+        public Visibility VIncreasePopulation
+        {
+            get { return vIncreasePopulation; }
+            set
+            {
+                if (vIncreasePopulation == value)
+                    return;
+                vIncreasePopulation = value;
+                RaisePropertyChanged("VIncreasePopulation");
+            }
+        }
+        private Visibility vIncreaseBodySize;
+        public Visibility VIncreaseBodySize
+        {
+            get { return vIncreaseBodySize; }
+            set
+            {
+                if (vIncreaseBodySize == value)
+                    return;
+                vIncreaseBodySize = value;
+                RaisePropertyChanged("VIncreaseBodySize");
+            }
+        }
+        private Visibility vAddTrait;
+        public Visibility VAddTrait
+        {
+            get { return vAddTrait; }
+            set
+            {
+                if (vAddTrait == value)
+                    return;
+                vAddTrait = value;
+                RaisePropertyChanged("VAddTrait");
+            }
+        }
+        private Visibility vPutOnTheWaterHole;
+        public Visibility VPutOnTheWaterHole
+        {
+            get { return vPutOnTheWaterHole; }
+            set
+            {
+                if (vPutOnTheWaterHole == value)
+                    return;
+                vPutOnTheWaterHole = value;
+                RaisePropertyChanged("VPutOnTheWaterHole");
+            }
+        }
+        private Visibility vSelectAim;
+        public Visibility VSelectAim
+        {
+            get { return vSelectAim; }
+            set
+            {
+                if (vSelectAim == value)
+                    return;
+                vSelectAim = value;
+                RaisePropertyChanged("VSelectAim");
+            }
+        }
+        private Visibility vAttack;
+        public Visibility VAttack
+        {
+            get { return vAttack; }
+            set
+            {
+                if (vAttack == value)
+                    return;
+                vAttack = value;
+                RaisePropertyChanged("VAttack");
+            }
+        }
+        private Visibility vEatPlant;
+        public Visibility VEatPlant
+        {
+            get { return vEatPlant; }
+            set
+            {
+                if (vEatPlant == value)
+                    return;
+                vEatPlant = value;
+                RaisePropertyChanged("VEatPlant");
+            }
+        }
+        private Visibility vNextPhase;
+        public Visibility VNextPhase
+        {
+            get { return vNextPhase; }
+            set
+            {
+                if (vNextPhase == value)
+                    return;
+                vNextPhase = value;
+                RaisePropertyChanged("VNextPhase");
+            }
+        }
+        private Visibility vNextPlayer;
+        public Visibility VNextPlayer
+        {
+            get { return vNextPlayer; }
+            set
+            {
+                if (vNextPlayer == value)
+                    return;
+                vNextPlayer = value;
+                RaisePropertyChanged("VNextPlayer");
+            }
         }
 
     }

@@ -63,9 +63,7 @@
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center" MouseEnter="ScrollViewer_MouseEnter" MouseLeave="ScrollViewer_MouseLeave" VerticalAlignment="Bottom">
-                    <StackPanel Height="150" x:Name="Arm" Orientation="Horizontal" MouseUp="Arm_MouseUp" MouseEnter="Arm_MouseEnter" MouseLeave="Arm_MouseLeave">
-
-                    </StackPanel>
+                    <StackPanel Height="150" x:Name="Arm" Orientation="Horizontal" MouseEnter="Arm_MouseEnter" MouseLeave="Arm_MouseLeave"/>
 
                 </ScrollViewer>
                 <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
@@ -74,10 +72,12 @@
                     <Button Command="{Binding IncreasePopulation}" Visibility="{Binding VIncreasePopulation}" Content="{DynamicResource IncreasePopulation}" Padding="3" Margin="2"></Button>
                     <Button Command="{Binding IncreaseBodySize}" Visibility="{Binding VIncreaseBodySize}" Content="{DynamicResource IncreaseBodySize}" Padding="3" Margin="2"></Button>
                     <Button Command="{Binding AddTrait}" Visibility="{Binding VAddTrait}" Content="{DynamicResource AddTrait}" Padding="3" Margin="2"></Button>
-                    <Button Command="{Binding AddTrait}" Visibility="{Binding VAddTrait}" Content="{DynamicResource AddTrait}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding PutOnTheWaterHole}" Visibility="{Binding VPutOnTheWaterHole}" Content="{DynamicResource PutOnTheWaterHole}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding SelectAim}" Visibility="{Binding VSelectAim}" Content="{DynamicResource SelectAim}" Padding="3" Margin="2"></Button>
                     <Button Command="{Binding Attack}" Visibility="{Binding VAttack}" Content="{DynamicResource Attack}" Padding="3" Margin="2"></Button>
                     <Button Command="{Binding EatPlant}" Visibility="{Binding VEatPlant}" Content="{DynamicResource EatPlant}" Padding="3" Margin="2"></Button>
                     <Button Command="{Binding NextPlayer}" Visibility="{Binding VNextPlayer}" Content="{DynamicResource NextPlayer}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding NextPhase}" Visibility="{Binding VNextPhase}" Content="{DynamicResource NextPhase}" Padding="3" Margin="2"></Button>
                 </StackPanel>
             </Grid>
         </Grid>

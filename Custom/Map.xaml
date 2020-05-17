@@ -31,11 +31,11 @@
             </WrapPanel>
 
         </Grid>
-        <StackPanel x:Name="player1Species" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Height="auto" Width="auto"/>
-        <StackPanel x:Name="player2Species" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Height="auto" Width="auto"/>
-        <StackPanel x:Name="player3Species" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="auto" Width="auto"/>
-        <StackPanel x:Name="player4Species" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Height="auto" Width="auto"/>
-        <StackPanel x:Name="player5Species" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="auto" Width="auto"/>
-        <StackPanel x:Name="player6Species" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player1Species" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" Orientation="Horizontal" Background="#fff" VerticalAlignment="Center" HorizontalAlignment="Right" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player2Species" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="1" Orientation="Horizontal" Background="#fff" VerticalAlignment="Center" HorizontalAlignment="Left" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player3Species" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#fff" VerticalAlignment="Top" HorizontalAlignment="Right" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player4Species" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#fff" VerticalAlignment="Top" HorizontalAlignment="Left" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player5Species" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#fff" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="auto" Width="auto"/>
+        <StackPanel x:Name="player6Species" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#fff" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="auto" Width="auto"/>
     </Grid>
 </UserControl>

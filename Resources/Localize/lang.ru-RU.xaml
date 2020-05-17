@@ -57,6 +57,9 @@
     <v:String x:Key="NewSpeciesR">Новый вид справа</v:String>
     <v:String x:Key="IncreasePopulation">Увеличить популяцию</v:String>
     <v:String x:Key="IncreaseBodySize">Увеличить размер тела</v:String>
+    <v:String x:Key="PutOnTheWaterHole">Положить на Водопой</v:String>
+    <v:String x:Key="SelectAim">Выбрать цель</v:String>
+    <v:String x:Key="NextPhase">Следующая фаза</v:String>
 
 
 

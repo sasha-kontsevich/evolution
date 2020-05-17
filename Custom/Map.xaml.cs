@@ -1,4 +1,5 @@
-﻿using System;
+﻿using evolution.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,16 +24,14 @@ namespace evolution.Custom
     {
         public double X = -1450;
         public double Y = -1200;
+        public int TotalFood = 0;
+        public static int currentPlayerNumber = 0;
+        public static Species SelectedSpecies = new Species();
         List<StackPanel> playersSpecies = new List<StackPanel>();
         public Map()
         {
             InitializeComponent();
             waterholeImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + @"../../../Resources/Images/Waterhole.png", UriKind.RelativeOrAbsolute));
-            for(int i = 0; i< 10;i++)
-            {
-                TokensPanel.Children.Add(new FoodToken());
-            }
-
         }
 
         public List<StackPanel> PlayersSpecies { get => playersSpecies; set => playersSpecies = value; }
@@ -88,5 +87,56 @@ namespace evolution.Custom
 
             }
         }
+        public int GetPlayersSpeciesCount(int i)
+        {
+            return PlayersSpecies.ToArray()[i].Children.Count;
+        }
+        public void SelectSpecies(int i)
+        {
+            foreach(StackPanel panel in PlayersSpecies)
+            {
+                panel.Background.Opacity = 0;
+            }
+            PlayersSpecies.ToArray()[i].Background.Opacity = 0.7;
+        }
+        public void PutFood()
+        {
+            for (int i = 0; i < TotalFood; i++)
+            {
+                TokensPanel.Children.Add(new FoodToken());
+            }
+        }
+        public bool isCurrentPlayersSpecies()
+        {
+            return PlayersSpecies.ToArray()[currentPlayerNumber].Children.Contains(SelectedSpecies);
+        }
+        public void RemoveSpecies(int i, Species species)
+        {
+            PlayersSpecies.ToArray()[i].Children.Remove(species);
+            GameViewModel.isAttacked = false;
+        }
+        public void Extinction()
+        {
+            List<Species> toRemove = new List<Species>();
+            foreach (StackPanel stackPanel in PlayersSpecies)
+            {
+                foreach(Species species in stackPanel.Children)
+                {
+                    if(species.Population==0)
+                    {
+                        toRemove.Add(species);
+                    }
+                }
+            }
+            foreach (StackPanel stackPanel in PlayersSpecies)
+            {
+                foreach (Species species in toRemove)
+                {
+                    stackPanel.Children.Remove(species);
+                }
+            }
+
+        }
+
     }
 }

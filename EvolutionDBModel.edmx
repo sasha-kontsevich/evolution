@@ -24,17 +24,16 @@
           <Property Name="Date" Type="date" />
           <Property Name="PlayerCount" Type="int" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "EvolutionDB.dbo.UserMatchResults" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="UserMatchResults">
           <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="MatchID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="MatchID" Type="int" Nullable="false" />
-          <Property Name="Place" Type="int" />
           <Property Name="Score" Type="int" />
+          <Property Name="Place" Type="int" />
+          <Property Name="Result" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -107,16 +106,9 @@
         <EntityContainer Name="Хранилище EvolutionDBModelContainer">
           <EntitySet Name="Awards" EntityType="Self.Awards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMatchResults" EntityType="Self.UserMatchResults" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersAwards" EntityType="Self.UsersAwards" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserMatchResults" EntityType="Self.UserMatchResults" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserMatchResults].[UserID] AS [UserID], 
-    [UserMatchResults].[MatchID] AS [MatchID], 
-    [UserMatchResults].[Place] AS [Place], 
-    [UserMatchResults].[Score] AS [Score]
-    FROM [dbo].[UserMatchResults] AS [UserMatchResults]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_UserMatchResults_Matches" Association="Self.FK_UserMatchResults_Matches">
             <End Role="Matches" EntitySet="Matches" />
             <End Role="UserMatchResults" EntitySet="UserMatchResults" />
@@ -160,6 +152,19 @@
           <Property Name="PlayerCount" Type="Int32" />
           <NavigationProperty Name="UserMatchResults" Relationship="Self.FK_UserMatchResults_Matches" FromRole="Matches" ToRole="UserMatchResults" />
         </EntityType>
+        <EntityType Name="UserMatchResults">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="MatchID" Type="Int32" Nullable="false" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="Place" Type="Int32" />
+          <Property Name="Result" Type="Int32" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK_UserMatchResults_Matches" FromRole="UserMatchResults" ToRole="Matches" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_UserMatchResults_Users" FromRole="UserMatchResults" ToRole="Users" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -183,18 +188,6 @@
           <Property Name="AwardID" Type="Int32" />
           <NavigationProperty Name="Awards" Relationship="Self.FK_UsersAwards_Awards" FromRole="UsersAwards" ToRole="Awards" />
           <NavigationProperty Name="Users" Relationship="Self.FK_UsersAwards_Users" FromRole="UsersAwards" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="UserMatchResults">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="MatchID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="MatchID" Type="Int32" Nullable="false" />
-          <Property Name="Place" Type="Int32" />
-          <Property Name="Score" Type="Int32" />
-          <NavigationProperty Name="Matches" Relationship="Self.FK_UserMatchResults_Matches" FromRole="UserMatchResults" ToRole="Matches" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_UserMatchResults_Users" FromRole="UserMatchResults" ToRole="Users" />
         </EntityType>
         <Association Name="FK_UsersAwards_Awards">
           <End Role="Awards" Type="EvolutionDBModel.Award" Multiplicity="0..1" />
@@ -247,9 +240,9 @@
         <EntityContainer Name="EvolutionDBContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Awards" EntityType="EvolutionDBModel.Award" />
           <EntitySet Name="Matches" EntityType="EvolutionDBModel.Match" />
+          <EntitySet Name="UserMatchResults" EntityType="Self.UserMatchResults" />
           <EntitySet Name="Users" EntityType="EvolutionDBModel.User" />
           <EntitySet Name="UsersAwards" EntityType="Self.UsersAwards" />
-          <EntitySet Name="UserMatchResults" EntityType="Self.UserMatchResults" />
           <AssociationSet Name="FK_UsersAwards_Awards" Association="Self.FK_UsersAwards_Awards">
             <End Role="Awards" EntitySet="Awards" />
             <End Role="UsersAwards" EntitySet="UsersAwards" />
@@ -294,6 +287,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserMatchResults">
+            <EntityTypeMapping TypeName="EvolutionDBModel.UserMatchResults">
+              <MappingFragment StoreEntitySet="UserMatchResults">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MatchID" ColumnName="MatchID" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="EvolutionDBModel.User">
               <MappingFragment StoreEntitySet="Users">
@@ -313,16 +318,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="AwardID" ColumnName="AwardID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserMatchResults">
-            <EntityTypeMapping TypeName="EvolutionDBModel.UserMatchResults">
-              <MappingFragment StoreEntitySet="UserMatchResults">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="MatchID" ColumnName="MatchID" />
-                <ScalarProperty Name="Place" ColumnName="Place" />
-                <ScalarProperty Name="Score" ColumnName="Score" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

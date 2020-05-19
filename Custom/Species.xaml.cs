@@ -152,5 +152,69 @@ namespace evolution.Custom
         {
             return false;
         }
+        public static bool Climbing()
+        {
+            if(GameViewModel.SelectedSpecies.Contains("Climbing"))
+            {
+                return true;
+            }
+            else if(GameViewModel.AttackedSpecies.Contains("Climbing"))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public static bool DefensiveHerding()
+        {
+            if(GameViewModel.AttackedSpecies.Contains("DefensiveHerding"))
+            {
+                if(GameViewModel.SelectedSpecies.Population>GameViewModel.AttackedSpecies.Population)
+                return true;
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public int HardShell()
+        {
+            if(this.Contains("HardShell"))
+            {
+                return 3;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public int Foraging()
+        {
+            if(Contains("Foraging"))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public int PackHunting()
+        {
+            if (Contains("PackHunting"))
+            {
+                return Population;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

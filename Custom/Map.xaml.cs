@@ -1,4 +1,5 @@
-﻿using evolution.ViewModel;
+﻿using evolution.Model;
+using evolution.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -89,7 +90,14 @@ namespace evolution.Custom
         }
         public int GetPlayersSpeciesCount(int i)
         {
-            return PlayersSpecies.ToArray()[i].Children.Count;
+            try
+            {
+                return PlayersSpecies.ToArray()[i].Children.Count;
+            }
+            catch
+            {
+                return 0;
+            }
         }
         public void SelectSpecies(int i)
         {
@@ -137,6 +145,44 @@ namespace evolution.Custom
             }
 
         }
-
+        public void ReleaseFood(List<Player> players)
+        {
+            foreach (StackPanel stackPanel in PlayersSpecies)
+            {
+                foreach(Species species in stackPanel.Children)
+                {
+                    players.ToArray()[PlayersSpecies.IndexOf(stackPanel)].Score += species.FoodCount;
+                    species.FoodCount = 0;
+                }
+            }
+        }
+        public void Fertile()   //карта Fertile
+        {
+            if(TokensPanel.Children.Count>0)
+                foreach (StackPanel stackPanel in PlayersSpecies)
+                {
+                    foreach (Species species in stackPanel.Children)
+                    {
+                        if(species.Contains("Fertile")&&species.Population<6)
+                            {
+                            species.Population++;
+                        }
+                    }
+                }
+        }
+        public void LongNeck()   //карта LongNeck
+        {
+            if(TokensPanel.Children.Count>0)
+                foreach (StackPanel stackPanel in PlayersSpecies)
+                {
+                    foreach (Species species in stackPanel.Children)
+                    {
+                        if(species.Contains("LongNeck") &&species.Population<6)
+                            {
+                            species.FoodCount++;
+                        }
+                    }
+                }
+        }
     }
 }

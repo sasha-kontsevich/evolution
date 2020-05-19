@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,27 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.ComponentModel;
-using evolution.ViewModel;
 
-namespace evolution
+namespace evolution.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Resulsts.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Resulsts : Page
     {
-        
-        public MainWindow()
+        public Resulsts()
         {
             InitializeComponent();
-
-            this.DataContext = new MainWindowViewModel(this);
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
-
     }
 }

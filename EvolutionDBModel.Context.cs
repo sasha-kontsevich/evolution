@@ -27,8 +27,8 @@ namespace evolution
     
         public virtual DbSet<Award> Awards { get; set; }
         public virtual DbSet<Match> Matches { get; set; }
+        public virtual DbSet<UserMatchResults> UserMatchResults { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersAwards> UsersAwards { get; set; }
-        public virtual DbSet<UserMatchResults> UserMatchResults { get; set; }
     }
 }

@@ -66,7 +66,7 @@
                 <StackPanel Orientation="Horizontal" Height="70" ></StackPanel>
                 <Label Content="{DynamicResource Matches}" Style="{StaticResource Heading4}" Margin="0" HorizontalAlignment="Center"></Label>
             </StackPanel>
-            <DataGrid Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding MatchesSource}"  ColumnWidth="*" AlternatingRowBackground="#FFB1FFB1" RowHeight="30" FontSize="18" GridLinesVisibility="None" FrozenColumnCount="3" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False">
+            <DataGrid Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding MatchesSource}"  AlternatingRowBackground="#FFB1FFB1" RowHeight="30" FontSize="18" GridLinesVisibility="None" FrozenColumnCount="3" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False">
                 
             </DataGrid>
 

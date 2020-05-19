@@ -1,5 +1,6 @@
 ﻿using evolution.Custom;
 using evolution.Model;
+using evolution.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,8 @@ namespace evolution.ViewModel
 {
     public class GameViewModel : BaseViewModel
     {
+        public static DateTime t1, t2;
+        bool flag=false;
         public int Phase = 0;
         public static int GameSize = 0;
         public static double cvsH = 0;
@@ -32,7 +35,6 @@ namespace evolution.ViewModel
         List<Player> players = new List<Player>();
         List<Card> cards = new List<Card>();
         public List<Player> Players { get => players; set => players = value; }
-        public List<Card> Cards { get => cards; set => cards = value; }
         int x = 0;
         int y = 0;
         public int NextPhaseCount = 0;
@@ -127,19 +129,29 @@ namespace evolution.ViewModel
         }
         public void GameCycle() 
         {
-            DealCards();//раздача карт
+            t1 = DateTime.Now;
+            PhaseName = UserFunctions.RuEngLang("Select food", "Определение кормовой базы");
+            GameTurn++;
+            if (!DealCards())
+            {
+                EndGame();
+                return;
+            }//раздача карт
             CurrentPlayer = Players.ToArray()[FirstPlayerToken];
             map.SelectSpecies(Players.IndexOf(currentPlayer));
             UpdateCardsInArm();
             UptadePlayersTable();
             //Определение кормовой базы
+            map.TotalFood = 0;
             Phase = 1;
             SelectFoodChangeButtonsVisibility();
         }
         //разыгрывание карт
         public void PlayCards()
         {
+
             Phase = 2;
+            PhaseName = UserFunctions.RuEngLang("Playing cards", "Разыгрывание карт");
             NextPhaseCount = 0;
             PlayCardsChangeButtonsVisibility();
         }
@@ -147,20 +159,30 @@ namespace evolution.ViewModel
         public void Feeding()
         {
             Phase = 3;
+            PhaseName = UserFunctions.RuEngLang("Feeding", "Кормление");
             FeedingChangeButtonsVisibility();
         }
 
-        public void DealCards()
+        public bool DealCards()
         {
+            flag = false;
+            List<Card> least = Deck;
             foreach (Player player in Players)
             {
                 for (int i = 0; i < 3+map.GetPlayersSpeciesCount(Players.IndexOf(player)); i++)
+                {
                     if (Deck.Count != 0)
                     {
                         player.Cards.Add(Deck.Last());
                         Deck.Remove(Deck.Last());
                     }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
+            return true;
         }
         public void DisplayCards()
         {
@@ -299,6 +321,10 @@ namespace evolution.ViewModel
                             if (SelectedSpecies.FoodCount < SelectedSpecies.Population && map.RemoveFoodToken())
                             {
                                 SelectedSpecies.FoodCount += 1;
+                                if(SelectedSpecies.Contains("Foraging")&&SelectedSpecies.FoodCount < SelectedSpecies.Population && map.RemoveFoodToken())
+                                {
+                                    SelectedSpecies.FoodCount += 1;
+                                }
                                 EndPlayersTurn();
                             }
                         }
@@ -318,13 +344,24 @@ namespace evolution.ViewModel
                         {
                             if(AttackedSpecies!=null&&isAttacked)
                             {
-                                if (SelectedSpecies.FoodCount < SelectedSpecies.Population&&SelectedSpecies.BodySize>AttackedSpecies.BodySize)
+                                if (SelectedSpecies.FoodCount < SelectedSpecies.Population && SelectedSpecies.BodySize + SelectedSpecies.PackHunting() > AttackedSpecies.BodySize + AttackedSpecies.HardShell()) //карты  PackHunting, HardShell
                                 {
-                                    AttackedSpecies.Population--;
-                                    map.Extinction();
-                                    SelectedSpecies.FoodCount += AttackedSpecies.BodySize;
-                                    map.RemoveSpecies(Players.IndexOf(currentPlayer),AttackedSpecies);
-                                    isAttacked = false;
+                                    if(!(attackedSpecies.Population<=AttackedSpecies.FoodCount && AttackedSpecies.Contains("Burrowing")))       //Карта Burrowing
+                                    {
+                                        if(Species.Climbing()&&Species.DefensiveHerding()) //карты Climbing, DefensiveHerding
+                                        {
+                                            AttackedSpecies.Population--;
+                                            if(AttackedSpecies.Contains("Horns"))       //карта Horns
+                                            {
+                                                SelectedSpecies.Population--;
+                                            }
+                                            map.Extinction();
+                                            if(SelectedSpecies.Population!=0)
+                                            SelectedSpecies.FoodCount += AttackedSpecies.BodySize+SelectedSpecies.Foraging();//карта Foraging
+                                            map.RemoveSpecies(Players.IndexOf(currentPlayer), AttackedSpecies);
+                                            isAttacked = false;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -366,12 +403,25 @@ namespace evolution.ViewModel
                         }
                     }
                     map.Extinction();
+                    map.ReleaseFood(Players);
+                    if(flag)
+                    {
+                        EndGame();
+                    }
                     GameCycle();
                     NextPhaseCount = 0;
                 });
             }
         }
-
+        public void EndGame()
+        {
+            t2 = DateTime.Now;
+            Resulsts resulsts = new Resulsts();
+            ResultsViewModel resultsViewModel = new ResultsViewModel(mainWindowViewModel, Players);
+            resulsts.DataContext = resultsViewModel;
+            mainWindowViewModel.ChangePage(resulsts);
+            ClearMatch();
+        }
         public void EndPlayersTurn()
         {
             if (CurrentPlayer != Players.Last())
@@ -394,6 +444,7 @@ namespace evolution.ViewModel
             {
                 if (NextPhaseCount == Players.Count)
                 {
+                    map.Fertile(); //карта Fertile
                     map.PutFood();
                     PlayCards();
                 }
@@ -401,17 +452,21 @@ namespace evolution.ViewModel
             else if (Phase == 2)
             {
                 NextPhaseCount++;
-                if (NextPhaseCount == Players.Count)
+                if (NextPhaseCount == Players.Count+2)
                 {
                     Feeding();
                 }
             }
         }
-
+ 
         public void ClearMatch()
         {
             Cvs.Children.Remove(map);
             Deck.Clear();
+            foreach(Player player in Players)
+            {
+                player.Cards.Clear();
+            }
             Players.Clear();
         }
 
@@ -443,9 +498,21 @@ namespace evolution.ViewModel
         {
 
             var query = from p in Players
-                        select new { Current = p == CurrentPlayer, Number = p.Number + 1, Name = p.User.NickName, CardsCount = p.Cards.Count.ToString() };
+                        select new { Current = p == CurrentPlayer, Name = p.User.NickName, CardsCount = p.Cards.Count.ToString(), Score = p.Score };
             PlayersTable = query.ToList();
+            if (CurrentPlayer != null)
+            {
+                if (CurrentPlayer.User.Avatar != null)
+                {
+                    Avatar = ImageController.ConvertByteArrayToImage(CurrentPlayer.User.Avatar);
+                }
+                else
+                {
+                    Avatar = null;
+                }
+                PlayersName = UserFunctions.RuEngLang("Now moving ", "Ход игрока ") + CurrentPlayer.User.NickName;
 
+            }
         }
         #region Menu
         private double menuOpacity = 0;
@@ -605,13 +672,13 @@ namespace evolution.ViewModel
             Deck.Add(new Card(5, "Carnivore"));
             Deck.Add(new Card(7, "Carnivore"));
 
-            Deck.Add(new Card(2, "Ambush"));
-            Deck.Add(new Card(3, "Ambush"));
-            Deck.Add(new Card(-3, "Ambush"));
+            //Deck.Add(new Card(2, "Ambush"));
+            //Deck.Add(new Card(3, "Ambush"));
+            //Deck.Add(new Card(-3, "Ambush"));
 
-            Deck.Add(new Card(4, "Cooperation"));
-            Deck.Add(new Card(2, "Cooperation"));
-            Deck.Add(new Card(3, "Cooperation"));
+            //Deck.Add(new Card(4, "Cooperation"));
+            //Deck.Add(new Card(2, "Cooperation"));
+            //Deck.Add(new Card(3, "Cooperation"));
 
             //Deck.Add(new Card(4, "GoodEyesight"));
             //Deck.Add(new Card(-1, "GoodEyesight"));
@@ -621,56 +688,69 @@ namespace evolution.ViewModel
             Deck.Add(new Card(5, "Horns"));
             Deck.Add(new Card(1, "Horns"));
 
-            Deck.Add(new Card(3, "LongNeck"));
-            Deck.Add(new Card(1, "LongNeck"));
-            Deck.Add(new Card(6, "LongNeck"));
+            //Deck.Add(new Card(3, "LongNeck"));
+            //Deck.Add(new Card(1, "LongNeck"));
+            //Deck.Add(new Card(6, "LongNeck"));
 
-            Deck.Add(new Card(1, "Scavenger"));
-            Deck.Add(new Card(-1, "Scavenger"));
-            Deck.Add(new Card(2, "Scavenger"));
+            ////Deck.Add(new Card(1, "Scavenger"));
+            ////Deck.Add(new Card(-1, "Scavenger"));
+            ////Deck.Add(new Card(2, "Scavenger"));
 
-            Deck.Add(new Card(4, "Climbing"));
-            Deck.Add(new Card(3, "Climbing"));
-            Deck.Add(new Card(4, "Climbing"));
+            //Deck.Add(new Card(4, "Climbing"));
+            //Deck.Add(new Card(3, "Climbing"));
+            //Deck.Add(new Card(4, "Climbing"));
 
-            Deck.Add(new Card(5, "Fertile"));
-            Deck.Add(new Card(3, "Fertile"));
-            Deck.Add(new Card(7, "Fertile"));
+            //Deck.Add(new Card(5, "Fertile"));
+            //Deck.Add(new Card(3, "Fertile"));
+            //Deck.Add(new Card(7, "Fertile"));
 
-            Deck.Add(new Card(5, "Foraging"));
-            Deck.Add(new Card(4, "Foraging"));
-            Deck.Add(new Card(7, "Foraging"));
+            //Deck.Add(new Card(5, "Foraging"));
+            //Deck.Add(new Card(4, "Foraging"));
+            //Deck.Add(new Card(7, "Foraging"));
 
-            Deck.Add(new Card(3, "PackHunting"));
-            Deck.Add(new Card(4, "PackHunting"));
-            Deck.Add(new Card(5, "PackHunting"));
+            //Deck.Add(new Card(3, "PackHunting"));
+            //Deck.Add(new Card(4, "PackHunting"));
+            //Deck.Add(new Card(5, "PackHunting"));
 
-            Deck.Add(new Card(5, "Symbiosis"));
-            Deck.Add(new Card(3, "Symbiosis"));
-            Deck.Add(new Card(6, "Symbiosis"));
+            ////Deck.Add(new Card(5, "Symbiosis"));
+            ////Deck.Add(new Card(3, "Symbiosis"));
+            ////Deck.Add(new Card(6, "Symbiosis"));
 
-            Deck.Add(new Card(1, "WarningCall"));
-            Deck.Add(new Card(0, "WarningCall"));
-            Deck.Add(new Card(5, "WarningCall"));
+            ////Deck.Add(new Card(1, "WarningCall"));
+            ////Deck.Add(new Card(0, "WarningCall"));
+            ////Deck.Add(new Card(5, "WarningCall"));
 
-            Deck.Add(new Card(7, "HardShell"));
-            Deck.Add(new Card(5, "HardShell"));
-            Deck.Add(new Card(6, "HardShell"));
+            //Deck.Add(new Card(7, "HardShell"));
+            //Deck.Add(new Card(5, "HardShell"));
+            //Deck.Add(new Card(6, "HardShell"));
 
-            Deck.Add(new Card(6, "DefensiveHerding"));
-            Deck.Add(new Card(5, "DefensiveHerding"));
-            Deck.Add(new Card(4, "DefensiveHerding"));
+            //Deck.Add(new Card(6, "DefensiveHerding"));
+            //Deck.Add(new Card(5, "DefensiveHerding"));
+            //Deck.Add(new Card(4, "DefensiveHerding"));
 
-            //Deck.Add(new Card(7, "FatTissue"));
-            //Deck.Add(new Card(5, "FatTissue"));
-            //Deck.Add(new Card(-3, "FatTissue"));
+            ////Deck.Add(new Card(7, "FatTissue"));
+            ////Deck.Add(new Card(5, "FatTissue"));
+            ////Deck.Add(new Card(-3, "FatTissue"));
 
-            //Deck.Add(new Card(4, "Intelligence"));
-            //Deck.Add(new Card(1, "Intelligence"));
-            //Deck.Add(new Card(2, "Intelligence"));
+            ////Deck.Add(new Card(4, "Intelligence"));
+            ////Deck.Add(new Card(1, "Intelligence"));
+            ////Deck.Add(new Card(2, "Intelligence"));
 
             UserFunctions.Shuffle(Deck);
         }
+        private BitmapSource avatar;
+        public BitmapSource Avatar
+        {
+            get { return avatar; }
+            set
+            {
+                if (avatar == value)
+                    return;
+                avatar = value;
+                RaisePropertyChanged("Avatar");
+            }
+        }
+
         private Visibility vNewSpeciesL;
         public Visibility VNewSpeciesL
         {
@@ -801,6 +881,30 @@ namespace evolution.ViewModel
                     return;
                 vNextPlayer = value;
                 RaisePropertyChanged("VNextPlayer");
+            }
+        }
+        private string phaseName;
+        public string PhaseName
+        {
+            get { return phaseName; }
+            set
+            {
+                if (phaseName == value)
+                    return;
+                phaseName = value;
+                RaisePropertyChanged("PhaseName");
+            }
+        }
+        private string playersName;
+        public string PlayersName
+        {
+            get { return playersName; }
+            set
+            {
+                if (playersName == value)
+                    return;
+                playersName = value;
+                RaisePropertyChanged("PlayersName");
             }
         }
 

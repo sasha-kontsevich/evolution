@@ -60,6 +60,7 @@
     <v:String x:Key="PutOnTheWaterHole">Положить на Водопой</v:String>
     <v:String x:Key="SelectAim">Выбрать цель</v:String>
     <v:String x:Key="NextPhase">Следующая фаза</v:String>
+    <v:String x:Key="CompleteTheGame">Завершить игру</v:String>
 
 
 

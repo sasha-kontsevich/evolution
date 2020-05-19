@@ -390,7 +390,7 @@ namespace evolution.ViewModel
                 IQueryable<object> query = from umr in contex.UserMatchResults
                                            join m in contex.Matches on umr.MatchID equals m.MatchID
                                            where umr.UserID == UserID
-                                           select new { MatchID = m.MatchID, Date = m.Date, Place = umr.Place, Score = umr.Score, MatchDuration = m.GameDuration };
+                                           select new { MatchID = m.MatchID, Date = m.Date, Place = umr.Place, Score = umr.Score, MatchDuration = m.GameDuration, Result = umr.Result, Players_count = m.PlayerCount };
                 MatchesSource = query.ToList();
             }
         }

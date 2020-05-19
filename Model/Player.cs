@@ -15,6 +15,7 @@ namespace evolution.Model
         private User user;
         Color color;
         public List<Card> Cards = new List<Card>();
+        private int score=0;
         public Player(User _user, int _number)
         {
             User = _user;
@@ -28,5 +29,6 @@ namespace evolution.Model
         public User User { get => user; set => user = value; }
         public Color Color { get => color; set => color = value; }
         public int Number { get => number; set => number = value; }
+        public int Score { get => score; set => score = value; }
     }
 }

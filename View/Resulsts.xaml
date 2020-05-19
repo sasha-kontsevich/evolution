@@ -1,0 +1,43 @@
+﻿<Page x:Class="evolution.View.Resulsts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:evolution.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Resulsts">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/GameUI.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/Style.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/RulesStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/SettingsStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Styles/ControlButtons.xaml"></ResourceDictionary>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="White" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3"></Rectangle>
+        <Rectangle Fill="White" Grid.Column="1" Grid.Row="1" Stroke="Green" StrokeThickness="3"></Rectangle>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Label Style="{StaticResource SettingsTitle}" Margin="0,40,0,0" Content="{Binding ResultsHeader}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36"></Label>
+            <DataGrid ItemsSource="{Binding Results}" FontSize="22" ColumnWidth="*" HorizontalAlignment="Center" VerticalAlignment="Center" AlternatingRowBackground="#FFB1FFB1" RowHeight="30"  GridLinesVisibility="None" FrozenColumnCount="3" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False"></DataGrid>
+            <Button Content="{DynamicResource CompleteTheGame}" Command="{Binding CompleteTheGame}" Padding="5" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" ></Button>
+        </Grid>
+    </Grid>
+</Page>

@@ -14,10 +14,12 @@ namespace evolution
     
     public partial class UserMatchResults
     {
+        public int ID { get; set; }
         public int UserID { get; set; }
         public int MatchID { get; set; }
-        public Nullable<int> Place { get; set; }
         public Nullable<int> Score { get; set; }
+        public Nullable<int> Place { get; set; }
+        public Nullable<int> Result { get; set; }
     
         public virtual Match Matches { get; set; }
         public virtual User Users { get; set; }

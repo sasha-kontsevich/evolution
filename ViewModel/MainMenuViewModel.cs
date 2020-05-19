@@ -33,7 +33,7 @@ namespace evolution.ViewModel
                 });
             }
         }
-        public RelayCommand ProfileMenuItem_Click                        //Комманда пункта меню "Рейтинг"
+        public RelayCommand ProfileMenuItem_Click                        //Комманда пункта меню "профиль"
         {
             get
             {

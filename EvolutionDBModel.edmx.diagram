@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="08835f06dfc14190857fa4b91aedf9cb" Name="Diagram1">
-        <EntityTypeShape EntityType="EvolutionDBModel.Award" Width="1.5" PointX="1.125" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EvolutionDBModel.Match" Width="1.5" PointX="6.375" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EvolutionDBModel.User" Width="1.5" PointX="3.625" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EvolutionDBModel.UsersAwards" Width="1.5" PointX="1.125" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EvolutionDBModel.UserMatchResults" Width="1.5" PointX="6.375" PointY="2.125" IsExpanded="true" />
+      <Diagram DiagramId="2a80edd992fe49769f884334cca73b8d" Name="Diagram1">
+        <EntityTypeShape EntityType="EvolutionDBModel.Award" Width="1.5" PointX="2.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EvolutionDBModel.Match" Width="1.5" PointX="7.625" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EvolutionDBModel.UserMatchResults" Width="1.5" PointX="7.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EvolutionDBModel.User" Width="1.5" PointX="5.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EvolutionDBModel.UsersAwards" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="EvolutionDBModel.FK_UsersAwards_Awards" ManuallyRouted="false" />
         <AssociationConnector Association="EvolutionDBModel.FK_UserMatchResults_Matches" ManuallyRouted="false" />
         <AssociationConnector Association="EvolutionDBModel.FK_UserMatchResults_Users" ManuallyRouted="false" />

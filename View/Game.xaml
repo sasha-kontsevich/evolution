@@ -43,6 +43,15 @@
                         <DropShadowEffect ShadowDepth="0" BlurRadius="4" Color="#777" Direction="-45"></DropShadowEffect>
                     </Rectangle.Effect>
                 </Rectangle>
+                <Grid Width="600" Height="60" HorizontalAlignment="Center" VerticalAlignment="top">
+                    <Rectangle Fill="#eee" Stroke="Green" StrokeThickness="3">
+                        <Rectangle.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="4" Color="#777" Direction="-45"></DropShadowEffect>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <TextBlock Text="{Binding PhaseName}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Width="200" TextAlignment="Right" Style="{StaticResource Text}"></TextBlock>
+                    <TextBlock Text="{Binding PlayersName}" VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="10"  Width="200" TextAlignment="Left" Style="{StaticResource Text}"></TextBlock>
+                </Grid>
                 <Ellipse Height="102" Width="130" Margin="0,-60,0,0" Fill="Green">
                     <Ellipse.Effect>
                         <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Green" Direction="-45"></DropShadowEffect>
@@ -50,12 +59,21 @@
                 </Ellipse>
                 <Ellipse Height="95" Width="125" Margin="0,-60,0,0" Fill="#eee"></Ellipse>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-                    <Label Content="{DynamicResource Turn}" Style="{DynamicResource Title}" FontSize="30" Foreground="#333" FontWeight="Bold"></Label>
-                    <Label Content="{Binding GameTurn}" Style="{DynamicResource Title}" FontSize="30" Foreground="#333" FontWeight="Bold"></Label>
+                    <Label Content="{DynamicResource Turn}" Style="{DynamicResource Title}" FontSize="30" Foreground="#333" ></Label>
+                    <Label Content="{Binding GameTurn}" Style="{DynamicResource Title}" FontSize="30" Foreground="#333" ></Label>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Width="auto" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
-                <DataGrid ItemsSource="{Binding PlayersTable}"  AlternatingRowBackground="#FFd1FFd1" RowHeight="30" FontSize="18" GridLinesVisibility="None" FrozenColumnCount="3" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False"></DataGrid>                
+            <Grid  HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Rectangle Width="103" Height="103" Fill="Green"></Rectangle>
+                        <Image Source="../Resources/Images/NoAvatar.jpg" Width="100" Height="100" Stretch="UniformToFill"></Image>
+                        <Image Source="{Binding Avatar}" Width="100" Height="100" Stretch="UniformToFill"></Image>
+                    </Grid>
+                    <Grid Width="auto" Height="auto" VerticalAlignment="top" HorizontalAlignment="Right">
+                        <DataGrid ItemsSource="{Binding PlayersTable}"  AlternatingRowBackground="#FFd1FFd1" RowHeight="30" FontSize="18" GridLinesVisibility="None" FrozenColumnCount="3" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False"></DataGrid>
+                    </Grid>
+                </StackPanel>
             </Grid>
             <Grid  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
@@ -76,8 +94,8 @@
                     <Button Command="{Binding SelectAim}" Visibility="{Binding VSelectAim}" Content="{DynamicResource SelectAim}" Padding="3" Margin="2"></Button>
                     <Button Command="{Binding Attack}" Visibility="{Binding VAttack}" Content="{DynamicResource Attack}" Padding="3" Margin="2"></Button>
                     <Button Command="{Binding EatPlant}" Visibility="{Binding VEatPlant}" Content="{DynamicResource EatPlant}" Padding="3" Margin="2"></Button>
-                    <Button Command="{Binding NextPlayer}" Visibility="{Binding VNextPlayer}" Content="{DynamicResource NextPlayer}" Padding="3" Margin="2"></Button>
                     <Button Command="{Binding NextPhase}" Visibility="{Binding VNextPhase}" Content="{DynamicResource NextPhase}" Padding="3" Margin="2"></Button>
+                    <Button Command="{Binding NextPlayer}" Visibility="{Binding VNextPlayer}" Content="{DynamicResource NextPlayer}" Padding="3" Margin="2"></Button>
                 </StackPanel>
             </Grid>
         </Grid>

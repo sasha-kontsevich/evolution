@@ -50,6 +50,7 @@ namespace evolution.ViewModel
                     return;
                 }
                 selectedCard = value;
+                
             }
         }
         public static Species SelectedSpecies
@@ -119,7 +120,7 @@ namespace evolution.ViewModel
         public void StartGame()
         {
             map = new Map();
-
+            t1 = DateTime.Now;
             UptadePlayersTable();
             Cvs.Children.Add(map);
             InitializeCards();
@@ -129,7 +130,6 @@ namespace evolution.ViewModel
         }
         public void GameCycle() 
         {
-            t1 = DateTime.Now;
             PhaseName = UserFunctions.RuEngLang("Select food", "Определение кормовой базы");
             GameTurn++;
             if (!DealCards())
@@ -445,6 +445,7 @@ namespace evolution.ViewModel
                 if (NextPhaseCount == Players.Count)
                 {
                     map.Fertile(); //карта Fertile
+                    map.LongNeck();
                     map.PutFood();
                     PlayCards();
                 }
@@ -688,53 +689,53 @@ namespace evolution.ViewModel
             Deck.Add(new Card(5, "Horns"));
             Deck.Add(new Card(1, "Horns"));
 
-            //Deck.Add(new Card(3, "LongNeck"));
-            //Deck.Add(new Card(1, "LongNeck"));
-            //Deck.Add(new Card(6, "LongNeck"));
+            Deck.Add(new Card(3, "LongNeck"));
+            Deck.Add(new Card(1, "LongNeck"));
+            Deck.Add(new Card(6, "LongNeck"));
 
-            ////Deck.Add(new Card(1, "Scavenger"));
-            ////Deck.Add(new Card(-1, "Scavenger"));
-            ////Deck.Add(new Card(2, "Scavenger"));
+            //Deck.Add(new Card(1, "Scavenger"));
+            //Deck.Add(new Card(-1, "Scavenger"));
+            //Deck.Add(new Card(2, "Scavenger"));
 
-            //Deck.Add(new Card(4, "Climbing"));
-            //Deck.Add(new Card(3, "Climbing"));
-            //Deck.Add(new Card(4, "Climbing"));
+            Deck.Add(new Card(4, "Climbing"));
+            Deck.Add(new Card(3, "Climbing"));
+            Deck.Add(new Card(4, "Climbing"));
 
-            //Deck.Add(new Card(5, "Fertile"));
-            //Deck.Add(new Card(3, "Fertile"));
-            //Deck.Add(new Card(7, "Fertile"));
+            Deck.Add(new Card(5, "Fertile"));
+            Deck.Add(new Card(3, "Fertile"));
+            Deck.Add(new Card(7, "Fertile"));
 
-            //Deck.Add(new Card(5, "Foraging"));
-            //Deck.Add(new Card(4, "Foraging"));
-            //Deck.Add(new Card(7, "Foraging"));
+            Deck.Add(new Card(5, "Foraging"));
+            Deck.Add(new Card(4, "Foraging"));
+            Deck.Add(new Card(7, "Foraging"));
 
-            //Deck.Add(new Card(3, "PackHunting"));
-            //Deck.Add(new Card(4, "PackHunting"));
-            //Deck.Add(new Card(5, "PackHunting"));
+            Deck.Add(new Card(3, "PackHunting"));
+            Deck.Add(new Card(4, "PackHunting"));
+            Deck.Add(new Card(5, "PackHunting"));
 
-            ////Deck.Add(new Card(5, "Symbiosis"));
-            ////Deck.Add(new Card(3, "Symbiosis"));
-            ////Deck.Add(new Card(6, "Symbiosis"));
+            //Deck.Add(new Card(5, "Symbiosis"));
+            //Deck.Add(new Card(3, "Symbiosis"));
+            //Deck.Add(new Card(6, "Symbiosis"));
 
-            ////Deck.Add(new Card(1, "WarningCall"));
-            ////Deck.Add(new Card(0, "WarningCall"));
-            ////Deck.Add(new Card(5, "WarningCall"));
+            //Deck.Add(new Card(1, "WarningCall"));
+            //Deck.Add(new Card(0, "WarningCall"));
+            //Deck.Add(new Card(5, "WarningCall"));
 
-            //Deck.Add(new Card(7, "HardShell"));
-            //Deck.Add(new Card(5, "HardShell"));
-            //Deck.Add(new Card(6, "HardShell"));
+            Deck.Add(new Card(7, "HardShell"));
+            Deck.Add(new Card(5, "HardShell"));
+            Deck.Add(new Card(6, "HardShell"));
 
-            //Deck.Add(new Card(6, "DefensiveHerding"));
-            //Deck.Add(new Card(5, "DefensiveHerding"));
-            //Deck.Add(new Card(4, "DefensiveHerding"));
+            Deck.Add(new Card(6, "DefensiveHerding"));
+            Deck.Add(new Card(5, "DefensiveHerding"));
+            Deck.Add(new Card(4, "DefensiveHerding"));
 
-            ////Deck.Add(new Card(7, "FatTissue"));
-            ////Deck.Add(new Card(5, "FatTissue"));
-            ////Deck.Add(new Card(-3, "FatTissue"));
+            //Deck.Add(new Card(7, "FatTissue"));
+            //Deck.Add(new Card(5, "FatTissue"));
+            //Deck.Add(new Card(-3, "FatTissue"));
 
-            ////Deck.Add(new Card(4, "Intelligence"));
-            ////Deck.Add(new Card(1, "Intelligence"));
-            ////Deck.Add(new Card(2, "Intelligence"));
+            //Deck.Add(new Card(4, "Intelligence"));
+            //Deck.Add(new Card(1, "Intelligence"));
+            //Deck.Add(new Card(2, "Intelligence"));
 
             UserFunctions.Shuffle(Deck);
         }
@@ -748,6 +749,18 @@ namespace evolution.ViewModel
                     return;
                 avatar = value;
                 RaisePropertyChanged("Avatar");
+            }
+        }
+        private BitmapSource bigCard;
+        public BitmapSource BigCard
+        {
+            get { return bigCard; }
+            set
+            {
+                if (bigCard == value)
+                    return;
+                bigCard = value;
+                RaisePropertyChanged("BigCard");
             }
         }
 
@@ -905,6 +918,24 @@ namespace evolution.ViewModel
                     return;
                 playersName = value;
                 RaisePropertyChanged("PlayersName");
+            }
+        }
+
+        public RelayCommand ShowCard
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedCard != null)
+                    {
+                        BigCard = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + @"../../../Resources/Images/" + SelectedCard.CardName +".png", UriKind.RelativeOrAbsolute));
+                    }
+                    else
+                    {
+                        BigCard = null;
+                    }
+                });
             }
         }
 

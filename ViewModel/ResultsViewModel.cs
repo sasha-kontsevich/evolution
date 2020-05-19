@@ -23,8 +23,8 @@ namespace evolution.ViewModel
             }
             ResultsHeader = UserFunctions.RuEngLang("Player ", "Игрок ")+ players.First().User.NickName + UserFunctions.RuEngLang(" wins ", " победил ");
             var query = from p in players
-                        orderby p.Score
-                        select new {Place = p.Number, Player = p.User.NickName, Score = p.Score, Rating = p.Number * 25 - players.Count * 12 + p.Score * 5 };
+                        orderby p.Number
+                        select new {Place = p.Number, Player = p.User.NickName, Score = p.Score, Result = GetRes(p) };
             Results = query.ToList();
 
             //Инфа о матче
@@ -32,6 +32,7 @@ namespace evolution.ViewModel
             int matchID = (from m in context.Matches
                            select m.MatchID).Max();
             context.Matches.Add(new Match { MatchID = matchID + 1, Date = DateTime.Now, GameDuration = GameViewModel.t2 - GameViewModel.t1, PlayerCount = players.Count });
+            context.SaveChanges();
             
             //Результаты игроков
 
@@ -45,7 +46,7 @@ namespace evolution.ViewModel
                     User user = (from u in context.Users
                                      where u.Login == player.User.Login
                                      select u).First();
-                        context.UserMatchResults.Add(new UserMatchResults {ID = matchResID, MatchID = matchID + 1, UserID = user.ID, Place = player.Number, Score = player.Score });
+                        context.UserMatchResults.Add(new UserMatchResults {ID = matchResID, MatchID = matchID + 1, UserID = user.ID, Place = player.Number, Score = player.Score, Result = GetRes(player) });
                     context.SaveChanges();
                 }
                 catch (Exception ex)
@@ -62,7 +63,7 @@ namespace evolution.ViewModel
                         User user = (from u in context.Users
                                      where u.Login == player.User.Login
                                      select u).First();
-                        user.Rating += player.Number * 25 - players.Count * 12 + player.Score*5;
+                        user.Rating += GetRes(player);
                     context.SaveChanges();
                 }
                 catch(Exception ex)
@@ -109,6 +110,9 @@ namespace evolution.ViewModel
             }
         }
 
-
+        public int GetRes(Player player)
+        {
+            return   players.Count * 12 - player.Number * 15 + player.Score * 3;
+        }
     }
 }

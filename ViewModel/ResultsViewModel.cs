@@ -51,7 +51,7 @@ namespace evolution.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    //ignore
+                    //ignore (отсеивание игроков без авторизации)
                 }
             }
 
@@ -68,7 +68,7 @@ namespace evolution.ViewModel
                 }
                 catch(Exception ex)
                 {
-                    //ignore
+                    //ignore (отсеивание игроков без авторизации)
                 }
             }
 

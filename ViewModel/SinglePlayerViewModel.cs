@@ -38,14 +38,7 @@ namespace evolution.ViewModel
             }
             catch
             {
-                if (App.Language.Name == "en-US")
-                {
-                    MessageBox.Show("Invalid login or password");
-                }
-                else
-                {
-                    MessageBox.Show("Неправильный логин или пароль");
-                }
+                MessageBox.Show(UserFunctions.RuEngLang("Invalid login or password", "Неправильный логин или пароль"));
                 return null;
             }
             

@@ -117,6 +117,15 @@ namespace evolution.ViewModel
 
         }
 
+        public void Reload()
+        {
+            singlePlayerDataContext = new SinglePlayerViewModel(this);
+            GameContext = new GameViewModel(this, GamePage.cvs);
+            SinglePlayerPage.DataContext = singlePlayerDataContext;
+            GamePage.DataContext = GameContext;
+
+        }
+
         public void ChangePage(Page page)
         {
             SlowOpacity(page);

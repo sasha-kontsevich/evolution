@@ -223,6 +223,24 @@ namespace evolution.ViewModel
                 });
             }
         }
+        public RelayCommand NewSpeciesL
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    if (SelectedCard != null && !currentPlayerTurnEnded)
+                    {
+                        Players.ToArray()[Players.IndexOf(CurrentPlayer)].Cards.Remove(SelectedCard);
+                        SelectedCard = null;
+                        UpdateCardsInArm();
+                        map.AddSpeciesL(Players.IndexOf(currentPlayer));
+                        currentPlayerTurnEnded = true;
+                        NextPhaseCount = 0;
+                    }
+                });
+            }
+        }
         public RelayCommand NewSpeciesR
         {
             get
@@ -254,7 +272,6 @@ namespace evolution.ViewModel
                         UpdateCardsInArm();
                         SelectedSpecies.Population += 1;
                         currentPlayerTurnEnded = true;
-                        EndPlayersTurn();
                         NextPhaseCount = 0;
                     }
                 });
@@ -273,7 +290,6 @@ namespace evolution.ViewModel
                         UpdateCardsInArm();
                         SelectedSpecies.BodySize += 1;
                         currentPlayerTurnEnded = true;
-                        EndPlayersTurn();
                         NextPhaseCount = 0;
                     }
                 });
@@ -292,7 +308,6 @@ namespace evolution.ViewModel
                         SelectedCard = null;
                         UpdateCardsInArm();
                         currentPlayerTurnEnded = true;
-                        EndPlayersTurn();
                         NextPhaseCount = 0;
                     }
                 });
@@ -325,7 +340,6 @@ namespace evolution.ViewModel
                                 {
                                     SelectedSpecies.FoodCount += 1;
                                 }
-                                EndPlayersTurn();
                             }
                         }
                     }
@@ -357,7 +371,7 @@ namespace evolution.ViewModel
                                             }
                                             map.Extinction();
                                             if(SelectedSpecies.Population!=0)
-                                            SelectedSpecies.FoodCount += AttackedSpecies.BodySize+SelectedSpecies.Foraging();//карта Foraging
+                                            SelectedSpecies.FoodCount += AttackedSpecies.BodySize/*+SelectedSpecies.Foraging()*/;//карта Foraging
                                             map.RemoveSpecies(Players.IndexOf(currentPlayer), AttackedSpecies);
                                             isAttacked = false;
                                         }
@@ -436,24 +450,24 @@ namespace evolution.ViewModel
             map.SelectSpecies(Players.IndexOf(currentPlayer));
             SelectedCard = null;
             SelectedSpecies = null;
-            UpdateCardsInArm();
+            UpdateCardsInArm(); //обновление карт в руке
             currentPlayerTurnEnded = false;
-            UptadePlayersTable();
+            UptadePlayersTable();   //обновление таблицы
 
             if (Phase == 1)
             {
                 if (NextPhaseCount == Players.Count)
                 {
                     map.Fertile(); //карта Fertile
-                    map.LongNeck();
-                    map.PutFood();
+                    map.LongNeck(); //карта Long Neck
+                    map.PutFood(); //Добавление еды на водопой
                     PlayCards();
                 }
             }
             else if (Phase == 2)
             {
                 NextPhaseCount++;
-                if (NextPhaseCount == Players.Count+2)
+                if (NextPhaseCount == Players.Count+1)
                 {
                     Feeding();
                 }

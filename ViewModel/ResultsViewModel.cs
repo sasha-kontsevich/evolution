@@ -51,7 +51,7 @@ namespace evolution.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //ignore
                 }
             }
 
@@ -68,7 +68,7 @@ namespace evolution.ViewModel
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //ignore
                 }
             }
 
@@ -112,7 +112,7 @@ namespace evolution.ViewModel
 
         public int GetRes(Player player)
         {
-            return   players.Count * 12 - player.Number * 15 + player.Score * 3;
+            return   player.Score * 3;
         }
     }
 }

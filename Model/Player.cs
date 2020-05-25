@@ -25,7 +25,7 @@ namespace evolution.Model
         {
 
         }
-
+        
         public User User { get => user; set => user = value; }
         public Color Color { get => color; set => color = value; }
         public int Number { get => number; set => number = value; }

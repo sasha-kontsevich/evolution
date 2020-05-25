@@ -29,7 +29,9 @@ namespace evolution.ViewModel
         {
             get
             {
-                return new RelayCommand(obj => {mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage);
+                return new RelayCommand(obj => {
+                    mainWindowViewModel.Reload();
+                    mainWindowViewModel.ChangePage(mainWindowViewModel.SinglePlayerPage) ;
                 });
             }
         }

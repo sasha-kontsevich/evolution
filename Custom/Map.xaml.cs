@@ -184,5 +184,18 @@ namespace evolution.Custom
                     }
                 }
         }
+
+        public void AddSpeciesL(int i)
+        {
+            int n = PlayersSpecies.ToArray()[i].Children.Count + 1;
+            Species[] species = new Species[n];
+            PlayersSpecies.ToArray()[i].Children.CopyTo(species, 1);
+
+            species[0] = new Species();
+            PlayersSpecies.ToArray()[i].Children.Clear();
+            for(int j = 0; j < species.Length;j++)
+            PlayersSpecies.ToArray()[i].Children.Add(species[j]);
+
+        }
     }
 }

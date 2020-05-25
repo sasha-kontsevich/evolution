@@ -311,7 +311,8 @@ namespace evolution.ViewModel
         {
             try
             {
-                if (Regex.IsMatch(RegistrationLogin, @"^[\w@.-]{6,50}$") && Regex.IsMatch(RegistrationPassword1, @"^[\w]{6,30}$") && RegistrationPassword1 == RegistrationPassword2 && Regex.IsMatch(RegistrationNickname, @"^[\w]{4,30}$"))
+                if (Regex.IsMatch(RegistrationLogin, @"^[\w@.-]{6,50}$") && Regex.IsMatch(RegistrationPassword1, @"^[\w]{6,30}$") 
+                    && RegistrationPassword1 == RegistrationPassword2 && Regex.IsMatch(RegistrationNickname, @"^[\w]{4,30}$"))
                 {
                     var context = new EvolutionDBContext();
                     int n = (from u in context.Users
@@ -327,29 +328,24 @@ namespace evolution.ViewModel
 
                     if (n1 == 0 && n2 == 0)
                     {
-                        context.Users.Add(new User { ID = n + 1, NickName = RegistrationNickname, Login = RegistrationLogin, Password = RegistrationPassword1, RegisterDate = DateTime.Now, Rating = 1000 });
+                        context.Users.Add(new User { ID = n + 1, NickName = RegistrationNickname, Login = RegistrationLogin, 
+                            Password = RegistrationPassword1, RegisterDate = DateTime.Now, Rating = 1000 });
                         context.SaveChanges();
                         SignInMethod(RegistrationLogin, RegistrationPassword1);
                         return true;
                     }
                     else
                     {
-                        if (App.Language.Name == "en-US")
-                        {
-                            MessageBox.Show("This login or nickname already taken");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Этот логин или имя пользователя уже используется");
-                        }
-
+                        MessageBox.Show(UserFunctions.RuEngLang("This login or nickname already taken", 
+                            "Этот логин или имя пользователя уже используется"));
                     }
                     return false;
                 }
             }
             catch
             {
-
+                MessageBox.Show(UserFunctions.RuEngLang("Registration failed",
+                    "Регистрация не удалась"));
             }
             return false;
         }
@@ -390,7 +386,8 @@ namespace evolution.ViewModel
                 IQueryable<object> query = from umr in contex.UserMatchResults
                                            join m in contex.Matches on umr.MatchID equals m.MatchID
                                            where umr.UserID == UserID
-                                           select new { MatchID = m.MatchID, Date = m.Date, Place = umr.Place, Score = umr.Score, MatchDuration = m.GameDuration, Result = umr.Result, Players_count = m.PlayerCount };
+                                           select new { MatchID = m.MatchID, Date = m.Date, Place = umr.Place, Score = umr.Score, 
+                                               MatchDuration = m.GameDuration, Result = umr.Result, Players_count = m.PlayerCount };
                 MatchesSource = query.ToList();
             }
         }
